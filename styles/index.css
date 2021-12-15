@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply w-full h-full;
+  }
+  body {
+    @apply w-full h-full;
+    min-width: 320px;
+  }
+  *:focus {
+    @apply outline-none;
+  }
+  *:focus-visible {
+    @apply outline-2 outline-offset-1 outline-secondary/60;
+  }
+  h1 {
+    @apply text-6xl font-black;
+  }
+  h2 {
+    @apply text-5xl font-bold;
+  }
+  h3 {
+    @apply text-4xl font-bold;
+  }
+  h4 {
+    @apply text-3xl font-semibold;
+  }
+  h5 {
+    @apply text-2xl font-semibold;
+  }
+  h6 {
+    @apply text-xl font-semibold;
+  }
+}
+
+@layer components {
+  .title {
+    @apply text-lg font-medium;
+  }
+  .text {
+    @apply text-base font-normal;
+  }
+  .link {
+    @apply text-base text-primary underline hover:text-primary/80 active:text-primary/60 focus:rounded-sm;
+  }
+}
