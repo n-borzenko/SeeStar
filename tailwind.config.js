@@ -1,3 +1,5 @@
+let plugin = require("tailwindcss/plugin");
+
 module.exports = {
   content: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   darkMode: "class",
@@ -14,9 +16,19 @@ module.exports = {
         0: "0",
       },
       boxShadow: {
-        bar: "0px 1px 12px 1px rgba(0,0,0,0.6)",
+        bar: "0 1px 12px 1px rgba(0,0,0,0.6)",
+        menu: "0 2px 4px 1px rgba(11,1,18,0.2)",
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant }) {
+      addVariant(`group1-hover`, `:merge(.group1):hover &`);
+      addVariant(`group1-active`, `:merge(.group1):active &`);
+      addVariant(`group1-focus`, `:merge(.group1):focus &`);
+      addVariant(`group2-hover`, `:merge(.group2):hover &`);
+      addVariant(`group2-active`, `:merge(.group2):active &`);
+      addVariant(`group2-focus`, `:merge(.group2):focus &`);
+    }),
+  ],
 };

@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import MainHeader from "components/MainHeader";
+import MainFooter from "components/MainFooter";
 import "../styles/index.css";
 
 const MainApp = ({ Component, pageProps }: AppProps) => {
@@ -13,6 +14,7 @@ const MainApp = ({ Component, pageProps }: AppProps) => {
       <div>
         <MainHeader />
         <Component {...pageProps} />
+        <MainFooter />
       </div>
     </>
   );

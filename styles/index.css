@@ -14,7 +14,7 @@
     @apply outline-none;
   }
   *:focus-visible {
-    @apply outline-2 outline-offset-1 outline-secondary/60;
+    @apply outline-2 outline-offset-2 outline-secondary/60;
   }
   h1 {
     @apply text-6xl font-black;

@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "components/*": ["components/*"],
+      "configurations/*": ["configurations/*"],
       "assets/*": ["public/assets/*"]
     },
     "target": "es5",
