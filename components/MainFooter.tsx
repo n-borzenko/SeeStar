@@ -1,3 +1,4 @@
+import { memo } from "react";
 import NextLink from "next/link";
 
 const MainFooter = () => {
@@ -10,4 +11,4 @@ const MainFooter = () => {
   );
 };
 
-export default MainFooter;
+export default memo(MainFooter);

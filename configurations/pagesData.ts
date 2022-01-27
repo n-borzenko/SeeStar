@@ -30,14 +30,18 @@ export const pagesData: { [key in PageKey]: PageInfo } = {
   about: { path: "/about", title: "About" },
 };
 
+export type ScreenBreakpoints = "xs" | "sm" | "md" | "lg";
+
 export type HeaderMenuItem = {
   id: PageKey;
+  supportedSizes?: ScreenBreakpoints[];
 };
 
 export type HeaderMenuGroup = {
   id: string;
   title: string;
   submenu: HeaderMenuItem[];
+  supportedSizes?: ScreenBreakpoints[];
 };
 
 export const isHeaderMenuGroup = (
@@ -47,15 +51,26 @@ export const isHeaderMenuGroup = (
 };
 
 export const headerMenuStructure: (HeaderMenuItem | HeaderMenuGroup)[] = [
-  { id: "search" },
+  { id: "search", supportedSizes: ["sm", "md", "lg"] },
   {
     id: "discover",
     title: "Discover",
-    submenu: [{ id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
+    submenu: [
+      { id: "search", supportedSizes: ["xs"] },
+      { id: "trending" },
+      { id: "upcoming" },
+      { id: "top-rated" },
+    ],
   },
-  { id: "shows" },
-  { id: "movies" },
-  { id: "calendar" },
+  { id: "shows", supportedSizes: ["lg"] },
+  { id: "movies", supportedSizes: ["lg"] },
+  { id: "calendar", supportedSizes: ["lg"] },
+  {
+    id: "my-lists",
+    title: "My lists",
+    supportedSizes: ["xs", "sm", "md"],
+    submenu: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }],
+  },
   {
     id: "manage",
     title: "Manage",

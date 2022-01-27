@@ -11,7 +11,6 @@ const AboutPage: NextPage = () => {
           src={tmdbLogoImage}
           alt="The Movie Database logo"
           layout="fixed"
-          priority
           quality="100"
           width="200"
           height="15"

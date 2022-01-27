@@ -1,41 +1,53 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useEffect, memo } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import NextLink from "next/link";
 import logoImage from "assets/logo.svg";
 import HeaderMenu from "./HeaderMenu";
 
 const MainHeader = () => {
+  const router = useRouter();
   const resetSelectionElement = useRef<HTMLDivElement>(null);
-  const resetMenuSelection = useCallback(() => {
+
+  const clearMenuSelection = useCallback(() => {
     resetSelectionElement.current?.focus();
     resetSelectionElement.current?.blur();
   }, []);
 
+  useEffect(() => {
+    router.events.on("routeChangeComplete", clearMenuSelection);
+    return () => router.events.off("routeChangeComplete", clearMenuSelection);
+  }, [router, clearMenuSelection]);
+
   return (
-    <div className="flex justify-center py-2 px-4 bg-primary shadow-bar">
+    <header className="flex justify-center py-2 px-4 bg-primary shadow-bar" role="banner">
       <div style={{ width: 0, height: 0 }} tabIndex={-1} ref={resetSelectionElement} />
-      <div className="flex justify-between items-center grow max-w-screen-lg">
+      <nav
+        className="lg:max-w-screen grow flex justify-between items-center h-full"
+        aria-label="Main navigation"
+      >
         <NextLink href="/" passHref>
           <a
             className="leading-0 flex items-center focus:rounded-full"
-            onClick={resetMenuSelection}
+            onClick={clearMenuSelection}
+            aria-label="See star home page"
           >
             <Image
               src={logoImage}
+              priority
               alt="Logo"
               layout="fixed"
-              priority
               quality="100"
               width="40"
               height="40"
             />
-            <h4 className="text-white ml-4">See Star</h4>
+            <span className="text-white ml-4 variant-h4">See Star</span>
           </a>
         </NextLink>
-        <HeaderMenu resetMenuSelection={resetMenuSelection} />
-      </div>
-    </div>
+        <HeaderMenu />
+      </nav>
+    </header>
   );
 };
 
-export default MainHeader;
+export default memo(MainHeader);

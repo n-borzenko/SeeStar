@@ -9,12 +9,10 @@ class MainDocument extends Document {
           <link rel="icon" href="/icon.svg" type="image/svg+xml" />
           <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
           <link rel="manifest" href="/manifest.webmanifest" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          {/* eslint-disable-next-line @next/next/google-font-display */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=swap"
-            rel="preload"
-            as="style"
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&display=block"
+            rel="stylesheet"
           />
         </Head>
         <body>

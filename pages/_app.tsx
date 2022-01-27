@@ -11,9 +11,11 @@ const MainApp = ({ Component, pageProps }: AppProps) => {
         <title>See Star</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div>
+      <div className="flex flex-col min-h-screen">
         <MainHeader />
-        <Component {...pageProps} />
+        <main className="grow">
+          <Component {...pageProps} />
+        </main>
         <MainFooter />
       </div>
     </>
