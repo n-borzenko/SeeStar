@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: 79 37 112;
+    --color-secondary: 254 149 2;
+  }
+
   html {
     @apply w-full h-full;
   }

@@ -13,8 +13,10 @@ const MainApp = ({ Component, pageProps }: AppProps) => {
       </Head>
       <div className="flex flex-col min-h-screen">
         <MainHeader />
-        <main className="grow">
-          <Component {...pageProps} />
+        <main className="flex justify-center grow w-full">
+          <div className="grow xl:max-w-screen-xl px-4">
+            <Component {...pageProps} />
+          </div>
         </main>
         <MainFooter />
       </div>

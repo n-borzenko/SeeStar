@@ -20,10 +20,10 @@ const MainHeader = () => {
   }, [router, clearMenuSelection]);
 
   return (
-    <header className="flex justify-center py-2 px-4 bg-primary shadow-bar" role="banner">
+    <header className="flex justify-center bg-primary shadow-bar z-1" role="banner">
       <div style={{ width: 0, height: 0 }} tabIndex={-1} ref={resetSelectionElement} />
       <nav
-        className="lg:max-w-screen grow flex justify-between items-center h-full"
+        className="xl:max-w-screen-xl py-2 px-4 grow flex justify-between items-center h-full"
         aria-label="Main navigation"
       >
         <NextLink href="/" passHref>

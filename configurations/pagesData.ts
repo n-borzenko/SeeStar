@@ -30,7 +30,7 @@ export const pagesData: { [key in PageKey]: PageInfo } = {
   about: { path: "/about", title: "About" },
 };
 
-export type ScreenBreakpoints = "xs" | "sm" | "md" | "lg";
+export type ScreenBreakpoints = "xs" | "sm" | "md" | "lg" | "xl";
 
 export type HeaderMenuItem = {
   id: PageKey;
@@ -51,7 +51,7 @@ export const isHeaderMenuGroup = (
 };
 
 export const headerMenuStructure: (HeaderMenuItem | HeaderMenuGroup)[] = [
-  { id: "search", supportedSizes: ["sm", "md", "lg"] },
+  { id: "search", supportedSizes: ["sm", "md", "lg", "xl"] },
   {
     id: "discover",
     title: "Discover",
@@ -62,9 +62,9 @@ export const headerMenuStructure: (HeaderMenuItem | HeaderMenuGroup)[] = [
       { id: "top-rated" },
     ],
   },
-  { id: "shows", supportedSizes: ["lg"] },
-  { id: "movies", supportedSizes: ["lg"] },
-  { id: "calendar", supportedSizes: ["lg"] },
+  { id: "shows", supportedSizes: ["lg", "xl"] },
+  { id: "movies", supportedSizes: ["lg", "xl"] },
+  { id: "calendar", supportedSizes: ["lg", "xl"] },
   {
     id: "my-lists",
     title: "My lists",
