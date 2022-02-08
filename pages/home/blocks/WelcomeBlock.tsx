@@ -1,9 +1,19 @@
-import { memo } from "react";
-import SearchWidget from "./SearchWidget";
+import { useState, useCallback, memo } from "react";
+import { useRouter } from "next/router";
+import qs from "qs";
+import SearchForm from "components/SearchForm";
 
 const WelcomeBlock = () => {
+  const router = useRouter();
+  const [searchText, setSearchText] = useState("");
+
+  const submitForm = useCallback(
+    () => router.push(`/search?${qs.stringify({ query: searchText })}`),
+    [router, searchText]
+  );
+
   return (
-    <div className="-mx-4">
+    <div className="-mx-4 -mt-4">
       <div
         className="flex relative h-[20rem] overflow-hidden p-4"
         style={{
@@ -15,7 +25,7 @@ const WelcomeBlock = () => {
           <h1 className="w-4/6 sm:w-full variant-h3 md:variant-h2 mt-11 sm:mt-0">
             Explore shows, movies, people
           </h1>
-          <SearchWidget />
+          <SearchForm onSubmit={submitForm} onValueChanged={setSearchText} />
         </div>
         <div className="absolute top-[5%] left-[80%] h-4/6 w-full bg-contain bg-left-top bg-no-repeat bg-[url('/assets/camera.svg')]" />
       </div>

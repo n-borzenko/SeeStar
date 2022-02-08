@@ -2,7 +2,6 @@ import { useCallback, useRef, useEffect, memo } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import NextLink from "next/link";
-import logoImage from "assets/logo.svg";
 import HeaderMenu from "./HeaderMenu";
 
 const MainHeader = () => {
@@ -20,7 +19,7 @@ const MainHeader = () => {
   }, [router, clearMenuSelection]);
 
   return (
-    <header className="flex justify-center bg-primary shadow-bar z-1" role="banner">
+    <header className="fixed w-full flex justify-center bg-primary shadow-bar z-1" role="banner">
       <div style={{ width: 0, height: 0 }} tabIndex={-1} ref={resetSelectionElement} />
       <nav
         className="xl:max-w-screen-xl py-2 px-4 grow flex justify-between items-center h-full"
@@ -33,7 +32,7 @@ const MainHeader = () => {
             aria-label="See star home page"
           >
             <Image
-              src={logoImage}
+              src="/assets/logo.svg"
               priority
               alt="Logo"
               layout="fixed"

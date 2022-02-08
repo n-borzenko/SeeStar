@@ -8,13 +8,14 @@
     --color-secondary: 254 149 2;
   }
 
-  html {
-    @apply w-full h-full;
-  }
+  html,
   body {
     @apply w-full h-full;
-    min-width: 320px;
   }
+  .body-locked {
+    @apply overflow-hidden fixed;
+  }
+
   *:focus {
     @apply outline-none shadow-outline;
   }
@@ -24,6 +25,7 @@
   *:focus-visible {
     @apply outline-none shadow-outline;
   }
+
   h1,
   .variant-h1 {
     @apply text-6xl font-black;
