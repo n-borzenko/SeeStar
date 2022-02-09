@@ -15,6 +15,8 @@ const generateVisibilityClassNames = (supportedSizes?: ScreenBreakpoints[]) => {
     "md:flex": supportedSizes.includes("md") && !supportedSizes.includes("sm"),
     "lg:hidden": !supportedSizes.includes("lg") && supportedSizes.includes("md"),
     "lg:flex": supportedSizes.includes("lg") && !supportedSizes.includes("md"),
+    "xl:hidden": !supportedSizes.includes("xl") && supportedSizes.includes("lg"),
+    "xl:flex": supportedSizes.includes("xl") && !supportedSizes.includes("lg"),
   });
 };
 

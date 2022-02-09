@@ -30,7 +30,7 @@ const CompactHeaderMenu = () => {
         type="button"
         icon={menuState === "isSlidingIn" || menuState === "isVisible" ? "close" : "burger"}
         variant="outlined"
-        color="secondary"
+        color="white"
         ref={burgerButton}
         onClick={toggleMenuVisibility}
         ariaExpanded={menuState === "isSlidingIn" || menuState === "isVisible"}

@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Image from "next/image";
-import tmdbLogoImage from "assets/tmdb-logo.svg";
 
 const AboutPage: NextPage = () => {
   return (
@@ -8,7 +7,7 @@ const AboutPage: NextPage = () => {
       <div>
         <h4 className="mb-4">Data and images provider</h4>
         <Image
-          src={tmdbLogoImage}
+          src="/assets/tmdb-logo.svg"
           alt="The Movie Database logo"
           layout="fixed"
           quality="100"

@@ -1,8 +1,3 @@
-import type { NextPage } from "next";
+import HomePage from "./home";
 
-const IndexPage: NextPage = () => {
-  return <div className="h-full w-full bg-white">
-  </div>;
-};
-
-export default IndexPage;
+export default HomePage;

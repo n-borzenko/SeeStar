@@ -3,13 +3,19 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    @apply w-full h-full;
+  :root {
+    --color-primary: 79 37 112;
+    --color-secondary: 254 149 2;
   }
+
+  html,
   body {
     @apply w-full h-full;
-    min-width: 320px;
   }
+  .body-locked {
+    @apply overflow-hidden fixed;
+  }
+
   *:focus {
     @apply outline-none shadow-outline;
   }
@@ -19,6 +25,7 @@
   *:focus-visible {
     @apply outline-none shadow-outline;
   }
+
   h1,
   .variant-h1 {
     @apply text-6xl font-black;

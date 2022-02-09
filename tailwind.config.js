@@ -1,5 +1,14 @@
 let plugin = require("tailwindcss/plugin");
 
+function withOpacityValue(variable) {
+  return ({ opacityValue }) => {
+    if (opacityValue === undefined) {
+      return `rgb(var(${variable}))`;
+    }
+    return `rgb(var(${variable}) / ${opacityValue})`;
+  };
+}
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -12,14 +21,15 @@ module.exports = {
       sm: "640px",
       md: "768px",
       lg: "1024px",
+      xl: "1200px",
     },
     fontFamily: {
       sans: '"Raleway", "Helvetica Neue", sans-serif, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
     },
     extend: {
       colors: {
-        primary: "#4F2570",
-        secondary: "#FE9502",
+        primary: withOpacityValue("--color-primary"),
+        secondary: withOpacityValue("--color-secondary"),
       },
       lineHeight: {
         0: "0",
@@ -28,6 +38,9 @@ module.exports = {
         bar: "0 1px 12px 1px rgba(0,0,0,0.6)",
         menu: "0 2px 4px 1px rgba(11,1,18,0.2)",
         outline: "0 0 6px 0 #FE9502",
+      },
+      zIndex: {
+        1: "1",
       },
       keyframes: {
         ["slide-from-right"]: {
