@@ -1,7 +1,9 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { Provider } from "react-redux";
 import MainHeader from "components/MainHeader";
 import MainFooter from "components/MainFooter";
+import store from "store";
 import "../styles/index.css";
 
 const MainApp = ({ Component, pageProps }: AppProps) => {
@@ -15,7 +17,9 @@ const MainApp = ({ Component, pageProps }: AppProps) => {
         <MainHeader />
         <main className="flex justify-center grow w-full mt-14 sm:mt-16">
           <div className="grow xl:max-w-screen-xl p-4">
-            <Component {...pageProps} />
+            <Provider store={store}>
+              <Component {...pageProps} />
+            </Provider>
           </div>
         </main>
         <MainFooter />
