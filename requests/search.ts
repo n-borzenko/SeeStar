@@ -25,10 +25,11 @@ export const getSearchResults = async (
       signal,
     }
   );
+  const result = await response.json();
   if (!response.ok) {
     throw new Error(
-      `Data fetching error in [getSearchResults], status: ${response.status} ${response.statusText}`
+      `[Data layer: get search results] status: ${response.status}, message: ${result?.errors?.[0]}`
     );
   }
-  return camelizeData(await response.json()) as SearchResultsData;
+  return camelizeData(result) as SearchResultsData;
 };

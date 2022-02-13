@@ -43,14 +43,15 @@ module.exports = {
         1: "1",
       },
       keyframes: {
-        ["slide-from-right"]: {
+        "slide-from-right": {
           from: { width: 0, left: "100%" },
           to: { width: "100vw", left: 0 },
         },
       },
       animation: {
-        ["slide-in-from-right"]: "slide-from-right 0.3s linear",
-        ["slide-out-to-right"]: "slide-from-right 0.3s linear reverse",
+        "slide-in-from-right": "slide-from-right 0.3s linear",
+        "slide-out-to-right": "slide-from-right 0.3s linear reverse",
+        "spin-slow": "spin 2.5s linear infinite",
       },
     },
   },

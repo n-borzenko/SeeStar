@@ -42,35 +42,44 @@ const fetchSearchResultsUnwrapped = createAsyncThunk<
   DataFetcherResult<typeof getSearchResults> | undefined,
   GetSearchResultsParameters,
   {
-    rejectValue: Error;
+    rejectValue: string;
     state: RootState;
   }
->("search/fetch_results", async (params, { getState, rejectWithValue, signal }) => {
-  try {
-    if (params.text.length === 0) {
-      // there is no need to make request with empty query string
-      return {
-        page: 1,
-        results: [],
-        totalResults: 0,
-        totalPages: 0,
-      };
+>(
+  "search/fetch_results",
+  async (params, { rejectWithValue, signal }) => {
+    try {
+      if (params.text.length === 0) {
+        // there is no need to make request with empty query string
+        return {
+          page: 1,
+          results: [],
+          totalResults: 0,
+          totalPages: 0,
+        };
+      }
+      const result = await getSearchResults(params, signal);
+      return result;
+    } catch (error) {
+      console.error(error);
+      return rejectWithValue("[Store layer: fetch search results] Data fetching error");
     }
-    const state = getState().search;
-    if (
-      params.text === state.parameters.text &&
-      params.type === state.parameters.type &&
-      state.data.pages[params.page]?.length
-    ) {
-      // requested page has already been downloaded, new parameters set in "pending" case, data already exists
-      return undefined;
-    }
-    const result = await getSearchResults(params, signal);
-    return result;
-  } catch (error) {
-    return rejectWithValue(new Error("[Fetch search results]: Data fetching error"));
+  },
+  {
+    condition: (params, { getState }) => {
+      const state = getState().search;
+      if (
+        state.requestStatus === "succeeded" &&
+        params.text === state.parameters.text &&
+        params.type === state.parameters.type &&
+        state.data.pages[params.page]?.length
+      ) {
+        // requested page has already been downloaded
+        return false;
+      }
+    },
   }
-});
+);
 
 export const fetchSearchResults = prepareArgForAsyncThunk(
   fetchSearchResultsUnwrapped,
@@ -83,7 +92,7 @@ export const fetchSearchResults = prepareArgForAsyncThunk(
   }
 );
 
-const clearSearchResults = createAction("search/clear_results");
+export const clearSearchResults = createAction("search/clear_results");
 
 const searchReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchSearchResultsUnwrapped.pending, (state, { meta }) => {
@@ -109,7 +118,7 @@ const searchReducer = createReducer(initialState, (builder) => {
   });
   builder.addCase(fetchSearchResultsUnwrapped.rejected, (state, { payload, meta }) => {
     if (state.requestId === meta.requestId) {
-      state.errorMessage = payload?.message;
+      state.errorMessage = payload;
       state.requestStatus = "failed";
       state.requestId = undefined;
     }
