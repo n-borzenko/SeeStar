@@ -3,8 +3,10 @@ import { getSearchResults, GetSearchResultsParameters } from "requests/search";
 import type { RootState } from "store";
 import { MediaTypes } from "types/search";
 import type { SearchItem } from "types/search";
-import { prepareArgForAsyncThunk } from "./helpers";
-import type { DataFetcherResult } from "./helpers";
+import { prepareArgForAsyncThunk } from "helpers/storeHelpers";
+import type { DataFetcherResult } from "helpers/storeHelpers";
+
+const storeNamespace = "search";
 
 type SearchState = {
   data: {
@@ -45,41 +47,34 @@ const fetchSearchResultsUnwrapped = createAsyncThunk<
     rejectValue: string;
     state: RootState;
   }
->(
-  "search/fetch_results",
-  async (params, { rejectWithValue, signal }) => {
-    try {
-      if (params.text.length === 0) {
-        // there is no need to make request with empty query string
-        return {
-          page: 1,
-          results: [],
-          totalResults: 0,
-          totalPages: 0,
-        };
-      }
-      const result = await getSearchResults(params, signal);
-      return result;
-    } catch (error) {
-      console.error(error);
-      return rejectWithValue("[Store layer: fetch search results] Data fetching error");
+>(`${storeNamespace}/fetch_results`, async (params, { getState, rejectWithValue, signal }) => {
+  try {
+    if (params.text.length === 0) {
+      // there is no need to make request with empty query string
+      return {
+        page: 1,
+        results: [],
+        totalResults: 0,
+        totalPages: 0,
+      };
     }
-  },
-  {
-    condition: (params, { getState }) => {
-      const state = getState().search;
-      if (
-        state.requestStatus === "succeeded" &&
-        params.text === state.parameters.text &&
-        params.type === state.parameters.type &&
-        state.data.pages[params.page]?.length
-      ) {
-        // requested page has already been downloaded
-        return false;
-      }
-    },
+    const state = getState().search;
+    if (
+      state.requestStatus === "succeeded" &&
+      params.text === state.parameters.text &&
+      params.type === state.parameters.type &&
+      state.data.pages[params.page]?.length
+    ) {
+      // requested page has already been downloaded, parameters have been updated in "pending" action
+      return undefined;
+    }
+    const result = await getSearchResults(params, signal);
+    return result;
+  } catch (error) {
+    console.error(error);
+    return rejectWithValue("[Store layer: fetch search results] Data fetching error");
   }
-);
+});
 
 export const fetchSearchResults = prepareArgForAsyncThunk(
   fetchSearchResultsUnwrapped,
@@ -92,7 +87,7 @@ export const fetchSearchResults = prepareArgForAsyncThunk(
   }
 );
 
-export const clearSearchResults = createAction("search/clear_results");
+export const clearSearchResults = createAction(`${storeNamespace}/clear_results`);
 
 const searchReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchSearchResultsUnwrapped.pending, (state, { meta }) => {

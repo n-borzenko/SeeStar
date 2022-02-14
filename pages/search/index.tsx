@@ -29,7 +29,7 @@ const SearchPage: NextPage = () => {
   return (
     <div className="w-full h-full grid grid-rows-[auto_auto_auto_1fr_auto] grid-cols-3 sm:grid-cols-2 gap-2 sm:gap-y-6 lg:gap-8">
       <h1 className="col-span-full variant-h3 md:variant-h2">Search for movies, shows, people</h1>
-      {router.isReady ? (
+      {searchState.requestStatus !== "idle" ? (
         <>
           <div className="col-span-full sm:col-span-1">
             <SearchForm value={searchText} onValueChanged={setSearchText} onSubmit={submitForm} />

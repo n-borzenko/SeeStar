@@ -42,7 +42,7 @@ export type SearchItemShow = {
 
 export type SearchItemPerson = {
   id: number;
-  profile_path?: string | null;
+  profilePath?: string | null;
   adult?: boolean;
   mediaType: MediaTypes.Person;
   knownFor?: SearchItemMovie | SearchItemShow[];

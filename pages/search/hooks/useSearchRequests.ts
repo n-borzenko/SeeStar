@@ -4,7 +4,7 @@ import qs from "qs";
 import { MediaTypes } from "types/search";
 import type { RootState } from "store";
 import { useAppDispatch } from "store/hooks";
-import { fetchSearchResults, clearSearchResults } from "store/fields/search";
+import { fetchSearchResults, clearSearchResults } from "store/slices/search";
 
 const getSearchText = (text?: string | string[]) => {
   if (!text) {
