@@ -1,10 +1,13 @@
-import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import { getSearchResults, GetSearchResultsParameters } from "requests/search";
+import type { GetSearchResultsParameters } from "requests/search";
 import type { RootState } from "store";
-import { MediaTypes } from "types/search";
+import type { DataFetcherResult } from "store/helpers";
 import type { SearchItem } from "types/search";
-import { prepareArgForAsyncThunk } from "helpers/storeHelpers";
-import type { DataFetcherResult } from "helpers/storeHelpers";
+
+import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+
+import { getSearchResults } from "requests/search";
+import { prepareArgForAsyncThunk } from "store/helpers";
+import { MediaTypes } from "types/search";
 
 const storeNamespace = "search";
 

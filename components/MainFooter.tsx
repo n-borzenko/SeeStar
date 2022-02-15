@@ -1,5 +1,5 @@
-import { memo } from "react";
 import NextLink from "next/link";
+import { memo } from "react";
 
 const MainFooter = () => {
   return (

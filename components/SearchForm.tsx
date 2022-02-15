@@ -1,4 +1,7 @@
-import { useCallback, memo, FormEvent, ChangeEvent, FC } from "react";
+import type { FormEvent, ChangeEvent, FC } from "react";
+
+import { memo, useCallback } from "react";
+
 import Button from "components/Button";
 
 type SearchFormProps = {

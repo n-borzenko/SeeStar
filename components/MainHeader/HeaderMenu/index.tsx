@@ -1,7 +1,8 @@
-import { useEffect, memo } from "react";
 import { useRouter } from "next/router";
-import FullHeaderMenu from "./FullHeaderMenu";
+import { memo, useEffect } from "react";
+
 import CompactHeaderMenu from "./CompactHeaderMenu";
+import FullHeaderMenu from "./FullHeaderMenu";
 import useSelectedSubmenu from "./useSelectedSubmenu";
 
 const HeaderMenu = () => {

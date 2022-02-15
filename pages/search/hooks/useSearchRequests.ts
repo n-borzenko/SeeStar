@@ -1,10 +1,12 @@
-import { useState, useCallback, useEffect, useRef } from "react";
 import type { NextRouter } from "next/router";
-import qs from "qs";
-import { MediaTypes } from "types/search";
 import type { RootState } from "store";
+
+import qs from "qs";
+import { useState, useCallback, useEffect, useRef } from "react";
+
 import { useAppDispatch } from "store/hooks";
 import { fetchSearchResults, clearSearchResults } from "store/slices/search";
+import { MediaTypes } from "types/search";
 
 const getSearchText = (text?: string | string[]) => {
   if (!text) {

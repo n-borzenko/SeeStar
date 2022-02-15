@@ -1,12 +1,13 @@
 import { combineReducers } from "redux";
-import searchReducer from "./search";
+
 import configurationReducer from "./configuration";
 import genresReducer from "./genres";
+import searchReducer from "./search";
 
 const rootReducer = combineReducers({
-  search: searchReducer,
   configuration: configurationReducer,
   genres: genresReducer,
+  search: searchReducer,
 });
 
 export default rootReducer;

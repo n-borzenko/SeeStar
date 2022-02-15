@@ -1,7 +1,11 @@
-import { FC, memo } from "react";
-import { MediaTypes, SearchItemMovie, SearchItemShow } from "types/search";
+import type { FC } from "react";
+import type { SearchItemMovie, SearchItemShow } from "types/search";
+
+import { memo } from "react";
+
 import Icon from "components/Icon";
 import Rating from "components/Rating";
+import { MediaTypes } from "types/search";
 
 type WorkItemsListProps = {
   items: (SearchItemMovie | SearchItemShow)[];
@@ -12,6 +16,7 @@ const WorkItemsList: FC<WorkItemsListProps> = ({ items }) => {
     <>
       {items.map((item) => {
         const title = item.mediaType === MediaTypes.Movie ? item.title : item.name;
+        const typeTitle = item.mediaType === MediaTypes.Movie ? "Type: movie" : "Type: show";
         const releaseDate =
           item.mediaType === MediaTypes.Movie ? item.releaseDate : item.firstAirDate;
 
@@ -19,7 +24,7 @@ const WorkItemsList: FC<WorkItemsListProps> = ({ items }) => {
           <div key={`${item.mediaType}-${item.id}`} className="flex justify-between">
             <div className="flex min-w-1">
               <div className="flex-shrink-0">
-                <Icon size="medium" type={item.mediaType} />
+                <Icon size="medium" type={item.mediaType} ariaLabel={typeTitle} />
               </div>
               <div className="text-sm font-normal leading-4 text-neutral-700 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
                 {title}

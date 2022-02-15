@@ -1,4 +1,6 @@
-import { FocusEvent, useCallback, useRef } from "react";
+import type { FocusEvent } from "react";
+
+import { useCallback, useRef } from "react";
 
 const useFocusLoop = () => {
   const burgerButton = useRef<HTMLButtonElement>(null);

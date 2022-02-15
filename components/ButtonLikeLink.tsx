@@ -1,13 +1,15 @@
-import {
+import type {
   ForwardRefRenderFunction,
   PropsWithChildren,
-  forwardRef,
   AnchorHTMLAttributes,
   AriaAttributes,
-  memo,
 } from "react";
+import type { IconTypes } from "./Icon";
+
 import clsx from "clsx";
-import Icon, { IconTypes } from "./Icon";
+import { memo, forwardRef } from "react";
+
+import Icon from "./Icon";
 
 type ButtonLikeLinkProps = Pick<
   AnchorHTMLAttributes<HTMLAnchorElement>,

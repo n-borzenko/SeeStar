@@ -1,11 +1,14 @@
-import { AppProps } from "next/app";
+import type { AppProps } from "next/app";
+import type { FC } from "react";
+
 import Head from "next/head";
-import { FC } from "react";
 import { Provider } from "react-redux";
+
+import ConfigurationLoader from "components/ConfigurationLoader";
 import MainHeader from "components/MainHeader";
 import MainFooter from "components/MainFooter";
-import ConfigurationLoader from "components/ConfigurationLoader";
 import store from "store";
+
 import "../styles/index.css";
 
 const MainApp: FC<AppProps> = ({ Component, pageProps }) => {

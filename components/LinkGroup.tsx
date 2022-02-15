@@ -1,6 +1,8 @@
-import { FC, memo } from "react";
-import NextLink from "next/link";
+import type { FC } from "react";
+
 import clsx from "clsx";
+import NextLink from "next/link";
+import { memo } from "react";
 
 type LinkData = {
   title: string;

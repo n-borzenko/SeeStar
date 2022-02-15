@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
+
 import rootReducer from "./slices";
 
 const devMiddleware = process.env.NODE_ENV === `development` ? [logger] : [];

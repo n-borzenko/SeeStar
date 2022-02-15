@@ -1,9 +1,12 @@
-import { FC, memo, useState, useCallback } from "react";
-import Image from "next/image";
+import type { FC } from "react";
+
 import clsx from "clsx";
+import Image from "next/image";
+import { memo, useState, useCallback } from "react";
+
+import Icon from "components/Icon";
 import { useAppSelector } from "store/hooks";
 import { MediaTypes } from "types/search";
-import Icon from "components/Icon";
 
 type PosterImageProps = {
   src?: string | null;
@@ -34,7 +37,7 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
       {isAlternativeIconHidden ? (
         <Image
           src={`${configuration.secureBaseUrl}${posterSize.id}${src}`}
-          alt={`${type} ${type === MediaTypes.Person ? "picture" : "poster"}`}
+          alt={`${type} ${type === MediaTypes.Person ? "Picture" : "Poster"}`}
           quality="100"
           width={posterSize.width}
           height={posterSize.height}

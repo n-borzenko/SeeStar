@@ -1,14 +1,16 @@
-import {
+import type {
   ForwardRefRenderFunction,
   PropsWithChildren,
-  forwardRef,
   MouseEventHandler,
   ButtonHTMLAttributes,
   AriaAttributes,
-  memo,
 } from "react";
+import type { IconTypes } from "./Icon";
+
 import clsx from "clsx";
-import Icon, { IconTypes } from "./Icon";
+import { memo, forwardRef } from "react";
+
+import Icon from "./Icon";
 
 type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
   color?: "primary" | "secondary" | "white";

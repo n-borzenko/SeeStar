@@ -1,5 +1,7 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+
 import Image from "next/image";
+import { memo } from "react";
 
 type LoaderProps = { size?: "medium" | "large" };
 

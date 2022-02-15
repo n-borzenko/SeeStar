@@ -1,11 +1,14 @@
 import type { NextPage } from "next";
+
 import { useRouter } from "next/router";
-import SearchForm from "components/SearchForm";
+
 import LinkGroup from "components/LinkGroup";
+import SearchForm from "components/SearchForm";
 import { useAppSelector } from "store/hooks";
-import SearchResults from "./components/SearchResults";
-import Pagination from "./components/Pagination";
+
 import EmptySearchStates from "./components/EmptySearchStates";
+import Pagination from "./components/Pagination";
+import SearchResults from "./components/SearchResults";
 import useSearchRequests from "./hooks/useSearchRequests";
 import useTypesLinks from "./hooks/useTypesLinks";
 

@@ -1,11 +1,14 @@
-import React, { memo, ReactNode, useEffect, useRef } from "react";
+import type { ReactNode } from "react";
+
+import { memo, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { fetchConfiguration } from "store/slices/configuration";
-import { fetchGenres } from "store/slices/genres";
-import { MediaTypes } from "types/search";
-import Loader from "components/Loader";
+
 import EmptyState from "components/EmptyState";
+import Loader from "components/Loader";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { fetchGenres } from "store/slices/genres";
+import { fetchConfiguration } from "store/slices/configuration";
+import { MediaTypes } from "types/search";
 
 const ConfigurationLoader = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
@@ -46,7 +49,7 @@ const ConfigurationLoader = ({ children }: { children: ReactNode }) => {
   }
 
   if (configuration.requestStatus === "failed") {
-    return <EmptyState message={`Error occured while processing request`} />;
+    return <EmptyState message="Error occured while processing request" />;
   }
 
   return <>{children}</>;

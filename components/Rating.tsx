@@ -1,5 +1,8 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+
 import clsx from "clsx";
+import { memo } from "react";
+
 import Icon from "components/Icon";
 
 type RatingProps = { size?: "medium" | "extra-large"; voteAverage?: number; voteCount?: number };
@@ -8,7 +11,7 @@ const Rating: FC<RatingProps> = ({ size = "medium", voteAverage = 0, voteCount }
   return (
     <div className={clsx("flex items-center", { "opacity-50": !voteAverage })}>
       <div className="flex-shrink-0">
-        <Icon size={size} type="star-filled" />
+        <Icon size={size} type="star-filled" ariaLabel="Rating" />
       </div>
       <div
         className={clsx({

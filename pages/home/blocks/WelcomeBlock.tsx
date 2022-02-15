@@ -1,6 +1,7 @@
-import { useState, useCallback, memo } from "react";
 import { useRouter } from "next/router";
 import qs from "qs";
+import { memo, useState, useCallback } from "react";
+
 import SearchForm from "components/SearchForm";
 
 const WelcomeBlock = () => {

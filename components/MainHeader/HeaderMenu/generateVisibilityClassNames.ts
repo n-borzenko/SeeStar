@@ -1,4 +1,5 @@
 import clsx from "clsx";
+
 import { ScreenBreakpoints } from "configurations/pagesData";
 
 const generateVisibilityClassNames = (supportedSizes?: ScreenBreakpoints[]) => {

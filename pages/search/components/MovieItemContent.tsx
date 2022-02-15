@@ -1,10 +1,13 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+import type { SearchItemMovie } from "types/search";
+
 import clsx from "clsx";
-import { SearchItemMovie } from "types/search";
-import PosterImage from "components/PosterImage";
+import { memo } from "react";
+
 import Icon from "components/Icon";
-import Rating from "components/Rating";
 import GenresList from "components/GenresList";
+import PosterImage from "components/PosterImage";
+import Rating from "components/Rating";
 
 type MovieItemContentProps = {
   item: SearchItemMovie;
@@ -21,7 +24,7 @@ const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
       <div className="w-full grid grid-rows-[auto_auto_auto_1fr] gap-1 p-2">
         <div className="flex items-center min-w-1">
           <div className="flex-shrink-0">
-            <Icon size="medium" type={item.mediaType} />
+            <Icon size="medium" type={item.mediaType} ariaLabel="Type: movie" />
           </div>
           <div className="text-base font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
             {item.title}

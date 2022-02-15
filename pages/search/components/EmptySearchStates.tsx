@@ -1,6 +1,9 @@
-import { FC, memo } from "react";
-import Loader from "components/Loader";
+import type { FC } from "react";
+
+import { memo } from "react";
+
 import EmptyState from "components/EmptyState";
+import Loader from "components/Loader";
 import { useAppSelector } from "store/hooks";
 
 type EmptySearchStatesProps = { retryRequest: () => void };

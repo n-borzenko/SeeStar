@@ -1,5 +1,8 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+
 import clsx from "clsx";
+import { memo } from "react";
+
 import { useAppSelector } from "store/hooks";
 import { MediaTypes } from "types/search";
 
@@ -25,6 +28,7 @@ const GenresList: FC<GenresListProps> = ({ size = "medium", type, ids, isMultili
         "h-4 overflow-hidden": size === "medium" && !isMultilined,
         "h-6 overflow-hidden": size === "large" && !isMultilined,
       })}
+      aria-label="Genres list"
     >
       {ids.map((id) =>
         genres.data[id] ? (

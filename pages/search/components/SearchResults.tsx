@@ -1,9 +1,11 @@
 import { memo } from "react";
-import { MediaTypes } from "types/search";
+
 import { useAppSelector } from "store/hooks";
+import { MediaTypes } from "types/search";
+
 import MovieItemContent from "./MovieItemContent";
-import ShowItemContent from "./ShowItemContent";
 import PersonItemContent from "./PersonItemContent";
+import ShowItemContent from "./ShowItemContent";
 
 const posterSize = "small";
 

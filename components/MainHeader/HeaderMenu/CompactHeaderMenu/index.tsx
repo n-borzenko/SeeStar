@@ -1,13 +1,15 @@
-import { memo } from "react";
-import NextLink from "next/link";
 import clsx from "clsx";
-import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "configurations/pagesData";
+import NextLink from "next/link";
+import { memo } from "react";
+
 import Button from "components/Button";
+import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "configurations/pagesData";
+
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 import useCompactMenuState from "./useCompactMenuState";
-import useScreenWidthChange from "./useScreenWidthChange";
-import useRouteChange from "./useRouteChange";
 import useFocusLoop from "./useFocusLoop";
+import useRouteChange from "./useRouteChange";
+import useScreenWidthChange from "./useScreenWidthChange";
 
 const headerHeight = 3.5;
 

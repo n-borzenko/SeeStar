@@ -1,6 +1,10 @@
-import { FC, memo } from "react";
+import type { FC } from "react";
+
 import NextLink from "next/link";
+import { memo } from "react";
+
 import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "configurations/pagesData";
+
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 import HeaderGroupedItem from "./HeaderGroupedItem";
 

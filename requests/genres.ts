@@ -1,6 +1,7 @@
 import qs from "qs";
-import { MediaTypes } from "types/search";
+
 import camelizeData from "helpers/camelizeData";
+import { MediaTypes } from "types/search";
 
 type ConfigurationData = {
   genres: {

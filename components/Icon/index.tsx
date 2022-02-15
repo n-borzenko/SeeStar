@@ -1,6 +1,10 @@
-import { FC, memo } from "react";
+import type { FC, AriaAttributes } from "react";
+
 import clsx from "clsx";
+import { memo } from "react";
+
 import { MediaTypes } from "types/search";
+
 import ArrowLeftIcon from "./items/arrow-left.svg";
 import BurgerIcon from "./items/burger.svg";
 import CloseIcon from "./items/close.svg";
@@ -29,9 +33,16 @@ type IconProps = {
   color?: "primary" | "secondary" | "white";
   size?: "small" | "medium" | "large" | "extra-large" | "huge";
   className?: string;
+  ariaLabel?: AriaAttributes["aria-label"];
 };
 
-const Icon: FC<IconProps> = ({ type, size = "medium", color = "primary", className }) => {
+const Icon: FC<IconProps> = ({
+  type,
+  size = "medium",
+  color = "primary",
+  className,
+  ariaLabel,
+}) => {
   const classes = clsx(
     {
       "w-2 h-2": size === "small",
@@ -49,16 +60,16 @@ const Icon: FC<IconProps> = ({ type, size = "medium", color = "primary", classNa
 
   return (
     <>
-      {type === "arrow-left" && <ArrowLeftIcon className={classes} />}
-      {type === "arrow-right" && <ArrowLeftIcon className={classes} />}
-      {type === "burger" && <BurgerIcon className={classes} />}
-      {type === "close" && <CloseIcon className={classes} />}
-      {type === "go-to-arrow" && <GoToArrowIcon className={classes} />}
-      {type === "movie" && <MovieIcon className={classes} />}
-      {type === "person" && <PersonIcon className={classes} />}
-      {type === "search" && <SearchIcon className={classes} />}
-      {type === "star-filled" && <StarFilledIcon className={classes} />}
-      {type === "tv" && <TvIcon className={classes} />}
+      {type === "arrow-left" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
+      {type === "arrow-right" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
+      {type === "burger" && <BurgerIcon className={classes} aria-label={ariaLabel} />}
+      {type === "close" && <CloseIcon className={classes} aria-label={ariaLabel} />}
+      {type === "go-to-arrow" && <GoToArrowIcon className={classes} aria-label={ariaLabel} />}
+      {type === "movie" && <MovieIcon className={classes} aria-label={ariaLabel} />}
+      {type === "person" && <PersonIcon className={classes} aria-label={ariaLabel} />}
+      {type === "search" && <SearchIcon className={classes} aria-label={ariaLabel} />}
+      {type === "star-filled" && <StarFilledIcon className={classes} aria-label={ariaLabel} />}
+      {type === "tv" && <TvIcon className={classes} aria-label={ariaLabel} />}
     </>
   );
 };

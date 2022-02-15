@@ -1,6 +1,9 @@
+import type { SearchItem } from "types/search";
+
 import qs from "qs";
-import { MediaTypes, SearchItem } from "types/search";
+
 import camelizeData from "helpers/camelizeData";
+import { MediaTypes } from "types/search";
 
 export type GetSearchResultsParameters = { text: string; type: MediaTypes; page: number };
 

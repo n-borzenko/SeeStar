@@ -1,9 +1,10 @@
-import { memo } from "react";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import qs from "qs";
-import { useAppSelector } from "store/hooks";
+import { memo } from "react";
+
 import ButtonLikeLink from "components/ButtonLikeLink";
+import { useAppSelector } from "store/hooks";
 
 const Pagination = () => {
   const router = useRouter();

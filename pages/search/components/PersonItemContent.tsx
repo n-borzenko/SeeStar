@@ -1,8 +1,12 @@
-import { FC, memo } from "react";
-import { SearchItemPerson } from "types/search";
-import PosterImage from "components/PosterImage";
+import type { FC } from "react";
+import type { SearchItemPerson } from "types/search";
+
+import { memo } from "react";
+
 import Icon from "components/Icon";
+import PosterImage from "components/PosterImage";
 import getGenderName from "helpers/getGenderName";
+
 import WorkItemsList from "./WorkItemsList";
 
 type PersonItemContentProps = {
@@ -26,7 +30,7 @@ const PersonItemContent: FC<PersonItemContentProps> = ({ item, posterSize }) => 
       <div className="w-full grid grid-rows-[auto_auto_1fr] gap-1 p-2">
         <div className="flex items-center min-w-1">
           <div className="flex-shrink-0">
-            <Icon size="medium" type={item.mediaType} />
+            <Icon size="medium" type={item.mediaType} ariaLabel="Type: person" />
           </div>
           <div className="text-base font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
             {item.name}

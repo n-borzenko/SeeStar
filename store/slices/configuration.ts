@@ -1,8 +1,10 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-import { getConfiguration } from "requests/configuration";
 import type { RootState } from "store";
+import type { DataFetcherResult } from "store/helpers";
+
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+
 import isDefined from "helpers/isDefined";
-import type { DataFetcherResult } from "helpers/storeHelpers";
+import { getConfiguration } from "requests/configuration";
 
 const storeNamespace = "configuration";
 
