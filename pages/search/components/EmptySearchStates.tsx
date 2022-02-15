@@ -1,7 +1,5 @@
 import type { FC } from "react";
-
 import { memo } from "react";
-
 import EmptyState from "components/EmptyState";
 import Loader from "components/Loader";
 import { useAppSelector } from "store/hooks";

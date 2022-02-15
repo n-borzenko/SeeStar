@@ -1,8 +1,6 @@
 import type { FC } from "react";
-
 import Image from "next/image";
 import { memo } from "react";
-
 import Button from "components/Button";
 
 type EmptyStateProps = { message?: string; buttonTitle?: string; onClick?: () => void };

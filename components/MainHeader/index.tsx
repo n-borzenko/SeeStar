@@ -2,7 +2,6 @@ import Image from "next/image";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { memo, useCallback, useRef, useEffect } from "react";
-
 import HeaderMenu from "./HeaderMenu";
 
 const MainHeader = () => {

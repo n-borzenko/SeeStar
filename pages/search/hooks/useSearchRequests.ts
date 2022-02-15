@@ -1,9 +1,7 @@
 import type { NextRouter } from "next/router";
 import type { RootState } from "store";
-
 import qs from "qs";
 import { useState, useCallback, useEffect, useRef } from "react";
-
 import { useAppDispatch } from "store/hooks";
 import { fetchSearchResults, clearSearchResults } from "store/slices/search";
 import { MediaTypes } from "types/search";

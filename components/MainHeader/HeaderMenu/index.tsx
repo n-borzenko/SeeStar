@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { memo, useEffect } from "react";
-
 import CompactHeaderMenu from "./CompactHeaderMenu";
 import FullHeaderMenu from "./FullHeaderMenu";
 import useSelectedSubmenu from "./useSelectedSubmenu";

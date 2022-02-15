@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-
+import { memo } from "react";
 import WelcomeBlock from "./blocks/WelcomeBlock";
 
 const IndexPage: NextPage = () => {
@@ -10,4 +10,4 @@ const IndexPage: NextPage = () => {
   );
 };
 
-export default IndexPage;
+export default memo(IndexPage);

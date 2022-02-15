@@ -1,9 +1,7 @@
 import type { FC } from "react";
-
 import clsx from "clsx";
 import Image from "next/image";
 import { memo, useState, useCallback } from "react";
-
 import Icon from "components/Icon";
 import { useAppSelector } from "store/hooks";
 import { MediaTypes } from "types/search";

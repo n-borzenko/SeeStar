@@ -1,9 +1,7 @@
 import type { FC } from "react";
 import type { SearchItemShow } from "types/search";
-
 import clsx from "clsx";
 import { memo } from "react";
-
 import Icon from "components/Icon";
 import GenresList from "components/GenresList";
 import PosterImage from "components/PosterImage";

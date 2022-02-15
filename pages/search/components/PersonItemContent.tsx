@@ -1,12 +1,9 @@
 import type { FC } from "react";
 import type { SearchItemPerson } from "types/search";
-
 import { memo } from "react";
-
 import Icon from "components/Icon";
 import PosterImage from "components/PosterImage";
 import getGenderName from "helpers/getGenderName";
-
 import WorkItemsList from "./WorkItemsList";
 
 type PersonItemContentProps = {

@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-
 import { memo, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
-
 import EmptyState from "components/EmptyState";
 import Loader from "components/Loader";
 import { useAppDispatch, useAppSelector } from "store/hooks";

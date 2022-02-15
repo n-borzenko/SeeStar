@@ -2,9 +2,7 @@ import type { GetSearchResultsParameters } from "requests/search";
 import type { RootState } from "store";
 import type { DataFetcherResult } from "store/helpers";
 import type { SearchItem } from "types/search";
-
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-
 import { getSearchResults } from "requests/search";
 import { prepareArgForAsyncThunk } from "store/helpers";
 import { MediaTypes } from "types/search";

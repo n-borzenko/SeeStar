@@ -1,10 +1,7 @@
 import type { FC, AriaAttributes } from "react";
-
 import clsx from "clsx";
 import { memo } from "react";
-
 import { MediaTypes } from "types/search";
-
 import ArrowLeftIcon from "./items/arrow-left.svg";
 import BurgerIcon from "./items/burger.svg";
 import CloseIcon from "./items/close.svg";

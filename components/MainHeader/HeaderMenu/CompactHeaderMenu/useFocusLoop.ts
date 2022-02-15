@@ -1,5 +1,4 @@
 import type { FocusEvent } from "react";
-
 import { useCallback, useRef } from "react";
 
 const useFocusLoop = () => {

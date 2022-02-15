@@ -1,11 +1,9 @@
 import type { NextPage } from "next";
-
 import { useRouter } from "next/router";
-
+import { memo } from "react";
 import LinkGroup from "components/LinkGroup";
 import SearchForm from "components/SearchForm";
 import { useAppSelector } from "store/hooks";
-
 import EmptySearchStates from "./components/EmptySearchStates";
 import Pagination from "./components/Pagination";
 import SearchResults from "./components/SearchResults";
@@ -72,4 +70,4 @@ const SearchPage: NextPage = () => {
   );
 };
 
-export default SearchPage;
+export default memo(SearchPage);

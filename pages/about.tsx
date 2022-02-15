@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-
 import Image from "next/image";
+import { memo } from "react";
 
 const AboutPage: NextPage = () => {
   return (
@@ -32,4 +32,4 @@ const AboutPage: NextPage = () => {
   );
 };
 
-export default AboutPage;
+export default memo(AboutPage);

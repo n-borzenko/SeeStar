@@ -1,8 +1,6 @@
 import type { FC } from "react";
 import type { SearchItemMovie, SearchItemShow } from "types/search";
-
 import { memo } from "react";
-
 import Icon from "components/Icon";
 import Rating from "components/Rating";
 import { MediaTypes } from "types/search";

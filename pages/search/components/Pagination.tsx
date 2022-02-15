@@ -2,7 +2,6 @@ import NextLink from "next/link";
 import { useRouter } from "next/router";
 import qs from "qs";
 import { memo } from "react";
-
 import ButtonLikeLink from "components/ButtonLikeLink";
 import { useAppSelector } from "store/hooks";
 

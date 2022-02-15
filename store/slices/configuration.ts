@@ -1,8 +1,6 @@
 import type { RootState } from "store";
 import type { DataFetcherResult } from "store/helpers";
-
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
-
 import isDefined from "helpers/isDefined";
 import { getConfiguration } from "requests/configuration";
 

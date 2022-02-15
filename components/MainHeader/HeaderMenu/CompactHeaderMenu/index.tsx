@@ -1,10 +1,8 @@
 import clsx from "clsx";
 import NextLink from "next/link";
 import { memo } from "react";
-
 import Button from "components/Button";
 import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "configurations/pagesData";
-
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 import useCompactMenuState from "./useCompactMenuState";
 import useFocusLoop from "./useFocusLoop";

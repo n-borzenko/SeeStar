@@ -1,8 +1,6 @@
 import type { FC } from "react";
-
 import clsx from "clsx";
 import { memo } from "react";
-
 import Icon from "components/Icon";
 
 type RatingProps = { size?: "medium" | "extra-large"; voteAverage?: number; voteCount?: number };

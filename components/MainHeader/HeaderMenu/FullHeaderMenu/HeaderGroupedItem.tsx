@@ -1,11 +1,8 @@
 import type { FC, FocusEvent } from "react";
-
 import clsx from "clsx";
 import NextLink from "next/link";
 import { memo, useCallback, useRef } from "react";
-
 import { HeaderMenuGroup, pagesData } from "configurations/pagesData";
-
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 
 type HeaderGroupedItemProps = {

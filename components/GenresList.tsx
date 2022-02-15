@@ -1,8 +1,6 @@
 import type { FC } from "react";
-
 import clsx from "clsx";
 import { memo } from "react";
-
 import { useAppSelector } from "store/hooks";
 import { MediaTypes } from "types/search";
 

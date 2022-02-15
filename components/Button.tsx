@@ -6,10 +6,8 @@ import type {
   AriaAttributes,
 } from "react";
 import type { IconTypes } from "./Icon";
-
 import clsx from "clsx";
 import { memo, forwardRef } from "react";
-
 import Icon from "./Icon";
 
 type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {

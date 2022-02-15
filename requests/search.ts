@@ -1,7 +1,5 @@
 import type { SearchItem } from "types/search";
-
 import qs from "qs";
-
 import camelizeData from "helpers/camelizeData";
 import { MediaTypes } from "types/search";
 
