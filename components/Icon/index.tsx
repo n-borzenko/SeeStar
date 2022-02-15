@@ -1,5 +1,6 @@
 import { FC, memo } from "react";
 import clsx from "clsx";
+import { MediaTypes } from "types/search";
 import ArrowLeftIcon from "./items/arrow-left.svg";
 import BurgerIcon from "./items/burger.svg";
 import CloseIcon from "./items/close.svg";
@@ -20,24 +21,31 @@ export type IconTypes =
   | "person"
   | "search"
   | "star-filled"
-  | "tv";
+  | "tv"
+  | Exclude<MediaTypes, "any">;
 
 type IconProps = {
   type: IconTypes;
   color?: "primary" | "secondary" | "white";
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | "extra-large" | "huge";
+  className?: string;
 };
 
-const Icon: FC<IconProps> = ({ type, size = "medium", color = "primary" }) => {
-  const classes = clsx({
-    "w-2 h-2": size === "small",
-    "w-4 h-4": size === "medium",
-    "w-5 h-5": size === "large",
-    "text-primary": color === "primary",
-    "text-secondary": color === "secondary",
-    "text-white": color === "white",
-    "rotate-180": type === "arrow-right",
-  });
+const Icon: FC<IconProps> = ({ type, size = "medium", color = "primary", className }) => {
+  const classes = clsx(
+    {
+      "w-2 h-2": size === "small",
+      "w-4 h-4": size === "medium",
+      "w-5 h-5": size === "large",
+      "w-8 h-8": size === "extra-large",
+      "w-10 h-10": size === "huge",
+      "text-primary": color === "primary",
+      "text-secondary": color === "secondary",
+      "text-white": color === "white",
+      "rotate-180": type === "arrow-right",
+    },
+    className
+  );
 
   return (
     <>

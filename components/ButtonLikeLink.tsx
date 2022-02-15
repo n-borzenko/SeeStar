@@ -2,40 +2,43 @@ import {
   ForwardRefRenderFunction,
   PropsWithChildren,
   forwardRef,
-  MouseEventHandler,
-  ButtonHTMLAttributes,
+  AnchorHTMLAttributes,
   AriaAttributes,
   memo,
 } from "react";
 import clsx from "clsx";
 import Icon, { IconTypes } from "./Icon";
 
-type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
+type ButtonLikeLinkProps = Pick<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  "href" | "rel" | "target" | "referrerPolicy" | "onClick"
+> & {
   color?: "primary" | "secondary" | "white";
   variant?: "outlined" | "filled";
   size?: "medium" | "large";
   wide?: boolean;
   icon?: IconTypes;
-  onClick?: MouseEventHandler<HTMLButtonElement>;
   className?: string;
-  ariaExpanded?: AriaAttributes["aria-expanded"];
-  ariaHasPopup?: AriaAttributes["aria-haspopup"];
   ariaLabel?: AriaAttributes["aria-label"];
 };
 
-const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<ButtonProps>> = (
+const ButtonLikeLink: ForwardRefRenderFunction<
+  HTMLAnchorElement,
+  PropsWithChildren<ButtonLikeLinkProps>
+> = (
   {
     color = "primary",
     variant = "filled",
     size = "medium",
     wide,
     icon,
-    type,
-    onClick,
     children,
-    ariaExpanded,
-    ariaHasPopup,
     ariaLabel,
+    href,
+    rel,
+    target,
+    referrerPolicy,
+    onClick,
     className,
   },
   ref
@@ -66,18 +69,19 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
   const iconColor = variant === "filled" ? (color === "white" ? "primary" : "white") : color;
 
   return (
-    <button
-      type={type}
+    <a
       ref={ref}
+      href={href}
+      rel={rel}
+      referrerPolicy={referrerPolicy}
+      target={target}
       className={classes}
-      onClick={onClick}
-      aria-expanded={ariaExpanded}
-      aria-haspopup={ariaHasPopup}
       aria-label={ariaLabel}
+      onClick={onClick}
     >
       {icon ? <Icon type={icon} color={iconColor} size={size} /> : children}
-    </button>
+    </a>
   );
 };
 
-export default memo(forwardRef(Button));
+export default memo(forwardRef(ButtonLikeLink));

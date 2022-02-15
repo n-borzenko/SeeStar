@@ -8,7 +8,7 @@ const WelcomeBlock = () => {
   const [searchText, setSearchText] = useState("");
 
   const submitForm = useCallback(
-    () => router.push(`/search?${qs.stringify({ query: searchText })}`),
+    () => router.push(`/search?${qs.stringify({ text: searchText })}`),
     [router, searchText]
   );
 
@@ -25,7 +25,7 @@ const WelcomeBlock = () => {
           <h1 className="w-4/6 sm:w-full variant-h3 md:variant-h2 mt-11 sm:mt-0">
             Explore shows, movies, people
           </h1>
-          <SearchForm onSubmit={submitForm} onValueChanged={setSearchText} />
+          <SearchForm value={searchText} onSubmit={submitForm} onValueChanged={setSearchText} />
         </div>
         <div className="absolute top-[5%] left-[80%] h-4/6 w-full bg-contain bg-left-top bg-no-repeat bg-[url('/assets/camera.svg')]" />
       </div>
