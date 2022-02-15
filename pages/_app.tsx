@@ -19,7 +19,7 @@ const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
         <MainHeader />
         <Provider store={store}>
           <main className="flex justify-center grow w-full mt-14 sm:mt-16">
-            <div className="grow xl:max-w-screen-xl p-4">
+            <div className="grow max-w-full xl:max-w-screen-xl p-4">
               <ConfigurationLoader>
                 <Component {...pageProps} />
               </ConfigurationLoader>

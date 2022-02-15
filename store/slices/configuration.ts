@@ -10,6 +10,7 @@ type ImageSize = {
   id: string;
   width: number;
   height: number;
+  key?: string;
 };
 
 type ConfigurationState = {
@@ -51,7 +52,7 @@ export const fetchConfiguration = createAsyncThunk<
   }
 });
 
-const searchReducer = createReducer(initialState, (builder) => {
+const configurationReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchConfiguration.pending, (state, { meta }) => {
     state.data = initialState.data;
     state.errorMessage = undefined;
@@ -67,9 +68,11 @@ const searchReducer = createReducer(initialState, (builder) => {
         state.data.baseUrl = payload.images.baseUrl;
         state.data.secureBaseUrl = payload.images.secureBaseUrl;
 
+        const keys = ["small", "medium", "large"];
         const widthRegexp = /^w([1-9]+)$/;
+
         state.data.posterSizes = payload.images.posterSizes
-          .map((sizeId) => {
+          .map((sizeId, index) => {
             const matched = sizeId.match(widthRegexp);
             if (!matched) {
               return undefined;
@@ -78,7 +81,8 @@ const searchReducer = createReducer(initialState, (builder) => {
             return {
               id: sizeId,
               width: width,
-              height: width * 1.5,
+              height: Math.ceil(width * 1.5),
+              key: index < keys.length ? keys[index] : undefined,
             };
           })
           .filter(isDefined);
@@ -94,4 +98,4 @@ const searchReducer = createReducer(initialState, (builder) => {
   });
 });
 
-export default searchReducer;
+export default configurationReducer;

@@ -53,12 +53,6 @@
 }
 
 @layer components {
-  .title {
-    @apply text-lg font-medium;
-  }
-  .text {
-    @apply text-base font-normal;
-  }
   .link {
     @apply text-base text-primary underline hover:text-primary/80 active:text-primary/60 focus:rounded-sm;
   }

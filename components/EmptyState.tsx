@@ -16,7 +16,9 @@ const EmptyState: FC<EmptyStateProps> = ({ message, buttonTitle, onClick, childr
           width="280"
           height="140"
         />
-        {message && <p className="text-center text mt-4 whitespace-pre-line">{message}</p>}
+        {message && (
+          <p className="text-base font-normal text-center mt-4 whitespace-pre-line">{message}</p>
+        )}
         {isButtonVisible && (
           <Button type="button" onClick={onClick} className="mt-4">
             {buttonTitle}

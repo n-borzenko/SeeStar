@@ -14,7 +14,7 @@ const Pagination = () => {
   const isPreviousPageAvailable = searchState.parameters.page > 1;
 
   return (
-    <div className="max-w-xs flex justify-between items-center">
+    <div className="max-w-[12rem] flex justify-between items-center">
       {isPreviousPageAvailable ? (
         <NextLink
           href={`${router.pathname}?${qs.stringify({
@@ -33,7 +33,7 @@ const Pagination = () => {
       ) : (
         <div className="w-10 h-10" />
       )}
-      <span className="text text-primary text-center">
+      <span className="text-base font-normal text-primary text-center">
         {searchState.parameters.page} / {searchState.data.totalPages}
       </span>
       {isNextPageAvailable ? (

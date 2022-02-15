@@ -14,7 +14,7 @@ const AboutPage: NextPage = () => {
           width="200"
           height="15"
         />
-        <p className="mt-1 text">
+        <p className="mt-1 text-base font-normal">
           This product uses the{" "}
           <a
             href="https://www.themoviedb.org/"

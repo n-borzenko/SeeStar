@@ -104,7 +104,11 @@ const searchReducer = createReducer(initialState, (builder) => {
       state.requestStatus = "succeeded";
       state.requestId = undefined;
       if (payload) {
-        payload.results.forEach((item) => (state.data.itemsById[item.id] = item));
+        payload.results.forEach((item) => {
+          const type =
+            state.parameters.type === MediaTypes.Any ? item.mediaType : state.parameters.type;
+          state.data.itemsById[item.id] = { ...item, mediaType: type };
+        });
         state.data.pages[payload.page] = payload.results.map(({ id }) => id);
         state.data.totalResults = payload.totalResults;
         state.data.totalPages = payload.totalPages;

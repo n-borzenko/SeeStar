@@ -44,7 +44,7 @@ const ButtonLikeLink: ForwardRefRenderFunction<
   ref
 ) => {
   const classes = clsx(
-    "text rounded-full border inline-flex justify-center items-center",
+    "font-normal rounded-full border inline-flex justify-center items-center",
     {
       "h-8 px-3 text-sm": size === "medium" && icon === undefined,
       "h-10 px-4 text-lg": size === "large" && icon === undefined,

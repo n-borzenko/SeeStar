@@ -25,7 +25,7 @@ const SearchForm: FC<SearchFormProps> = ({ value = "", onSubmit, onValueChanged 
     <form onSubmit={submitForm} className="flex relative w-full">
       <input
         type="text"
-        className="h-10 flex-grow max-w-full text-lg pl-2 pr-12 md:pr-[10.5rem] border border-1 border-primary rounded-full text-primary"
+        className="h-10 flex-grow max-w-full text-lg font-normal text-primary pl-2 pr-12 md:pr-[10.5rem] border border-1 border-primary rounded-full"
         placeholder="You are looking for..."
         value={value}
         onChange={updateSearchText}

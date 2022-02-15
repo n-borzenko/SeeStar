@@ -31,13 +31,20 @@ module.exports = {
         primary: withOpacityValue("--color-primary"),
         secondary: withOpacityValue("--color-secondary"),
       },
+      minWidth: {
+        1: "1px",
+      },
       lineHeight: {
         0: "0",
       },
       boxShadow: {
         bar: "0 1px 12px 1px rgba(0,0,0,0.6)",
-        menu: "0 2px 4px 1px rgba(11,1,18,0.2)",
+        card: "0 2px 4px 1px rgba(11,1,18,0.2)",
+        popup: "0 2px 6px 2px rgba(11,1,18,0.2)",
         outline: "0 0 6px 0 #FE9502",
+      },
+      gridTemplateRows: {
+        "20-auto": "repeat(20, auto)",
       },
       zIndex: {
         1: "1",
@@ -56,6 +63,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("@tailwindcss/line-clamp"),
     plugin(function ({ addVariant }) {
       addVariant(`group1-hover`, `:merge(.group1):hover &`);
       addVariant(`group1-active`, `:merge(.group1):active &`);

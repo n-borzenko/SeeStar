@@ -1,24 +1,41 @@
-import React, { FC, memo, ReactNode, useEffect, useRef } from "react";
+import React, { memo, ReactNode, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { fetchConfiguration } from "store/slices/configuration";
+import { fetchGenres } from "store/slices/genres";
+import { MediaTypes } from "types/search";
 import Loader from "components/Loader";
 import EmptyState from "components/EmptyState";
 
 const ConfigurationLoader = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const configuration = useAppSelector((state) => state.configuration);
+  const { configuration, genres } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  const requestPromise = useRef<{ abort: () => void } | undefined>(undefined);
+  const requestPromises = useRef<{ abort: () => void }[]>([]);
 
   useEffect(() => {
-    if (configuration.requestStatus !== "failed" && configuration.requestStatus !== "succeeded") {
-      requestPromise.current = dispatch(fetchConfiguration());
+    if (configuration.requestStatus === "idle") {
+      requestPromises.current = [...requestPromises.current, dispatch(fetchConfiguration())];
     }
+    if (genres[MediaTypes.Movie].requestStatus === "idle") {
+      requestPromises.current = [
+        ...requestPromises.current,
+        dispatch(fetchGenres(MediaTypes.Movie)),
+      ];
+    }
+    if (genres[MediaTypes.Show].requestStatus === "idle") {
+      requestPromises.current = [
+        ...requestPromises.current,
+        dispatch(fetchGenres(MediaTypes.Show)),
+      ];
+    }
+  }, [dispatch, configuration.requestStatus, genres]);
+
+  useEffect(() => {
     return () => {
-      requestPromise.current?.abort();
+      requestPromises.current.map((promise) => promise.abort());
     };
-  }, [dispatch, configuration.requestStatus]);
+  }, []);
 
   if (
     !router.isReady ||

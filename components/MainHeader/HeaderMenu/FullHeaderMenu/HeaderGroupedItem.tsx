@@ -56,7 +56,7 @@ const HeaderGroupedItem: FC<HeaderGroupedItemProps> = ({
         {group.title}
       </button>
       {isExpanded && (
-        <ul className="p-2 flex flex-col items-center z-50 bg-white absolute top-full right-1/2 translate-x-1/2 group-last:right-0 group-last:-translate-x-0 max-w-5xl rounded-2xl shadow-menu">
+        <ul className="p-2 flex flex-col items-center z-50 bg-white absolute top-full right-1/2 translate-x-1/2 group-last:right-0 group-last:-translate-x-0 max-w-5xl rounded-2xl shadow-popup">
           {group.submenu.map((item) => (
             <li
               className={`mx-2 my-1.5 ${generateVisibilityClassNames(item.supportedSizes)}`}

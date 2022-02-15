@@ -26,7 +26,7 @@ export const getConfiguration = async (signal: AbortSignal) => {
   const result = await response.json();
   if (!response.ok) {
     throw new Error(
-      `[Data layer: get search results] status: ${response.status}, message: ${result?.errors?.[0]}`
+      `[Data layer: get configuration results] status: ${response.status}, message: ${result?.errors?.[0]}`
     );
   }
   return camelizeData(result) as ConfigurationData;
