@@ -10,7 +10,7 @@ type SearchFormProps = {
 
 const SearchForm: FC<SearchFormProps> = ({ value = "", onSubmit, onValueChanged }) => {
   const updateSearchText = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => onValueChanged(e.currentTarget.value.trim()),
+    (e: ChangeEvent<HTMLInputElement>) => onValueChanged(e.currentTarget.value),
     [onValueChanged]
   );
 

@@ -61,7 +61,6 @@ const fetchSearchResultsUnwrapped = createAsyncThunk<
     }
     const state = getState().search;
     if (
-      state.requestStatus === "succeeded" &&
       params.text === state.parameters.text &&
       params.type === state.parameters.type &&
       state.data.pages[params.page]?.length
@@ -81,7 +80,7 @@ export const fetchSearchResults = prepareArgForAsyncThunk(
   fetchSearchResultsUnwrapped,
   ({ text, type, page }: Partial<GetSearchResultsParameters>) => {
     return {
-      text: text ?? initialParams.text,
+      text: (text ?? initialParams.text).trim(),
       type: type ?? initialParams.type,
       page: page ?? initialParams.page,
     };

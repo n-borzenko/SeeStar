@@ -8,7 +8,7 @@ const WelcomeBlock = () => {
   const [searchText, setSearchText] = useState("");
 
   const submitForm = useCallback(
-    () => router.push(`/search?${qs.stringify({ text: searchText })}`),
+    () => router.push(`/search?${qs.stringify({ text: searchText.trim() })}`),
     [router, searchText]
   );
 
