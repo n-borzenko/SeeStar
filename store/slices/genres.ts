@@ -2,7 +2,7 @@ import type { RootState } from "store";
 import type { DataFetcherResult } from "store/helpers";
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { getGenres } from "requests/genres";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 const storeNamespace = "genres";
 

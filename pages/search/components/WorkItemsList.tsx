@@ -3,7 +3,7 @@ import type { SearchItemMovie, SearchItemShow } from "types/search";
 import { memo } from "react";
 import Icon from "components/Icon";
 import Rating from "components/Rating";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 type WorkItemsListProps = {
   items: (SearchItemMovie | SearchItemShow)[];

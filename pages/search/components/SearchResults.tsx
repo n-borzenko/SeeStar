@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { useAppSelector } from "store/hooks";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 import MovieItemContent from "./MovieItemContent";
 import PersonItemContent from "./PersonItemContent";
 import ShowItemContent from "./ShowItemContent";

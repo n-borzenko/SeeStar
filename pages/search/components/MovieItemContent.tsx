@@ -6,23 +6,26 @@ import Icon from "components/Icon";
 import GenresList from "components/GenresList";
 import PosterImage from "components/PosterImage";
 import Rating from "components/Rating";
+import { MediaTypes } from "types/mediaTypes";
 
 type MovieItemContentProps = {
   item: SearchItemMovie;
   posterSize: "small" | "medium" | "large";
 };
 
+const mediaType = MediaTypes.Movie;
+
 const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
   return (
     <div className="bg-white shadow-card rounded-lg flex">
       <div className="flex-shrink-0">
-        <PosterImage src={item.posterPath} type={item.mediaType} size={posterSize} rounded="left" />
+        <PosterImage src={item.posterPath} type={mediaType} size={posterSize} rounded="left" />
       </div>
 
       <div className="w-full grid grid-rows-[auto_auto_auto_1fr] gap-1 p-2">
         <div className="flex items-center min-w-1">
           <div className="flex-shrink-0">
-            <Icon size="medium" type={item.mediaType} ariaLabel="Type: movie" />
+            <Icon size="medium" type={mediaType} ariaLabel="Type: movie" />
           </div>
           <div className="text-base font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
             {item.title}
@@ -41,7 +44,7 @@ const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
         </div>
 
         <div className="w-full">
-          <GenresList ids={item.genreIds} type={item.mediaType} />
+          <GenresList ids={item.genreIds} type={mediaType} />
         </div>
 
         <div

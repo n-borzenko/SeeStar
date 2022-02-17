@@ -1,6 +1,6 @@
 import qs from "qs";
 import camelizeData from "helpers/camelizeData";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 type ConfigurationData = {
   genres: {
@@ -24,6 +24,5 @@ export const getGenres = async (type: MediaTypes.Movie | MediaTypes.Show, signal
       `[Data layer: get genres results] status: ${response.status}, message: ${result?.errors?.[0]}`
     );
   }
-  await new Promise((res) => setTimeout(() => res(1), 5000));
   return camelizeData(result) as ConfigurationData;
 };

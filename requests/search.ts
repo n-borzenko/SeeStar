@@ -1,7 +1,7 @@
 import type { SearchItem } from "types/search";
 import qs from "qs";
 import camelizeData from "helpers/camelizeData";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 export type GetSearchResultsParameters = { text: string; type: MediaTypes; page: number };
 
@@ -32,5 +32,19 @@ export const getSearchResults = async (
       `[Data layer: get search results] status: ${response.status}, message: ${result?.errors?.[0]}`
     );
   }
-  return camelizeData(result) as SearchResultsData;
+
+  const convertedResult = camelizeData(result);
+  if (type === MediaTypes.Any) {
+    return convertedResult as SearchResultsData;
+  }
+
+  // the mediaType field is only provided by API in case of multitype request
+  // for consistency it's more convenient to have it in all cases
+  return {
+    ...convertedResult,
+    results: convertedResult.results.map((item: SearchItem) => ({
+      ...item,
+      mediaType: type,
+    })),
+  } as SearchResultsData;
 };

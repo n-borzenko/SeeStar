@@ -4,6 +4,7 @@ import { memo } from "react";
 import Icon from "components/Icon";
 import PosterImage from "components/PosterImage";
 import getGenderName from "helpers/getGenderName";
+import { MediaTypes } from "types/mediaTypes";
 import WorkItemsList from "./WorkItemsList";
 
 type PersonItemContentProps = {
@@ -11,23 +12,20 @@ type PersonItemContentProps = {
   posterSize: "small" | "medium" | "large";
 };
 
+const mediaType = MediaTypes.Person;
+
 const PersonItemContent: FC<PersonItemContentProps> = ({ item, posterSize }) => {
   const genderName = getGenderName(item.gender);
   return (
     <div className="bg-white shadow-card rounded-lg flex">
       <div className="flex-shrink-0">
-        <PosterImage
-          src={item.profilePath}
-          type={item.mediaType}
-          size={posterSize}
-          rounded="left"
-        />
+        <PosterImage src={item.profilePath} type={mediaType} size={posterSize} rounded="left" />
       </div>
 
       <div className="w-full grid grid-rows-[auto_auto_1fr] gap-1 p-2">
         <div className="flex items-center min-w-1">
           <div className="flex-shrink-0">
-            <Icon size="medium" type={item.mediaType} ariaLabel="Type: person" />
+            <Icon size="medium" type={mediaType} ariaLabel="Type: person" />
           </div>
           <div className="text-base font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
             {item.name}

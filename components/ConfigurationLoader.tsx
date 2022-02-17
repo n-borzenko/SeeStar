@@ -6,7 +6,7 @@ import Loader from "components/Loader";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { fetchGenres } from "store/slices/genres";
 import { fetchConfiguration } from "store/slices/configuration";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 const ConfigurationLoader = ({ children }: { children: ReactNode }) => {
   const router = useRouter();

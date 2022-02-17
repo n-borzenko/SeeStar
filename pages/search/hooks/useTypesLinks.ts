@@ -1,6 +1,6 @@
 import qs from "qs";
 import { useMemo } from "react";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 const links = [
   {

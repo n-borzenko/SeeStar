@@ -1,55 +1,19 @@
-export enum MediaTypes {
-  Any = "multi",
-  Movie = "movie",
-  Show = "tv",
-  Person = "person",
-}
+import type { Movie } from "types/movie";
+import type { Person } from "types/person";
+import type { Show } from "types/show";
+import { MediaTypes } from "types/mediaTypes";
 
-export type SearchItemMovie = {
-  id: number;
-  adult?: boolean;
-  title?: string;
-  posterPath?: string | null;
-  overview?: string;
-  releaseDate?: string;
-  originalTitle?: string;
-  genreIds?: number[];
+export type SearchItemMovie = Movie & {
   mediaType: MediaTypes.Movie;
-  originalLanguage?: string;
-  backdropPath?: string | null;
-  popularity?: number;
-  voteCount?: number;
-  video?: boolean;
-  voteAverage?: number;
 };
 
-export type SearchItemShow = {
-  id: number;
-  posterPath?: string | null;
-  popularity?: number;
-  overview?: string;
-  backdropPath?: string | null;
-  voteAverage?: number;
+export type SearchItemShow = Show & {
   mediaType: MediaTypes.Show;
-  firstAirDate?: string;
-  originCountry?: string[];
-  genreIds?: number[];
-  originalLanguage?: string;
-  voteCount?: number;
-  name?: string;
-  originalName?: string;
 };
 
-export type SearchItemPerson = {
-  id: number;
-  profilePath?: string | null;
-  adult?: boolean;
+export type SearchItemPerson = Person & {
   mediaType: MediaTypes.Person;
   knownFor?: (SearchItemMovie | SearchItemShow)[];
-  knownForDepartment?: string;
-  name?: string;
-  popularity?: number;
-  gender?: number;
 };
 
 export type SearchItem = SearchItemMovie | SearchItemShow | SearchItemPerson;

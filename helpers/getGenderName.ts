@@ -1,4 +1,4 @@
-const getGenderName = (gender?: number) => {
+const getGenderName = (gender?: number | null) => {
   switch (gender) {
     case 1:
       return "woman";

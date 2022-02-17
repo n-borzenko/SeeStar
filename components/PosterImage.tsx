@@ -4,7 +4,7 @@ import Image from "next/image";
 import { memo, useState, useCallback } from "react";
 import Icon from "components/Icon";
 import { useAppSelector } from "store/hooks";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 type PosterImageProps = {
   src?: string | null;

@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import EmptyState from "components/EmptyState";
 
 const NotFoundPage: NextPage = () => {
-  return <h1>404 - Page not found</h1>;
+  return <EmptyState message="404 - Page was not found" />;
 };
 
 export default NotFoundPage;

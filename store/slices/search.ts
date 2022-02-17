@@ -5,7 +5,7 @@ import type { SearchItem } from "types/search";
 import { createAction, createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import { getSearchResults } from "requests/search";
 import { prepareArgForAsyncThunk } from "store/helpers";
-import { MediaTypes } from "types/search";
+import { MediaTypes } from "types/mediaTypes";
 
 const storeNamespace = "search";
 
@@ -104,11 +104,7 @@ const searchReducer = createReducer(initialState, (builder) => {
       state.requestStatus = "succeeded";
       state.requestId = undefined;
       if (payload) {
-        payload.results.forEach((item) => {
-          const type =
-            state.parameters.type === MediaTypes.Any ? item.mediaType : state.parameters.type;
-          state.data.itemsById[item.id] = { ...item, mediaType: type };
-        });
+        payload.results.forEach((item) => (state.data.itemsById[item.id] = item));
         state.data.pages[payload.page] = payload.results.map(({ id }) => id);
         state.data.totalResults = payload.totalResults;
         state.data.totalPages = payload.totalPages;
