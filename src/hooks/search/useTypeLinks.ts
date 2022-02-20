@@ -21,7 +21,7 @@ const links = [
   },
 ];
 
-const useTypesLinks = (pathname: string, searchText?: string) => {
+const useTypeLinks = (pathname: string, searchText: string) => {
   const typesLinks = useMemo(
     () =>
       links.map((link) => ({
@@ -34,4 +34,4 @@ const useTypesLinks = (pathname: string, searchText?: string) => {
   return typesLinks;
 };
 
-export default useTypesLinks;
+export default useTypeLinks;

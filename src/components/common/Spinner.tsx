@@ -16,6 +16,7 @@ const Spinner: FC<SpinnerProps> = ({ size = "medium" }) => {
         height={dimension}
         objectPosition="center"
         className="leading-0 animate-spin-slow"
+        priority
       />
     </div>
   );

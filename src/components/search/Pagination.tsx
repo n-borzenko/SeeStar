@@ -1,25 +1,28 @@
+import type { FC } from "react";
+import type { SearchParameters } from "types/search";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import qs from "qs";
 import { memo } from "react";
 import ButtonLikeLink from "components/common/ButtonLikeLink";
-import { useAppSelector } from "store/hooks";
 
-const Pagination = () => {
+type PaginationProps = {
+  parameters: SearchParameters;
+  totalPages: number;
+};
+
+const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
   const router = useRouter();
-  const searchState = useAppSelector((state) => state.search);
-
-  const isNextPageAvailable =
-    searchState.parameters.page > 0 && searchState.parameters.page < searchState.data.totalPages;
-  const isPreviousPageAvailable = searchState.parameters.page > 1;
+  const isNextPageAvailable = parameters.page > 0 && parameters.page < totalPages;
+  const isPreviousPageAvailable = parameters.page > 1;
 
   return (
     <div className="max-w-[12rem] flex justify-between items-center">
       {isPreviousPageAvailable ? (
         <NextLink
           href={`${router.pathname}?${qs.stringify({
-            ...searchState.parameters,
-            page: searchState.parameters.page - 1,
+            ...parameters,
+            page: parameters.page - 1,
           })}`}
           passHref
         >
@@ -34,13 +37,13 @@ const Pagination = () => {
         <div className="w-10 h-10" />
       )}
       <span className="text-base font-normal text-primary text-center">
-        {searchState.parameters.page} / {searchState.data.totalPages}
+        {parameters.page} / {totalPages}
       </span>
       {isNextPageAvailable ? (
         <NextLink
           href={`${router.pathname}?${qs.stringify({
-            ...searchState.parameters,
-            page: searchState.parameters.page + 1,
+            ...parameters,
+            page: parameters.page + 1,
           })}`}
           passHref
         >

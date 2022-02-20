@@ -6,8 +6,6 @@
       "components/*": ["src/components/*"],
       "helpers/*": ["src/helpers/*"],
       "hooks/*": ["src/hooks/*"],
-      "requests/*": ["src/requests/*"],
-      "store/*": ["src/store/*"],
       "types/*": ["src/types/*"]
     },
     "target": "es5",

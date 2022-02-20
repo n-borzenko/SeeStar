@@ -17,3 +17,12 @@ export type SearchItemPerson = Person & {
 };
 
 export type SearchItem = SearchItemMovie | SearchItemShow | SearchItemPerson;
+
+export type SearchParameters = { text: string; type: MediaTypes; page: number };
+
+export type SearchData = {
+  page: number;
+  results: SearchItem[];
+  totalResults: number;
+  totalPages: number;
+};

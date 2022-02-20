@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import clsx from "clsx";
-import Image from "next/image";
-import { memo, useState, useCallback } from "react";
+import { memo, useState, useCallback, useMemo } from "react";
 import Icon from "components/common/Icon";
-import { useAppSelector } from "store/hooks";
+import getImageSize from "helpers/getImageSize";
+import useConfigurationRequest from "hooks/configuration/useConfigurationRequest";
 import { MediaTypes } from "types/mediaTypes";
 
 type PosterImageProps = {
@@ -14,15 +14,34 @@ type PosterImageProps = {
 };
 
 const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }) => {
-  const configuration = useAppSelector((state) => state.configuration.data);
+  const imageSize = getImageSize(size);
+  const configuration = useConfigurationRequest();
   const [isImageReady, setIsImageReady] = useState(false);
   const [isAlternativeIconHidden, setIsAlternativeIconHidden] = useState(src && src.length > 0);
 
   const onLoad = useCallback(() => setIsImageReady(true), []);
   const onError = useCallback(() => setIsAlternativeIconHidden(false), []);
 
-  const posterSize =
-    configuration.posterSizes.find(({ key }) => key === size) || configuration.posterSizes[0];
+  const links = useMemo(() => {
+    if (configuration.state !== "succeeded" || !src || src.length === 0) {
+      return undefined;
+    }
+
+    const size1xId =
+      configuration.data.imageSizes.find(({ width }) => width >= imageSize.width)?.id ??
+      configuration.data.fallbackSizeId;
+    const size2xId =
+      configuration.data.imageSizes.find(({ width }) => width >= imageSize.width * 2)?.id ??
+      configuration.data.fallbackSizeId;
+
+    return {
+      srcSet: `
+        ${configuration.data.secureBaseUrl}${size1xId}${src} 1x,
+        ${configuration.data.secureBaseUrl}${size2xId}${src} 2x
+      `,
+      src: `${configuration.data.secureBaseUrl}${size1xId}${src}`,
+    };
+  }, [configuration, imageSize.width, src]);
 
   return (
     <div
@@ -30,15 +49,16 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
         "rounded-l-lg": rounded === "left",
         "rounded-t-lg": rounded === "top",
       })}
-      style={{ width: posterSize.width, height: posterSize.height }}
+      style={{ width: imageSize.width, height: imageSize.height }}
     >
-      {isAlternativeIconHidden ? (
-        <Image
-          src={`${configuration.secureBaseUrl}${posterSize.id}${src}`}
+      {isAlternativeIconHidden && links ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          srcSet={links.srcSet}
+          src={links.src}
           alt={`${type} ${type === MediaTypes.Person ? "Picture" : "Poster"}`}
-          quality="100"
-          width={posterSize.width}
-          height={posterSize.height}
+          width={imageSize.width}
+          height={imageSize.height}
           className={clsx("opacity-0 transition-opacity duration-200", {
             "opacity-100": isImageReady,
             "rounded-l-lg": rounded === "left",

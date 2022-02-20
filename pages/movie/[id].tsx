@@ -2,34 +2,29 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
-import Loader from "components/common/Spinner";
-import { useAppSelector } from "store/hooks";
+import Spinner from "components/common/Spinner";
+import Movie from "components/movie";
 import useMovieRequest from "hooks/movie/useMovieRequest";
 
 const MoviePage: NextPage = () => {
   const router = useRouter();
-  const { requestStatus, data } = useAppSelector((state) => state.movie);
-  const { retryRequest } = useMovieRequest(router);
+  const { movie, retry } = useMovieRequest(router);
 
-  if (requestStatus === "idle" || requestStatus === "pending") {
-    return <Loader size="large" />;
+  if (movie.state === "loading") {
+    return <Spinner size="large" />;
   }
 
-  if (requestStatus === "failed" || !data) {
+  if (movie.state === "failed") {
     return (
       <EmptyState
-        message={`Error occured while processing request`}
-        buttonTitle="Try again"
-        onClick={retryRequest}
+        message={movie.errorMessage}
+        buttonTitle={movie.isRetryAvailable ? "Try again" : undefined}
+        onClick={movie.isRetryAvailable ? retry : undefined}
       />
     );
   }
 
-  return (
-    <div className="w-full h-full">
-      <h1>{data.title}</h1>
-    </div>
-  );
+  return <Movie movie={movie.data} />;
 };
 
 export default memo(MoviePage);

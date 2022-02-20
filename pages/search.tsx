@@ -1,67 +1,64 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { memo } from "react";
+import EmptyState from "components/common/EmptyState";
 import LinkGroup from "components/common/LinkGroup";
 import SearchForm from "components/common/SearchForm";
-import { useAppSelector } from "store/hooks";
-import EmptySearchStates from "components/search/EmptySearchStates";
+import Spinner from "components/common/Spinner";
 import Pagination from "components/search/Pagination";
 import SearchResults from "components/search/SearchResults";
-import useSearchRequests from "hooks/search/useSearchRequests";
-import useTypesLinks from "hooks/search/useTypesLinks";
+import useSearchForm from "hooks/search/useSearchForm";
+import useSearchParameters from "hooks/search/useSearchParameters";
+import useSearchRequest from "hooks/search/useSearchRequest";
+import useTypeLinks from "hooks/search/useTypeLinks";
 
 const SearchPage: NextPage = () => {
   const router = useRouter();
-  const searchState = useAppSelector((state) => state.search);
-
-  const { submitForm, retryRequest, searchText, setSearchText } = useSearchRequests(
+  const parameters = useSearchParameters(router);
+  const { searchText, setSearchText, submitForm } = useSearchForm(
     router,
-    searchState
+    parameters.text,
+    parameters.type
   );
-  const typesLinks = useTypesLinks(router.pathname, searchText);
+  const { searchResults, retry } = useSearchRequest(router.isReady, parameters);
+  const typeLinks = useTypeLinks(router.pathname, searchText);
 
-  const areFiltersAvailable = searchState.requestStatus !== "idle";
-  const areSearchResultsVisible =
-    searchState.requestStatus === "succeeded" &&
-    searchState.data.pages[searchState.parameters.page]?.length > 0;
-  const isPaginationAvailable =
-    searchState.requestStatus === "succeeded" && searchState.data.totalResults > 0;
+  if (!router.isReady) {
+    return <Spinner size="large" />;
+  }
 
   return (
     <div className="w-full h-full grid grid-rows-[auto_auto_auto_1fr_auto] grid-cols-3 sm:grid-cols-2 gap-2 sm:gap-y-6 lg:gap-8">
       <h1 className="col-span-full variant-h3 md:variant-h2">Search for movies, shows, people</h1>
-      {areFiltersAvailable && (
-        <>
-          <div className="col-span-full sm:col-span-1">
-            <SearchForm value={searchText} onValueChanged={setSearchText} onSubmit={submitForm} />
-          </div>
-          <div className="col-span-full sm:col-span-1">
-            <LinkGroup
-              links={typesLinks}
-              selectedId={searchState.parameters.type}
-              size="large"
-              wide
-            />
-          </div>
-        </>
-      )}
-
-      <div className="col-span-full sm:row-span-2">
-        {areSearchResultsVisible ? (
-          <SearchResults />
-        ) : (
-          <EmptySearchStates retryRequest={retryRequest} />
-        )}
+      <div className="col-span-full sm:col-span-1">
+        <SearchForm value={searchText} onValueChanged={setSearchText} onSubmit={submitForm} />
+      </div>
+      <div className="col-span-full sm:col-span-1">
+        <LinkGroup links={typeLinks} selectedId={parameters.type} size="large" wide />
       </div>
 
-      {isPaginationAvailable && (
+      <div className="col-span-full sm:row-span-2">
+        {searchResults.state === "loading" && <Spinner size="large" />}
+        {searchResults.state === "failed" && (
+          <EmptyState
+            message={searchResults.errorMessage}
+            buttonTitle={searchResults.isRetryAvailable ? "Try again" : undefined}
+            onClick={searchResults.isRetryAvailable ? retry : undefined}
+          />
+        )}
+        {searchResults.state === "succeeded" && <SearchResults data={searchResults.data} />}
+      </div>
+
+      {searchResults.state === "succeeded" && searchResults.data.totalResults > 0 && (
         <>
           <div className="col-span-2 sm:col-span-1 self-center">
-            <Pagination />
+            {searchResults.data.totalPages > 1 && (
+              <Pagination parameters={parameters} totalPages={searchResults.data.totalPages} />
+            )}
           </div>
           <div className="col-span-1 justify-self-end self-center">
             <p className="text-lg font-medium text-primary text-right">
-              {searchState.data.totalResults} results
+              {searchResults.data.totalResults} results
             </p>
           </div>
         </>
