@@ -4,7 +4,7 @@ import type {
   AnchorHTMLAttributes,
   AriaAttributes,
 } from "react";
-import type { IconTypes } from "components/common/Icon";
+import type { IconSize, IconTypes } from "components/common/Icon";
 import clsx from "clsx";
 import { memo, forwardRef } from "react";
 import Icon from "components/common/Icon";
@@ -18,6 +18,7 @@ type ButtonLikeLinkProps = Pick<
   size?: "medium" | "large";
   wide?: boolean;
   icon?: IconTypes;
+  iconSize?: IconSize;
   className?: string;
   ariaLabel?: AriaAttributes["aria-label"];
 };
@@ -32,6 +33,7 @@ const ButtonLikeLink: ForwardRefRenderFunction<
     size = "medium",
     wide,
     icon,
+    iconSize,
     children,
     ariaLabel,
     href,
@@ -79,7 +81,7 @@ const ButtonLikeLink: ForwardRefRenderFunction<
       aria-label={ariaLabel}
       onClick={onClick}
     >
-      {icon ? <Icon type={icon} color={iconColor} size={size} /> : children}
+      {icon ? <Icon type={icon} color={iconColor} size={iconSize || size} /> : children}
     </a>
   );
 };

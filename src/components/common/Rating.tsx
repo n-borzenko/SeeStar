@@ -14,7 +14,7 @@ const Rating: FC<RatingProps> = ({ size = "medium", voteAverage = 0, voteCount }
       <div
         className={clsx({
           "ml-1 text-base font-normal leading-4": size === "medium",
-          "ml-2 variant-h5": size === "extra-large",
+          "ml-2 text-xl font-semibold": size === "extra-large",
         })}
       >
         {voteAverage}
@@ -23,10 +23,11 @@ const Rating: FC<RatingProps> = ({ size = "medium", voteAverage = 0, voteCount }
         <div
           className={clsx("text-neutral-500", {
             "ml-1 text-base font-normal leading-4": size === "medium",
-            "ml-2 text-2xl font-normal": size === "extra-large",
+            "ml-2 text-xl font-normal": size === "extra-large",
           })}
         >
-          ({voteCount} votes)
+          ({voteCount}
+          <span className="hidden sm:inline"> votes</span>)
         </div>
       ) : null}
     </div>

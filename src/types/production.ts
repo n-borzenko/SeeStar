@@ -5,4 +5,4 @@ export type ProductionCompany = {
   originCountry?: string;
 };
 
-export type ProductionCountry = { iso31661: string; name: string };
+export type ProductionCountry = { iso_3166_1: string; name: string };

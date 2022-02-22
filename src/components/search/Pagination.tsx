@@ -26,15 +26,10 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           })}`}
           passHref
         >
-          <ButtonLikeLink
-            icon="arrow-left"
-            variant="outlined"
-            size="large"
-            ariaLabel="Previous page"
-          />
+          <ButtonLikeLink icon="arrow-left" variant="outlined" ariaLabel="Previous page" />
         </NextLink>
       ) : (
-        <div className="w-10 h-10" />
+        <div className="w-8 h-8" />
       )}
       <span className="text-base font-normal text-primary text-center">
         {parameters.page} / {totalPages}
@@ -47,15 +42,10 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           })}`}
           passHref
         >
-          <ButtonLikeLink
-            icon="arrow-right"
-            variant="outlined"
-            size="large"
-            ariaLabel="Next page"
-          />
+          <ButtonLikeLink icon="arrow-right" variant="outlined" ariaLabel="Next page" />
         </NextLink>
       ) : (
-        <div className="w-10 h-10" />
+        <div className="w-8 h-8" />
       )}
     </div>
   );

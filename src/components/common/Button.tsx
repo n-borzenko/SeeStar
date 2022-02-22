@@ -5,7 +5,7 @@ import type {
   ButtonHTMLAttributes,
   AriaAttributes,
 } from "react";
-import type { IconTypes } from "components/common/Icon";
+import type { IconTypes, IconSize } from "components/common/Icon";
 import clsx from "clsx";
 import { memo, forwardRef } from "react";
 import Icon from "components/common/Icon";
@@ -16,6 +16,7 @@ type ButtonProps = Pick<ButtonHTMLAttributes<HTMLButtonElement>, "type"> & {
   size?: "medium" | "large";
   wide?: boolean;
   icon?: IconTypes;
+  iconSize?: IconSize;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   className?: string;
   ariaExpanded?: AriaAttributes["aria-expanded"];
@@ -30,6 +31,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
     size = "medium",
     wide,
     icon,
+    iconSize,
     type,
     onClick,
     children,
@@ -75,7 +77,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
       aria-haspopup={ariaHasPopup}
       aria-label={ariaLabel}
     >
-      {icon ? <Icon type={icon} color={iconColor} size={size} /> : children}
+      {icon ? <Icon type={icon} color={iconColor} size={iconSize || size} /> : children}
     </button>
   );
 };

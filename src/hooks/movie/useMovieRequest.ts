@@ -22,7 +22,7 @@ const generateMovieUrl = (id: number) => {
   return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/movie/${id}?${qs.stringify(
     {
       api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
-      append_to_response: ["credits", "external_ids", "keywords"],
+      append_to_response: ["credits", "external_ids", "keywords", "release_dates"],
     },
     { arrayFormat: "comma" }
   )}`;

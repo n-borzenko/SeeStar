@@ -2,6 +2,7 @@ import type { CastMember, CrewMember } from "types/credit";
 import type { ExternalIds } from "types/externalIds";
 import type { Language } from "types/language";
 import type { ProductionCompany, ProductionCountry } from "types/production";
+import type { CountryCertification } from "types/release";
 
 type MovieCollection = {
   id: number;
@@ -57,4 +58,7 @@ export type MovieExtended = MovieDetailed & {
   };
   externalIds: ExternalIds;
   keywords: { keywords: { id: number; name: string }[] };
+  releaseDates: {
+    results: CountryCertification[];
+  };
 };

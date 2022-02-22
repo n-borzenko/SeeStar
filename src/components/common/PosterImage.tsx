@@ -45,13 +45,13 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
 
   return (
     <div
-      className={clsx("bg-primary/10 flex justify-center items-center", {
+      className={clsx("bg-primary/10 flex justify-center items-center max-w-full max-h-full", {
         "rounded-l-lg": rounded === "left",
         "rounded-t-lg": rounded === "top",
       })}
       style={{ width: imageSize.width, height: imageSize.height }}
     >
-      {isAlternativeIconHidden && links ? (
+      {isAlternativeIconHidden && links && (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           srcSet={links.srcSet}
@@ -67,9 +67,8 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
           onLoad={onLoad}
           onError={onError}
         />
-      ) : (
-        <Icon type={type} size="huge" className="opacity-30" />
       )}
+      {!isAlternativeIconHidden && <Icon type={type} size="huge" className="opacity-30" />}
     </div>
   );
 };
