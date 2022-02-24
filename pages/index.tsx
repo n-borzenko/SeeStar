@@ -1,3 +1,13 @@
-import HomePage from "./home";
+import type { NextPage } from "next";
+import { memo } from "react";
+import WelcomeBlock from "components/home/WelcomeBlock";
 
-export default HomePage;
+const IndexPage: NextPage = () => {
+  return (
+    <>
+      <WelcomeBlock />
+    </>
+  );
+};
+
+export default memo(IndexPage);

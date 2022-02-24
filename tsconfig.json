@@ -3,12 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "assets/*": ["public/assets/*"],
-      "components/*": ["components/*"],
-      "configurations/*": ["configurations/*"],
-      "helpers/*": ["helpers/*"],
-      "requests/*": ["requests/*"],
-      "store/*": ["store/*"],
-      "types/*": ["types/*"]
+      "components/*": ["src/components/*"],
+      "helpers/*": ["src/helpers/*"],
+      "hooks/*": ["src/hooks/*"],
+      "types/*": ["src/types/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

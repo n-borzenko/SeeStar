@@ -1,12 +1,15 @@
 import type { AppProps } from "next/app";
 import type { FC } from "react";
 import Head from "next/head";
-import { Provider } from "react-redux";
-import ConfigurationLoader from "components/ConfigurationLoader";
-import MainHeader from "components/MainHeader";
-import MainFooter from "components/MainFooter";
-import store from "store";
+import { SWRConfig } from "swr";
+import MainHeader from "components/structure/MainHeader";
+import MainFooter from "components/structure/MainFooter";
+import defaultFetcher from "helpers/fetching/defaultFetcher";
 import "../styles/index.css";
+
+const swrOptions = {
+  fetcher: defaultFetcher,
+};
 
 const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
   return (
@@ -17,15 +20,13 @@ const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
       </Head>
       <div className="flex flex-col min-h-screen">
         <MainHeader />
-        <Provider store={store}>
+        <SWRConfig value={swrOptions}>
           <main className="flex justify-center grow w-full mt-14 sm:mt-16">
             <div className="grow max-w-full xl:max-w-screen-xl p-4">
-              <ConfigurationLoader>
-                <Component {...pageProps} />
-              </ConfigurationLoader>
+              <Component {...pageProps} />
             </div>
           </main>
-        </Provider>
+        </SWRConfig>
         <MainFooter />
       </div>
     </>
