@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import Image from "next/image";
 import { memo } from "react";
 import Button from "components/common/Button";
 import EmptyImage from "./empty-state.svg";

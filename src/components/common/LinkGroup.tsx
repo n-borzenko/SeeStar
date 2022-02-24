@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import clsx from "clsx";
-import NextLink from "next/link";
+import Link from "next/link";
 import { memo } from "react";
 
 type LinkData = {
@@ -37,11 +37,11 @@ const LinkGroup: FC<LinkGroupProps> = ({
     "h-full px-1.5 md:px-4 text-lg": size === "large",
   });
   const itemClasses = clsx(defaultItemClasses, {
-    "text-primary bg-primary/0 focus:bg-primary/20 hover:bg-primary/20 active:bg-primary/40":
+    "text-primary bg-primary/0 focus:bg-primary/10 hover:bg-primary/10 active:bg-primary/20":
       color === "primary",
-    "text-secondary bg-secondary/0 focus:bg-secondary/20 hover:bg-secondary/20 active:bg-secondary/40":
+    "text-secondary bg-secondary/0 focus:bg-secondary/10 hover:bg-secondary/10 active:bg-secondary/20":
       color === "secondary",
-    "text-white bg-white/0 border-white focus:bg-white/20 hover:bg-white/20 active:bg-white/40":
+    "text-white bg-white/0 border-white focus:bg-white/10 hover:bg-white/10 active:bg-white/20":
       color === "white",
   });
   const selectedItemClasses = clsx(defaultItemClasses, {
@@ -61,7 +61,7 @@ const LinkGroup: FC<LinkGroupProps> = ({
   return (
     <div className={containerClasses}>
       {links.map(({ id, title, href }) => (
-        <NextLink key={id} href={href} passHref>
+        <Link key={id} href={href}>
           <a
             aria-current={id === selectedId ? true : undefined}
             className={id === selectedId ? selectedItemClasses : itemClasses}
@@ -69,7 +69,7 @@ const LinkGroup: FC<LinkGroupProps> = ({
           >
             {title}
           </a>
-        </NextLink>
+        </Link>
       ))}
     </div>
   );

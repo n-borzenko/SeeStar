@@ -1,6 +1,6 @@
 import type { FC, FocusEvent } from "react";
 import clsx from "clsx";
-import NextLink from "next/link";
+import Link from "next/link";
 import { memo, useCallback, useRef } from "react";
 import { HeaderMenuGroup, pagesData } from "components/structure/pagesData";
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
@@ -63,11 +63,11 @@ const HeaderGroupedItem: FC<HeaderGroupedItemProps> = ({
               className={`mx-2 my-1.5 ${generateVisibilityClassNames(item.supportedSizes)}`}
               key={item.id}
             >
-              <NextLink href={pagesData[item.id].path} passHref>
+              <Link href={pagesData[item.id].path}>
                 <a className="variant-h6 inline-block text-primary rounded-full px-2 py-1 focus:bg-primary/10 hover:bg-primary/10 active:bg-primary/20">
                   {pagesData[item.id].title}
                 </a>
-              </NextLink>
+              </Link>
             </li>
           ))}
         </ul>

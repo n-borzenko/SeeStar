@@ -37,7 +37,7 @@ module.exports = {
         bar: "0 1px 12px 1px rgba(0,0,0,0.6)",
         card: "0 2px 4px 1px rgba(11,1,18,0.2)",
         popup: "0 2px 6px 2px rgba(11,1,18,0.2)",
-        outline: "0 0 6px 0 #FE9502",
+        flying: "0 2px 8px 3px rgba(11,1,18,0.2)",
       },
       gridTemplateRows: {
         "20-auto": "repeat(20, auto)",

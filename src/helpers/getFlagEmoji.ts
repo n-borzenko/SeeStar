@@ -3,7 +3,7 @@ const asciiOffset = 0x41;
 
 const getFlagEmoji = (country?: string) => {
   if (!country || country.length !== 2) {
-    return undefined;
+    return "⬜";
   }
 
   const symbol1 = country.charCodeAt(0) - asciiOffset + flagOffset;

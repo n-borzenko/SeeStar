@@ -58,7 +58,7 @@ const MovieMainInfo: FC<MovieMainInfoProps> = ({ movie }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-8 mt-4 lg:mt-8">
         <div className="text-lg leading-6 font-normal col-span-1 sm:col-start-1 sm:row-start-1">
           <div className="text-neutral-700 mb-2">Genres: </div>
-          {movie.genres ? (
+          {movie.genres && movie.genres.length > 0 ? (
             <LabelsList labels={movie.genres} isMultilined size="large" />
           ) : (
             <span>No data</span>
@@ -66,7 +66,7 @@ const MovieMainInfo: FC<MovieMainInfoProps> = ({ movie }) => {
         </div>
         <div className="text-lg leading-6 font-normal col-span-1 sm:col-start-1 sm:row-start-2">
           <div className="text-neutral-700 mb-2">Keywords: </div>
-          {movie.keywords.keywords ? (
+          {movie.keywords.keywords && movie.keywords.keywords.length > 0 ? (
             <LabelsList labels={movie.keywords.keywords} isMultilined size="large" />
           ) : (
             <span>No data</span>

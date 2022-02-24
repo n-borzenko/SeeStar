@@ -35,7 +35,7 @@ export type IconTypes =
   | "twitter"
   | Exclude<MediaTypes, "any">;
 
-export type IconSize = "small" | "medium" | "large" | "extra-large" | "huge";
+export type IconSize = "small" | "medium" | "large" | "extra-large" | "huge" | "giant";
 
 type IconProps = {
   type: IconTypes;
@@ -59,6 +59,7 @@ const Icon: FC<IconProps> = ({
       "w-5 h-5": size === "large",
       "w-8 h-8": size === "extra-large",
       "w-10 h-10": size === "huge",
+      "w-20 h-20": size === "giant",
       "text-primary": color === "primary",
       "text-secondary": color === "secondary",
       "text-white": color === "white",

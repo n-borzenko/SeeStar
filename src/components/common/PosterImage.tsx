@@ -58,17 +58,21 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
           src={links.src}
           alt={`${type} ${type === MediaTypes.Person ? "Picture" : "Poster"}`}
           width={imageSize.width}
-          height={imageSize.height}
-          className={clsx("opacity-0 transition-opacity duration-200", {
-            "opacity-100": isImageReady,
-            "rounded-l-lg": rounded === "left",
-            "rounded-t-lg": rounded === "top",
-          })}
+          className={clsx(
+            "opacity-0 object-center object-cover h-full transition-opacity duration-200",
+            {
+              "opacity-100": isImageReady,
+              "rounded-l-lg": rounded === "left",
+              "rounded-t-lg": rounded === "top",
+            }
+          )}
           onLoad={onLoad}
           onError={onError}
         />
       )}
-      {!isAlternativeIconHidden && <Icon type={type} size="huge" className="opacity-30" />}
+      {!isAlternativeIconHidden && (
+        <Icon type={type} size={size === "large" ? "giant" : "huge"} className="opacity-30" />
+      )}
     </div>
   );
 };

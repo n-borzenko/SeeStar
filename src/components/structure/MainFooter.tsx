@@ -1,12 +1,12 @@
-import NextLink from "next/link";
+import Link from "next/link";
 import { memo } from "react";
 
 const MainFooter = () => {
   return (
     <footer>
-      <NextLink href="/about">
+      <Link href="/about">
         <a className="link">About</a>
-      </NextLink>
+      </Link>
     </footer>
   );
 };

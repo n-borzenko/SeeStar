@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { SearchItemMovie } from "types/search";
 import clsx from "clsx";
 import { memo } from "react";
+import Card from "components/common/Card";
 import Icon from "components/common/Icon";
 import GenresList from "components/common/GenresList";
 import PosterImage from "components/common/PosterImage";
@@ -17,7 +18,7 @@ const mediaType = MediaTypes.Movie;
 
 const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
   return (
-    <div className="bg-white shadow-card rounded-lg flex">
+    <Card href={`/movie/${item.id}`}>
       <div className="flex-shrink-0">
         <PosterImage src={item.posterPath} type={mediaType} size={posterSize} rounded="left" />
       </div>
@@ -27,7 +28,7 @@ const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
           <div className="flex-shrink-0">
             <Icon size="medium" type={mediaType} ariaLabel="Type: movie" />
           </div>
-          <div className="text-base font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
+          <div className="text-base group-hover:text-primary group-active:text-primary font-medium leading-5 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
             {item.title}
           </div>
         </div>
@@ -58,7 +59,7 @@ const MovieItemContent: FC<MovieItemContentProps> = ({ item, posterSize }) => {
           {item.overview}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

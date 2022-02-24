@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import type { SearchParameters } from "types/search";
-import NextLink from "next/link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import qs from "qs";
 import { memo } from "react";
@@ -19,7 +19,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
   return (
     <div className="max-w-[12rem] flex justify-between items-center">
       {isPreviousPageAvailable ? (
-        <NextLink
+        <Link
           href={`${router.pathname}?${qs.stringify({
             ...parameters,
             page: parameters.page - 1,
@@ -27,7 +27,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           passHref
         >
           <ButtonLikeLink icon="arrow-left" variant="outlined" ariaLabel="Previous page" />
-        </NextLink>
+        </Link>
       ) : (
         <div className="w-8 h-8" />
       )}
@@ -35,7 +35,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
         {parameters.page} / {totalPages}
       </span>
       {isNextPageAvailable ? (
-        <NextLink
+        <Link
           href={`${router.pathname}?${qs.stringify({
             ...parameters,
             page: parameters.page + 1,
@@ -43,7 +43,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           passHref
         >
           <ButtonLikeLink icon="arrow-right" variant="outlined" ariaLabel="Next page" />
-        </NextLink>
+        </Link>
       ) : (
         <div className="w-8 h-8" />
       )}

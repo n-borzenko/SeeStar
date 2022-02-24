@@ -1,5 +1,5 @@
 import Image from "next/image";
-import NextLink from "next/link";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { memo, useCallback, useRef, useEffect } from "react";
 import HeaderMenu from "./HeaderMenu";
@@ -25,7 +25,7 @@ const MainHeader = () => {
         className="xl:max-w-screen-xl py-2 px-4 grow flex justify-between items-center h-full"
         aria-label="Main navigation"
       >
-        <NextLink href="/" passHref>
+        <Link href="/">
           <a
             className="leading-0 flex items-center focus:rounded-full"
             onClick={clearMenuSelection}
@@ -42,7 +42,7 @@ const MainHeader = () => {
             />
             <span className="text-white ml-4 variant-h4">See Star</span>
           </a>
-        </NextLink>
+        </Link>
         <HeaderMenu />
       </nav>
     </header>

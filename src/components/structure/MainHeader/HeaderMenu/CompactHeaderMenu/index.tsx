@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import NextLink from "next/link";
+import Link from "next/link";
 import { memo } from "react";
 import Button from "components/common/Button";
 import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "components/structure/pagesData";
@@ -70,11 +70,11 @@ const CompactHeaderMenu = () => {
                             )}`}
                             key={item.id}
                           >
-                            <NextLink href={pagesData[item.id].path} passHref>
+                            <Link href={pagesData[item.id].path}>
                               <a className="variant-h6 inline-block text-white px-2 py-1 rounded-full focus:bg-white/20 hover:bg-white/20 active:bg-white/40 js-compact-menu-link">
                                 {pagesData[item.id].title}
                               </a>
-                            </NextLink>
+                            </Link>
                           </li>
                         ))}
                       </ul>
