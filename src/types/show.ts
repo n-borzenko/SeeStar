@@ -1,6 +1,7 @@
 import type { ExternalIds } from "types/externalIds";
 import type { Language } from "types/language";
 import type { ProductionCompany, ProductionCountry } from "types/production";
+import type { CertificationRating } from "types/release";
 
 type ShowCreator = {
   id: number;
@@ -93,4 +94,7 @@ export type ShowDetailed = Exclude<Show, "genreIds"> & {
 export type ShowExtended = ShowDetailed & {
   externalIds: ExternalIds;
   keywords: { results: { id: number; name: string }[] };
+  contentRatings: {
+    results: CertificationRating[];
+  };
 };

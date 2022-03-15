@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { MovieExtended } from "types/movie";
 import { memo } from "react";
-import MovieMainInfo from "./MovieMainInfo";
+import MovieDetails from "./MovieDetails";
 import MovieSummary from "./MovieSummary";
 
 type MovieProps = {
@@ -12,7 +12,7 @@ const Movie: FC<MovieProps> = ({ movie }) => {
   return (
     <div>
       <MovieSummary movie={movie} />
-      <MovieMainInfo movie={movie} />
+      <MovieDetails movie={movie} />
     </div>
   );
 };

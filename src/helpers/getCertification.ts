@@ -1,4 +1,4 @@
-import type { CountryCertification } from "types/release";
+import type { CountryCertification, CertificationRating } from "types/release";
 import { ReleaseType } from "types/release";
 
 const acceptableReleaseTypes = [
@@ -18,7 +18,7 @@ const getSpecificCertification = (
     : undefined;
 };
 
-const getCertification = (
+export const getCertificationFromRelease = (
   certifications: CountryCertification[],
   releaseType?: ReleaseType,
   region = "GB"
@@ -42,4 +42,10 @@ const getCertification = (
   return undefined;
 };
 
-export default getCertification;
+export const getCertificationRating = (ratings: CertificationRating[], region = "GB") => {
+  const certification = ratings.find(({ iso_3166_1 }) => iso_3166_1 === region);
+  if (!certification) {
+    return undefined;
+  }
+  return certification.rating;
+};

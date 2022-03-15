@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { SearchItemShow } from "types/search";
 import clsx from "clsx";
 import { memo } from "react";
+import Card from "components/common/Card";
 import Icon from "components/common/Icon";
 import GenresList from "components/common/GenresList";
 import PosterImage from "components/common/PosterImage";
@@ -17,7 +18,7 @@ const mediaType = MediaTypes.Show;
 
 const ShowItemContent: FC<ShowItemContentProps> = ({ item, posterSize }) => {
   return (
-    <div className="bg-white shadow-card rounded-lg flex">
+    <Card href={`/show/${item.id}`}>
       <div className="flex-shrink-0">
         <PosterImage src={item.posterPath} type={mediaType} size={posterSize} rounded="left" />
       </div>
@@ -58,7 +59,7 @@ const ShowItemContent: FC<ShowItemContentProps> = ({ item, posterSize }) => {
           {item.overview}
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

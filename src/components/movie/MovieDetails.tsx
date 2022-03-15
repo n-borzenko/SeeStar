@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import type { MovieExtended } from "types/movie";
 import { memo } from "react";
+import InfoItem from "components/common/InfoItem";
 import LabelsList from "components/common/LabelsList";
-import getCertification from "helpers/getCertification";
+import SocialLinks from "components/common/SocialLinks";
+import { getCertificationFromRelease } from "helpers/getCertification";
 import getFlagEmoji from "helpers/getFlagEmoji";
-import InfoItem from "./InfoItem";
-import SocialLinks from "./SocialLinks";
 
-type MovieMainInfoProps = {
+type MovieDetailsProps = {
   movie: MovieExtended;
 };
 
@@ -21,12 +21,12 @@ const getCurrencyValue = (value?: number) => {
     : undefined;
 };
 
-const MovieMainInfo: FC<MovieMainInfoProps> = ({ movie }) => {
+const MovieDetails: FC<MovieDetailsProps> = ({ movie }) => {
   return (
     <div className="mt-4 lg:mt-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="sm:col-start-2">
-          <SocialLinks movie={movie} />
+          <SocialLinks homepage={movie.homepage} externalIds={movie.externalIds} label="Movie" />
         </div>
         <h5 className="sm:col-start-1 sm:row-start-1">Main information</h5>
       </div>
@@ -36,7 +36,10 @@ const MovieMainInfo: FC<MovieMainInfoProps> = ({ movie }) => {
           <InfoItem label="Status" value={movie.status} />
         </div>
         <div className="col-span-1 sm:col-start-1 sm:row-start-2">
-          <InfoItem label="Certification" value={getCertification(movie.releaseDates.results)} />
+          <InfoItem
+            label="Certification"
+            value={getCertificationFromRelease(movie.releaseDates.results)}
+          />
         </div>
         <div className="col-span-1 sm:col-start-1 sm:row-start-3 md:col-start-2 md:row-start-2">
           <InfoItem label="Original language" value={movie.originalLanguage?.toUpperCase()} />
@@ -98,4 +101,4 @@ const MovieMainInfo: FC<MovieMainInfoProps> = ({ movie }) => {
   );
 };
 
-export default memo(MovieMainInfo);
+export default memo(MovieDetails);
