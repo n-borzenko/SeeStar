@@ -1,7 +1,10 @@
+import type { AggregatedCastMember, AggregatedCrewMember } from "types/credit";
 import type { ExternalIds } from "types/externalIds";
 import type { Language } from "types/language";
 import type { ProductionCompany, ProductionCountry } from "types/production";
 import type { CertificationRating } from "types/release";
+import type { ShowEpisode } from "types/show/episode";
+import type { ShowSeason } from "types/show/season";
 
 type ShowCreator = {
   id: number;
@@ -9,29 +12,6 @@ type ShowCreator = {
   name: string;
   gender?: number;
   profilePath?: string | null;
-};
-
-type ShowEpisode = {
-  airDate?: string;
-  episodeNumber?: number;
-  id: number;
-  name: string;
-  overview?: string;
-  productionCode?: string;
-  seasonNumber?: number;
-  stillPath?: string | null;
-  voteAverage?: number;
-  voteCount?: number;
-};
-
-type ShowSeason = {
-  airDate?: string;
-  episodeCount?: number;
-  id: number;
-  name: string;
-  overview?: string;
-  posterPath?: string | null;
-  seasonNumber?: number;
 };
 
 type ShowNetwork = {
@@ -90,11 +70,14 @@ export type ShowDetailed = Exclude<Show, "genreIds"> & {
   type?: ShowType;
 };
 
-// Credits to be added later
 export type ShowExtended = ShowDetailed & {
   externalIds: ExternalIds;
   keywords: { results: { id: number; name: string }[] };
   contentRatings: {
     results: CertificationRating[];
+  };
+  aggregateCredits: {
+    cast: AggregatedCastMember[];
+    crew: AggregatedCrewMember[];
   };
 };

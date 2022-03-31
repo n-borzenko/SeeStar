@@ -3,14 +3,14 @@ import type { SearchParameters } from "types/search";
 import { useMemo } from "react";
 import { MediaTypes } from "types/mediaTypes";
 
-const getSearchText = (text?: string | string[]) => {
+const parseSearchText = (text?: string | string[]) => {
   if (!text) {
     return undefined;
   }
   return typeof text === "string" ? text : text[0];
 };
 
-const getSelectedId = (type?: string | string[]) => {
+const parseSelectedId = (type?: string | string[]) => {
   if (!type) {
     return undefined;
   }
@@ -18,7 +18,7 @@ const getSelectedId = (type?: string | string[]) => {
   return Object.values(MediaTypes).find((id) => id === expectedType) ?? undefined;
 };
 
-const getPage = (page?: string | string[]) => {
+const parsePage = (page?: string | string[]) => {
   if (!page) {
     return undefined;
   }
@@ -29,9 +29,9 @@ const getPage = (page?: string | string[]) => {
 const useSearchParameters = (router: NextRouter) => {
   const parameters = useMemo<SearchParameters>(
     () => ({
-      type: getSelectedId(router.query.type) ?? MediaTypes.Any,
-      text: (getSearchText(router.query.text) ?? "").trim(),
-      page: getPage(router.query.page) ?? 1,
+      type: parseSelectedId(router.query.type) ?? MediaTypes.Any,
+      text: (parseSearchText(router.query.text) ?? "").trim(),
+      page: parsePage(router.query.page) ?? 1,
     }),
     [router.query]
   );

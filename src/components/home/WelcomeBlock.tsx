@@ -13,9 +13,9 @@ const WelcomeBlock = () => {
   );
 
   return (
-    <div className="-mx-4 -mt-4">
+    <div className="-m-4 sm:-m-8">
       <div
-        className="flex relative h-[20rem] overflow-hidden p-4"
+        className="flex relative h-[20rem] overflow-hidden p-4 sm:p-8"
         style={{
           background:
             "radial-gradient(80% 60% at 0% 35%, white, white 99.99%, rgb(var(--color-primary) / 0.2) 100%)",

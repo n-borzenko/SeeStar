@@ -1,6 +1,6 @@
 import type { NextRouter } from "next/router";
 import type FetchingError from "helpers/fetching/fetchingError";
-import type { ShowExtended } from "types/show";
+import type { ShowExtended, ShowDetailed } from "types/show";
 import qs from "qs";
 import { useMemo, useCallback } from "react";
 import useSWRImmutable from "swr/immutable";
@@ -9,30 +9,28 @@ import {
   createLoadingRequestResult,
   createSuccessfulRequestResult,
 } from "helpers/fetching/createRequestResult";
+import { parseId } from "helpers/fetching/parseParams";
 
-const getShowId = (id?: string | string[]) => {
-  if (!id) {
-    return null;
-  }
-  const parsedId = parseInt(typeof id === "string" ? id : id[0], 10);
-  return isNaN(parsedId) || parsedId < 1 || parsedId > Number.MAX_SAFE_INTEGER ? null : parsedId;
-};
-
-const generateShowUrl = (id: number) => {
+const generateShowUrl = (id: number, isExtended: boolean) => {
   return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/tv/${id}?${qs.stringify(
     {
       api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
-      append_to_response: ["credits", "external_ids", "keywords", "content_ratings"],
+      append_to_response: isExtended
+        ? ["aggregate_credits", "external_ids", "keywords", "content_ratings"]
+        : [],
     },
     { arrayFormat: "comma" }
   )}`;
 };
 
-const useShowRequest = (router: NextRouter) => {
-  const showId = useMemo(() => getShowId(router.query.id), [router.query]);
+const useShowRequest = <T extends ShowExtended | ShowDetailed>(
+  router: NextRouter,
+  isExtended: boolean
+) => {
+  const showId = useMemo(() => parseId(router.query.showId), [router.query]);
 
-  const { data, error, mutate } = useSWRImmutable<ShowExtended, FetchingError>(
-    router.isReady && showId ? generateShowUrl(showId) : null,
+  const { data, error, mutate } = useSWRImmutable<T, FetchingError>(
+    router.isReady && showId ? generateShowUrl(showId, isExtended) : null,
     {
       shouldRetryOnError: false,
     }
@@ -40,7 +38,10 @@ const useShowRequest = (router: NextRouter) => {
 
   const retry = useCallback(() => mutate(), [mutate]);
 
-  const show = useMemo(() => {
+  const showRequestResult = useMemo(() => {
+    if (!showId && router.isReady) {
+      return createFailedRequestResult("Requested show was not found");
+    }
     if (error && error.status && error.status === 404) {
       return createFailedRequestResult("Requested show was not found");
     }
@@ -55,12 +56,20 @@ const useShowRequest = (router: NextRouter) => {
       return createLoadingRequestResult();
     }
     return createSuccessfulRequestResult(data);
-  }, [error, data]);
+  }, [error, data, showId, router.isReady]);
 
   return {
     retry,
-    show,
+    showRequestResult,
   };
 };
 
-export default useShowRequest;
+export const useExtendedShowRequest = (router: NextRouter) => {
+  const extendedShowRequestResult = useShowRequest<ShowExtended>(router, true);
+  return extendedShowRequestResult;
+};
+
+export const useDetailedShowRequest = (router: NextRouter) => {
+  const detailedShowRequestResult = useShowRequest<ShowDetailed>(router, false);
+  return detailedShowRequestResult;
+};

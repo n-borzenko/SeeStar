@@ -22,7 +22,7 @@ const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
         <MainHeader />
         <SWRConfig value={swrOptions}>
           <main className="flex justify-center grow w-full mt-14 sm:mt-16">
-            <div className="grow max-w-full xl:max-w-screen-xl p-4">
+            <div className="grow max-w-full xl:max-w-screen-xl p-4 sm:p-8">
               <Component {...pageProps} />
             </div>
           </main>

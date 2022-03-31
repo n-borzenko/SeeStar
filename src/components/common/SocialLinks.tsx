@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { ExternalIds } from "types/externalIds";
 import { memo } from "react";
-import ButtonLikeLink from "components/common/ButtonLikeLink";
+import { ButtonLink } from "components/common/Button";
 
 type SocialLinksProps = {
   externalIds: ExternalIds;
@@ -15,7 +15,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
   return (
     <div className="flex justify-between sm:justify-end">
       {homepage && (
-        <ButtonLikeLink
+        <ButtonLink
           ariaLabel={`${label} homepage`}
           href={homepage}
           target="_blank"
@@ -26,7 +26,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
         />
       )}
       {externalIds.imdbId && (
-        <ButtonLikeLink
+        <ButtonLink
           ariaLabel={`${label} page on Imdb`}
           href={`https://www.imdb.com/title/${externalIds.imdbId}`}
           target="_blank"
@@ -37,7 +37,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
         />
       )}
       {externalIds.facebookId && (
-        <ButtonLikeLink
+        <ButtonLink
           ariaLabel={`${label} page on Facebook`}
           href={`https://www.facebook.com/${externalIds.facebookId}`}
           target="_blank"
@@ -48,7 +48,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
         />
       )}
       {externalIds.instagramId && (
-        <ButtonLikeLink
+        <ButtonLink
           ariaLabel={`${label} page on Instagram`}
           href={`https://www.instagram.com/${externalIds.instagramId}`}
           target="_blank"
@@ -59,7 +59,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
         />
       )}
       {externalIds.twitterId && (
-        <ButtonLikeLink
+        <ButtonLink
           ariaLabel={`${label} page on Twitter`}
           href={`https://twitter.com/${externalIds.twitterId}`}
           target="_blank"

@@ -38,7 +38,10 @@ const ShowDetails: FC<ShowDetailsProps> = ({ show }) => {
           <InfoItem label="Original language" value={show.originalLanguage?.toUpperCase()} />
         </div>
         <div className="col-span-1 sm:col-start-2 sm:row-start-2 md:col-start-3 md:row-start-1">
-          <InfoItem label="Seasons" value={`${show.seasons.length}`} />
+          <InfoItem
+            label="Seasons / Episodes"
+            value={`${show.numberOfSeasons ?? "No data"} / ${show.numberOfEpisodes ?? "No data"}`}
+          />
         </div>
         <div className="col-span-1 sm:col-start-2 sm:row-start-3 md:col-start-3 md:row-start-2">
           <InfoItem

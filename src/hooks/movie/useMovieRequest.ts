@@ -9,14 +9,7 @@ import {
   createLoadingRequestResult,
   createSuccessfulRequestResult,
 } from "helpers/fetching/createRequestResult";
-
-const getMovieId = (id?: string | string[]) => {
-  if (!id) {
-    return null;
-  }
-  const parsedId = parseInt(typeof id === "string" ? id : id[0], 10);
-  return isNaN(parsedId) || parsedId < 1 || parsedId > Number.MAX_SAFE_INTEGER ? null : parsedId;
-};
+import { parseId } from "helpers/fetching/parseParams";
 
 const generateMovieUrl = (id: number) => {
   return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/movie/${id}?${qs.stringify(
@@ -29,7 +22,7 @@ const generateMovieUrl = (id: number) => {
 };
 
 const useMovieRequest = (router: NextRouter) => {
-  const movieId = useMemo(() => getMovieId(router.query.id), [router.query]);
+  const movieId = useMemo(() => parseId(router.query.movieId), [router.query]);
 
   const { data, error, mutate } = useSWRImmutable<MovieExtended, FetchingError>(
     router.isReady && movieId ? generateMovieUrl(movieId) : null,
@@ -40,7 +33,10 @@ const useMovieRequest = (router: NextRouter) => {
 
   const retry = useCallback(() => mutate(), [mutate]);
 
-  const movie = useMemo(() => {
+  const movieRequestResult = useMemo(() => {
+    if (!movieId && router.isReady) {
+      return createFailedRequestResult("Requested movie was not found");
+    }
     if (error && error.status && error.status === 404) {
       return createFailedRequestResult("Requested movie was not found");
     }
@@ -55,11 +51,11 @@ const useMovieRequest = (router: NextRouter) => {
       return createLoadingRequestResult();
     }
     return createSuccessfulRequestResult(data);
-  }, [error, data]);
+  }, [error, data, movieId, router.isReady]);
 
   return {
     retry,
-    movie,
+    movieRequestResult,
   };
 };
 
