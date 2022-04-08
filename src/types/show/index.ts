@@ -48,7 +48,7 @@ export type Show = {
   voteCount?: number;
 };
 
-export type ShowDetailed = Exclude<Show, "genreIds"> & {
+export type ShowDetailed = Omit<Show, "genreIds"> & {
   createdBy: ShowCreator[];
   episodeRunTime?: number[];
   genres?: { id: number; name: string }[];

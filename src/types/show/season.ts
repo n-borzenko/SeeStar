@@ -11,7 +11,7 @@ export type ShowSeason = {
   seasonNumber?: number;
 };
 
-export type ShowSeasonDetailed = Exclude<ShowSeason, "episodeCount"> & {
+export type ShowSeasonDetailed = Omit<ShowSeason, "episodeCount"> & {
   episodes: ShowEpisodeDetailed[];
 };
 

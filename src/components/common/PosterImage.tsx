@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { ImageSizeName } from "helpers/getImageSize";
 import clsx from "clsx";
 import { memo, useState, useCallback, useMemo } from "react";
 import Icon from "components/common/Icon";
@@ -9,8 +10,8 @@ import { MediaTypes } from "types/mediaTypes";
 type PosterImageProps = {
   src?: string | null;
   type: Exclude<MediaTypes, "any">;
-  size: "small" | "medium" | "large";
-  rounded?: "none" | "top" | "left";
+  size: ImageSizeName;
+  rounded?: "none" | "top" | "left" | "top-left";
 };
 
 const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }) => {
@@ -48,6 +49,7 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
       className={clsx("bg-primary/10 flex justify-center items-center max-w-full max-h-full", {
         "rounded-l-lg": rounded === "left",
         "rounded-t-lg": rounded === "top",
+        "rounded-tl-lg": rounded === "top-left",
       })}
       style={{ width: imageSize.width, height: imageSize.height }}
     >
@@ -64,6 +66,7 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
               "opacity-100": isImageReady,
               "rounded-l-lg": rounded === "left",
               "rounded-t-lg": rounded === "top",
+              "rounded-tl-lg": rounded === "top-left",
             }
           )}
           onLoad={onLoad}
@@ -71,7 +74,11 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
         />
       )}
       {!isAlternativeIconHidden && (
-        <Icon type={type} size={size === "large" ? "giant" : "huge"} className="opacity-30" />
+        <Icon
+          type={type}
+          size={size === "largePortrait" ? "giant" : "huge"}
+          className="opacity-30"
+        />
       )}
     </div>
   );

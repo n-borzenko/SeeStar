@@ -2,8 +2,7 @@ import type { FC } from "react";
 import type { ShowSeasonExtended } from "types/show/season";
 import { memo } from "react";
 import EpisodesList from "./EpisodesList";
-// import SeasonSummary from "./SeasonSummary";
-// import SeasonDetails from "./SeasonDetails";
+import SeasonSummary from "./SeasonSummary";
 
 type SeasonProps = {
   season: ShowSeasonExtended;
@@ -13,10 +12,8 @@ type SeasonProps = {
 const Season: FC<SeasonProps> = ({ season, showId }) => {
   return (
     <div>
-      {season.seasonNumber} {season.name} {season.episodeCount}
+      <SeasonSummary season={season} />
       <EpisodesList episodes={season.episodes} showId={showId} />
-      {/* <SeasonSummary show={show} />
-      <SeasonDetails show={show} /> */}
     </div>
   );
 };

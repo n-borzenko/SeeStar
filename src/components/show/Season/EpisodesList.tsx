@@ -3,8 +3,9 @@ import type { ShowEpisodeDetailed } from "types/show/episode";
 import { memo } from "react";
 import BlockHeader from "components/common/BlockHeader";
 import Card from "components/common/Card";
-import Icon from "components/common/Icon";
+import CardsList from "components/common/CardsList";
 import PosterImage from "components/common/PosterImage";
+import Rating from "components/common/Rating";
 import getImageSize from "helpers/getImageSize";
 import { MediaTypes } from "types/mediaTypes";
 
@@ -13,23 +14,57 @@ type EpisodesListProps = {
   episodes: ShowEpisodeDetailed[];
 };
 
+const posterSize = "mediumLandscape";
+
 const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
-  const posterSize = getImageSize("medium");
-  const posterRatio = (posterSize.height / posterSize.width) * 100;
+  const seasonNumber = episodes[0]?.seasonNumber;
+  const imageSize = getImageSize(posterSize);
 
   return (
     <div>
-      <BlockHeader title="Episodes" />
-      <div className="w-full grid gap-4 lg:gap-8">
-        {episodes.map((episode) => (
+      <BlockHeader
+        title="Episodes"
+        href={
+          seasonNumber !== undefined ? `/show/${showId}/season/${seasonNumber}/episodes` : undefined
+        }
+      />
+      <CardsList items={episodes}>
+        {(episode) => (
           <Card
-            key={episode.id}
             href={`/show/${showId}/season/${episode.seasonNumber}/episode/${episode.episodeNumber}`}
+            direction="vertical"
           >
-            S{episode.seasonNumber}E{episode.episodeNumber} -{episode.name}
+            <div className="flex-shrink-0">
+              <PosterImage
+                src={episode.stillPath}
+                type={MediaTypes.Show}
+                size={posterSize}
+                rounded="top"
+              />
+            </div>
+
+            <div
+              className="w-full grid grid-rows-[auto_1fr] gap-1 sm:gap-2 p-2 flex-grow"
+              style={{ maxWidth: `${imageSize.width}px` }}
+            >
+              <div className="text-base font-medium leading-5 line-clamp-2">
+                {episode.name ? episode.name : `Episode ${episode.episodeNumber}`}
+              </div>
+
+              <div className="flex items-center justify-between self-end">
+                {episode.airDate && (
+                  <div className="text-sm font-normal leading-4 text-neutral-500">
+                    {new Date(episode.airDate).toLocaleDateString()}
+                  </div>
+                )}
+                <div className="ml-auto">
+                  <Rating voteAverage={episode.voteAverage} />
+                </div>
+              </div>
+            </div>
           </Card>
-        ))}
-      </div>
+        )}
+      </CardsList>
     </div>
   );
 };

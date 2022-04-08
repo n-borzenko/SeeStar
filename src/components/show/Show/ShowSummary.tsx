@@ -11,8 +11,10 @@ type ShowSummaryProps = {
   show: ShowExtended;
 };
 
+const posterSizeName = "largePortrait";
+
 const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
-  const posterSize = getImageSize("large");
+  const posterSize = getImageSize(posterSizeName);
   const posterRatio = (posterSize.height / posterSize.width) * 100;
 
   return (
@@ -54,7 +56,7 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
           }}
         >
           <div className="absolute top-0 left-0 w-full h-full">
-            <PosterImage size="large" type={MediaTypes.Show} src={show.posterPath} />
+            <PosterImage size={posterSizeName} type={MediaTypes.Show} src={show.posterPath} />
           </div>
         </div>
       </div>

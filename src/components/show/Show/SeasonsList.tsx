@@ -23,7 +23,7 @@ const SeasonsList: FC<SeasonsListProps> = ({ seasons, showId }) => {
               <PosterImage
                 src={season.posterPath}
                 type={MediaTypes.Show}
-                size="medium"
+                size="mediumPortrait"
                 rounded="top"
               />
             </div>

@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { ImageSizeName } from "helpers/getImageSize";
 import type { SearchItemMovie } from "types/search";
 import clsx from "clsx";
 import { memo } from "react";
@@ -11,7 +12,7 @@ import { MediaTypes } from "types/mediaTypes";
 
 type MovieItemContentProps = {
   item: SearchItemMovie;
-  posterSize: "small" | "medium" | "large";
+  posterSize: ImageSizeName;
 };
 
 const mediaType = MediaTypes.Movie;
