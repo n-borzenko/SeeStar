@@ -19,3 +19,8 @@ export type CountryCertification = {
   iso_3166_1: string;
   releaseDates: ReleaseDate[];
 };
+
+export type CertificationRating = {
+  iso_3166_1: string;
+  rating: string;
+};

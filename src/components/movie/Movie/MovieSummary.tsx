@@ -11,8 +11,10 @@ type MovieSummaryProps = {
   movie: MovieExtended;
 };
 
+const posterSizeName = "largePortrait";
+
 const MovieSummary: FC<MovieSummaryProps> = ({ movie }) => {
-  const posterSize = getImageSize("large");
+  const posterSize = getImageSize(posterSizeName);
   const posterRatio = (posterSize.height / posterSize.width) * 100;
 
   return (
@@ -57,7 +59,7 @@ const MovieSummary: FC<MovieSummaryProps> = ({ movie }) => {
           }}
         >
           <div className="absolute top-0 left-0 w-full h-full">
-            <PosterImage size="large" type={MediaTypes.Movie} src={movie.posterPath} />
+            <PosterImage size={posterSizeName} type={MediaTypes.Movie} src={movie.posterPath} />
           </div>
         </div>
       </div>

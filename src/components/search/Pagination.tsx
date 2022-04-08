@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import qs from "qs";
 import { memo } from "react";
-import ButtonLikeLink from "components/common/ButtonLikeLink";
+import { ButtonLink } from "components/common/Button";
 
 type PaginationProps = {
   parameters: SearchParameters;
@@ -26,7 +26,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           })}`}
           passHref
         >
-          <ButtonLikeLink icon="arrow-left" variant="outlined" ariaLabel="Previous page" />
+          <ButtonLink icon="arrow-left" variant="outlined" ariaLabel="Previous page" />
         </Link>
       ) : (
         <div className="w-8 h-8" />
@@ -42,7 +42,7 @@ const Pagination: FC<PaginationProps> = ({ parameters, totalPages }) => {
           })}`}
           passHref
         >
-          <ButtonLikeLink icon="arrow-right" variant="outlined" ariaLabel="Next page" />
+          <ButtonLink icon="arrow-right" variant="outlined" ariaLabel="Next page" />
         </Link>
       ) : (
         <div className="w-8 h-8" />

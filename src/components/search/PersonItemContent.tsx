@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import type { ImageSizeName } from "helpers/getImageSize";
 import type { SearchItemPerson } from "types/search";
 import { memo } from "react";
 import Icon from "components/common/Icon";
@@ -9,7 +10,7 @@ import WorkItemsList from "./WorkItemsList";
 
 type PersonItemContentProps = {
   item: SearchItemPerson;
-  posterSize: "small" | "medium" | "large";
+  posterSize: ImageSizeName;
 };
 
 const mediaType = MediaTypes.Person;

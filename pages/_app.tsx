@@ -2,6 +2,7 @@ import type { AppProps } from "next/app";
 import type { FC } from "react";
 import Head from "next/head";
 import { SWRConfig } from "swr";
+import Breadcrumbs from "components/structure/Breadcrumbs";
 import MainHeader from "components/structure/MainHeader";
 import MainFooter from "components/structure/MainFooter";
 import defaultFetcher from "helpers/fetching/defaultFetcher";
@@ -18,17 +19,18 @@ const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
         <title>See Star</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <div className="flex flex-col min-h-screen">
-        <MainHeader />
-        <SWRConfig value={swrOptions}>
+      <SWRConfig value={swrOptions}>
+        <div className="flex flex-col min-h-screen">
+          <MainHeader />
           <main className="flex justify-center grow w-full mt-14 sm:mt-16">
-            <div className="grow max-w-full xl:max-w-screen-xl p-4">
+            <div className="grow max-w-full xl:max-w-screen-xl p-4 sm:p-8">
+              <Breadcrumbs />
               <Component {...pageProps} />
             </div>
           </main>
-        </SWRConfig>
-        <MainFooter />
-      </div>
+          <MainFooter />
+        </div>
+      </SWRConfig>
     </>
   );
 };

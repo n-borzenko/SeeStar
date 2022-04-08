@@ -36,7 +36,7 @@ export type Movie = {
   voteCount?: number;
 };
 
-export type MovieDetailed = Exclude<Movie, "genreIds"> & {
+export type MovieDetailed = Omit<Movie, "genreIds"> & {
   belongsToCollection?: null | MovieCollection;
   budget?: number;
   genres?: { id: number; name: string }[];

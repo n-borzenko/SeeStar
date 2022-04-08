@@ -7,14 +7,14 @@ import MovieItemContent from "./MovieItemContent";
 import PersonItemContent from "./PersonItemContent";
 import ShowItemContent from "./ShowItemContent";
 
-const posterSize = "small";
+const posterSizeName = "smallPortrait";
 
 type SearchResultsProps = {
   data: SearchData;
 };
 
 const SearchResults: FC<SearchResultsProps> = ({ data }) => {
-  const maxItemHeight = getImageSize(posterSize).height;
+  const maxItemHeight = getImageSize(posterSizeName).height;
 
   return (
     <div className="grid grid-cols-2 grid-rows-20-auto -mb-4 lg:-mb-8">
@@ -25,13 +25,13 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
           style={{ maxHeight: maxItemHeight }}
         >
           {item.mediaType === MediaTypes.Movie && (
-            <MovieItemContent item={item} posterSize={posterSize} />
+            <MovieItemContent item={item} posterSize={posterSizeName} />
           )}
           {item.mediaType === MediaTypes.Show && (
-            <ShowItemContent item={item} posterSize={posterSize} />
+            <ShowItemContent item={item} posterSize={posterSizeName} />
           )}
           {item.mediaType === MediaTypes.Person && (
-            <PersonItemContent item={item} posterSize={posterSize} />
+            <PersonItemContent item={item} posterSize={posterSizeName} />
           )}
         </div>
       ))}
