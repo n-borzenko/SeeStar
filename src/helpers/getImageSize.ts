@@ -19,6 +19,10 @@ const imageSizesConfiguration = {
     width: 185,
     height: 104,
   },
+  largeLandscape: {
+    width: 300,
+    height: 192,
+  },
 };
 
 export type ImageSizeName = keyof typeof imageSizesConfiguration;

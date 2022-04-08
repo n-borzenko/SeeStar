@@ -24,12 +24,7 @@ const EpisodePage: NextPage = () => {
     );
   }
 
-  return (
-    <Episode
-      showId={episodeRequestResult.data.showId}
-      episode={episodeRequestResult.data.episode}
-    />
-  );
+  return <Episode episode={episodeRequestResult.data.episode} />;
 };
 
 export default memo(EpisodePage);

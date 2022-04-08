@@ -17,7 +17,7 @@ const generateEpisodeUrl = (showId: number, seasonNumber: number, episodeNumber:
   }/tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}?${qs.stringify(
     {
       api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
-      append_to_response: ["aggregate_credits"],
+      append_to_response: ["credits"],
     },
     { arrayFormat: "comma" }
   )}`;
