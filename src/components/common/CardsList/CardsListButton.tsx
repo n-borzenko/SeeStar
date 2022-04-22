@@ -1,6 +1,6 @@
-import { FC, useCallback } from "react";
+import type { FC } from "react";
 import clsx from "clsx";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import Button from "components/common/Button";
 
 type CardsListButtonProps = {

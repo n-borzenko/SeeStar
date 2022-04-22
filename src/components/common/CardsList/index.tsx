@@ -22,7 +22,7 @@ const CardsList = <T extends CardsListItem>({ items, children }: CardsListProps<
   } = useListScroll();
 
   return (
-    <div className="-mx-4 -my-2 relative">
+    <div className="-mx-4 relative">
       <CardsListButton
         direction="left"
         scrollBarHeight={scrollBarHeight}

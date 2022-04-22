@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { ImageSizeName } from "helpers/getImageSize";
 import type { SearchItemPerson } from "types/search";
 import { memo } from "react";
+import Card from "components/common/Card";
 import Icon from "components/common/Icon";
 import PosterImage from "components/common/PosterImage";
 import getGenderName from "helpers/getGenderName";
@@ -18,7 +19,7 @@ const mediaType = MediaTypes.Person;
 const PersonItemContent: FC<PersonItemContentProps> = ({ item, posterSize }) => {
   const genderName = getGenderName(item.gender);
   return (
-    <div className="bg-white shadow-card rounded-lg flex">
+    <Card href={`/person/${item.id}`}>
       <div className="flex-shrink-0">
         <PosterImage src={item.profilePath} type={mediaType} size={posterSize} rounded="left" />
       </div>
@@ -55,7 +56,7 @@ const PersonItemContent: FC<PersonItemContentProps> = ({ item, posterSize }) => 
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 };
 

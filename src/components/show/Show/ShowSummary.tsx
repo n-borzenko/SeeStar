@@ -24,7 +24,7 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
     >
       <div className="md:col-start-2 md:col-end-2 flex flex-col">
         <div>
-          <div className="inline-block flex-shrink-0 mr-2 md:mr-4">
+          <div className="inline-block mr-2 md:mr-4">
             <Icon size="extra-large" type={MediaTypes.Show} ariaLabel="Type: show" />
           </div>
           <h1 className="inline text-3xl md:text-4xl font-black">{show.name}</h1>
@@ -32,10 +32,10 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
 
         <div className="flex items-center mt-2 sm:mt-4">
           {show.firstAirDate && (
-            <div className="text-xl font-normal text-neutral-500">
+            <p className="text-xl font-normal text-neutral-500">
               {new Date(show.firstAirDate).toLocaleDateString()}
               {show.lastAirDate && ` - ${new Date(show.lastAirDate).toLocaleDateString()}`}
-            </div>
+            </p>
           )}
           <div className="ml-auto flex">
             <Rating voteAverage={show.voteAverage} voteCount={show.voteCount} size="extra-large" />
@@ -64,7 +64,7 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
       <div className="md:col-start-2 md:col-end-2 self-end">
         {show.overview && show.overview.length > 0 && (
           <>
-            <h5>Overview</h5>
+            <h5 className="mb-1 sm:mb-2">Overview</h5>
             <p className="text-lg font-normal leading-6 text-neutral-700">{show.overview}</p>
           </>
         )}

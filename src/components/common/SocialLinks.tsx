@@ -10,7 +10,7 @@ type SocialLinksProps = {
 };
 
 const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => {
-  const className = "ml-2 sm:ml-4 lg:ml-8 first:ml-0";
+  const className = "mx-auto sm:mr-0 sm:ml-4 lg:ml-8 first:sm:ml-0";
 
   return (
     <div className="flex justify-between sm:justify-end">
