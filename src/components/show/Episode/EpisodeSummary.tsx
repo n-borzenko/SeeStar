@@ -24,7 +24,7 @@ const EpisodeSummary: FC<EpisodeSummaryProps> = ({ episode }) => {
     >
       <div className="md:col-start-2 md:row-end-1 flex flex-col">
         <div>
-          <div className="inline-block flex-shrink-0 mr-2 md:mr-4">
+          <div className="inline-block mr-2 md:mr-4">
             <Icon size="extra-large" type={MediaTypes.Show} ariaLabel="Type: show" />
           </div>
           <h1 className="inline text-3xl md:text-4xl font-black">
@@ -35,9 +35,9 @@ const EpisodeSummary: FC<EpisodeSummaryProps> = ({ episode }) => {
 
         <div className="flex items-center mt-2 sm:mt-4">
           {episode.airDate && (
-            <div className="text-xl font-normal text-neutral-500">
+            <p className="text-xl font-normal text-neutral-500">
               {new Date(episode.airDate).toLocaleDateString()}
-            </div>
+            </p>
           )}
           <div className="ml-auto flex">
             <Rating
@@ -66,7 +66,7 @@ const EpisodeSummary: FC<EpisodeSummaryProps> = ({ episode }) => {
       <div className="md:col-span-full">
         {episode.overview && episode.overview.length > 0 && (
           <>
-            <h5>Overview</h5>
+            <h5 className="mb-1 sm:mb-2">Overview</h5>
             <p className="text-lg font-normal leading-6 text-neutral-700">{episode.overview}</p>
           </>
         )}

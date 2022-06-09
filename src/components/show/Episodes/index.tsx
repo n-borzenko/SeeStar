@@ -4,12 +4,12 @@ import { memo } from "react";
 import EpisodesList from "./EpisodesList";
 import SeasonDescription from "./SeasonDescription";
 
-type SeasonsProps = {
+type EpisodesProps = {
   showId: number;
   season: ShowSeasonDetailed;
 };
 
-const Seasons: FC<SeasonsProps> = ({ season, showId }) => {
+const Episodes: FC<EpisodesProps> = ({ season, showId }) => {
   return (
     <div>
       <SeasonDescription season={season} />
@@ -18,4 +18,4 @@ const Seasons: FC<SeasonsProps> = ({ season, showId }) => {
   );
 };
 
-export default memo(Seasons);
+export default memo(Episodes);

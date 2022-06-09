@@ -14,11 +14,11 @@ type EpisodesListProps = {
   episodes: ShowEpisodeDetailed[];
 };
 
-const posterSize = "mediumLandscape";
+const posterSizeName = "mediumLandscape";
 
 const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
   const seasonNumber = episodes[0]?.seasonNumber;
-  const imageSize = getImageSize(posterSize);
+  const posterSize = getImageSize(posterSizeName);
 
   return (
     <div>
@@ -38,14 +38,14 @@ const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
               <PosterImage
                 src={episode.stillPath}
                 type={MediaTypes.Show}
-                size={posterSize}
+                size={posterSizeName}
                 rounded="top"
               />
             </div>
 
             <div
               className="w-full grid grid-rows-[auto_1fr] gap-1 sm:gap-2 p-2 flex-grow"
-              style={{ maxWidth: `${imageSize.width}px` }}
+              style={{ maxWidth: `${posterSize.width}px` }}
             >
               <div className="text-base font-medium leading-5 line-clamp-2">
                 {episode.name ? episode.name : `Episode ${episode.episodeNumber}`}

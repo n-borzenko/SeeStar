@@ -23,7 +23,7 @@ const SeasonSummary: FC<SeasonSummaryProps> = ({ season }) => {
     >
       <div className="md:col-start-2 md:col-end-2 flex flex-col">
         <div>
-          <div className="inline-block flex-shrink-0 mr-2 md:mr-4">
+          <div className="inline-block mr-2 md:mr-4">
             <Icon size="extra-large" type={MediaTypes.Show} ariaLabel="Type: show" />
           </div>
           <h1 className="inline text-3xl md:text-4xl font-black">
@@ -33,16 +33,17 @@ const SeasonSummary: FC<SeasonSummaryProps> = ({ season }) => {
 
         <div className="flex items-center mt-2 sm:mt-4">
           {season.airDate && (
-            <div className="text-xl font-normal text-neutral-500">
+            <p className="text-xl font-normal text-neutral-500">
               {new Date(season.airDate).toLocaleDateString()}
+            </p>
+          )}
+          {season.episodes.length && (
+            <div className="ml-auto flex">
+              <p className="text-xl font-normal text-primary">
+                {season.episodes.length} episode{season.episodes.length !== 1 && "s"}
+              </p>
             </div>
           )}
-          <div className="ml-auto flex">
-            <div className="text-xl font-normal text-primary">
-              {season.episodes.length &&
-                `${season.episodes.length} episode${season.episodes.length === 1 ? "" : "s"}`}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -63,7 +64,7 @@ const SeasonSummary: FC<SeasonSummaryProps> = ({ season }) => {
       <div className="md:col-start-2 md:col-end-2 self-end">
         {season.overview && season.overview.length > 0 && (
           <>
-            <h5>Overview</h5>
+            <h5 className="mb-1 sm:mb-2">Overview</h5>
             <p className="text-lg font-normal leading-6 text-neutral-700">{season.overview}</p>
           </>
         )}

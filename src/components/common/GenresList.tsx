@@ -1,5 +1,5 @@
-import { FC, useMemo } from "react";
-import { memo } from "react";
+import type { FC } from "react";
+import { memo, useMemo } from "react";
 import LabelsList from "components/common/LabelsList";
 import isDefined from "helpers/isDefined";
 import useGenresRequest from "hooks/genres/useGenresRequest";

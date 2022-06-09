@@ -23,9 +23,11 @@ const MainApp: FC<AppProps> = ({ Component, pageProps }) => {
         <div className="flex flex-col min-h-screen">
           <MainHeader />
           <main className="flex justify-center grow w-full mt-14 sm:mt-16">
-            <div className="grow max-w-full xl:max-w-screen-xl p-4 sm:p-8">
+            <div className="grow flex flex-col max-w-full xl:max-w-screen-xl p-4 sm:p-8">
               <Breadcrumbs />
-              <Component {...pageProps} />
+              <div className="grow">
+                <Component {...pageProps} />
+              </div>
             </div>
           </main>
           <MainFooter />
