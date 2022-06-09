@@ -39,7 +39,7 @@ const SeasonsList: FC<SeasonsListProps> = ({ seasons, showId }) => {
                     {new Date(season.airDate).toLocaleDateString()}
                   </div>
                 )}
-                <div className="text-sm font-normal leading-4 text-primary">
+                <div className="text-sm font-normal leading-4 text-primary ml-auto">
                   {season.episodeCount && `${season.episodeCount} ep.`}
                 </div>
               </div>

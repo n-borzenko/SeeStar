@@ -1,12 +1,10 @@
 import type { FC } from "react";
-import type { MovieCastCredit, ShowCastCredit } from "types/credit";
+import type { AnyCredit } from "types/credit";
 import type { PersonExtended } from "types/person";
-import { memo, useMemo, Fragment } from "react";
+import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
-import CardsList from "components/common/CardsList";
 import { MediaTypes } from "types/mediaTypes";
-import MovieCreditCard from "./MovieCreditCard";
-import ShowCreditCard from "./ShowCreditCard";
+import PersonCreditList from "./PersonCreditList";
 
 type PersonCreditsProps = {
   person: PersonExtended;
@@ -14,7 +12,7 @@ type PersonCreditsProps = {
 
 const listLengthLimit = 10;
 
-const sortFunction = (a: MovieCastCredit | ShowCastCredit, b: MovieCastCredit | ShowCastCredit) => {
+const sortCredits = (a: AnyCredit, b: AnyCredit) => {
   if (a.mediaType === MediaTypes.Show && b.mediaType === MediaTypes.Show) {
     const result = (b.episodeCount || 0) - (a.episodeCount || 0);
     if (result !== 0) {
@@ -24,61 +22,52 @@ const sortFunction = (a: MovieCastCredit | ShowCastCredit, b: MovieCastCredit | 
   return (b.popularity || 0) - (a.popularity || 0);
 };
 
+const getTopUniqueCredits = <T extends AnyCredit>(items: T[]) => {
+  return items.sort(sortCredits).reduce<T[]>((result, credit) => {
+    if (
+      result.length >= listLengthLimit ||
+      result.findIndex((item) => item.id === credit.id) !== -1
+    ) {
+      return result;
+    }
+    return [...result, credit];
+  }, []);
+};
+
 const PersonCredits: FC<PersonCreditsProps> = ({ person }) => {
   const items = useMemo(
     () => ({
-      cast: person.combinedCredits.cast.sort(sortFunction).slice(0, listLengthLimit),
-      crew: person.combinedCredits.crew.sort(sortFunction).slice(0, listLengthLimit),
+      cast: getTopUniqueCredits(person.combinedCredits.cast),
+      crew: getTopUniqueCredits(person.combinedCredits.crew),
     }),
     [person.combinedCredits]
   );
+
+  if (items.cast.length === 0 && items.crew.length === 0) {
+    return null;
+  }
+
   return (
     <div>
-      <BlockHeader title="Work" />
-      {items.cast.length && (
+      <BlockHeader title="Credits" href={`/person/${person.id}/credits`} />
+      {items.cast.length > 0 && (
         <>
           <h6 className="lg:mb-4 text-primary">As cast member</h6>
-          <CardsList items={items.cast}>
-            {(item) => (
-              <Fragment key={`${item.mediaType}-${item.id}`}>
-                {item.mediaType === MediaTypes.Movie && (
-                  <MovieCreditCard movie={item}>
-                    <span>{item.character}</span>
-                  </MovieCreditCard>
-                )}
-                {item.mediaType === MediaTypes.Show && (
-                  <ShowCreditCard show={item}>
-                    <span>{item.character}</span>
-                  </ShowCreditCard>
-                )}
-              </Fragment>
-            )}
-          </CardsList>
+          <PersonCreditList items={items.cast}>
+            {(item) => <span>{item.character}</span>}
+          </PersonCreditList>
         </>
       )}
-      {items.crew.length && (
+      {items.crew.length > 0 && (
         <>
           <h6 className="mt-4 lg:mt-8 lg:mb-4 text-primary">As crew member</h6>
-          <CardsList items={items.crew}>
+          <PersonCreditList items={items.crew}>
             {(item) => (
-              <Fragment key={`${item.mediaType}-${item.id}`}>
-                {item.mediaType === MediaTypes.Movie && (
-                  <MovieCreditCard movie={item}>
-                    <span>
-                      {item.department}, {item.job}
-                    </span>
-                  </MovieCreditCard>
-                )}
-                {item.mediaType === MediaTypes.Show && (
-                  <ShowCreditCard show={item}>
-                    <span>
-                      {item.department}, {item.job}
-                    </span>
-                  </ShowCreditCard>
-                )}
-              </Fragment>
+              <span>
+                {item.department}, {item.job}
+              </span>
             )}
-          </CardsList>
+          </PersonCreditList>
         </>
       )}
     </div>

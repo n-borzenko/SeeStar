@@ -33,7 +33,7 @@ const SeasonsList: FC<SeasonsListProps> = ({ seasons, showId }) => {
             </div>
 
             <div className="w-full grid grid-rows-[auto_auto_auto_1fr] gap-1 sm:gap-2 p-2">
-              <div className="text-base sm:text-lg font-medium leading-5 sm:leading-6 ml-1 text-ellipsis overflow-hidden whitespace-nowrap">
+              <div className="text-base sm:text-lg font-medium leading-5 sm:leading-6 text-ellipsis overflow-hidden whitespace-nowrap">
                 {season.name ? season.name : `Season ${season.seasonNumber}`}
               </div>
 

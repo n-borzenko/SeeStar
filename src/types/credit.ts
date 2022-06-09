@@ -1,6 +1,9 @@
 import type { Movie } from "types/movie";
 import type { Person } from "types/person";
 import type { Show } from "types/show";
+import type { ShowEpisode } from "types/show/episode";
+import type { ShowSeason } from "types/show/season";
+import { CreditTypes } from "types/creditTypes";
 import { MediaTypes } from "types/mediaTypes";
 
 type GuestStarCredit = {
@@ -45,6 +48,8 @@ export type ShowCrewCredit = CrewCredit &
     episodeCount?: number;
   };
 
+export type AnyCredit = MovieCastCredit | ShowCastCredit | MovieCrewCredit | ShowCrewCredit;
+
 // Part of Show details
 export type GuestStarMember = Person &
   GuestStarCredit & {
@@ -81,3 +86,27 @@ export type AggregatedCrewMember = Person &
     ];
     totalEpisodeCount: number;
   };
+
+type CreditDetailed = {
+  creditType: CreditTypes;
+  id: string;
+  department?: string;
+  job?: string;
+  person: Person;
+};
+
+export type MovieCreditDetailed = CreditDetailed & {
+  mediaType: MediaTypes.Movie;
+  media: Movie & {
+    character?: string;
+  };
+};
+
+export type ShowCreditDetailed = CreditDetailed & {
+  mediaType: MediaTypes.Show;
+  media: Show & {
+    character?: string;
+    episodes: ShowEpisode[];
+    seasons: ShowSeason[];
+  };
+};

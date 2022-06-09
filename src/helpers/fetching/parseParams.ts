@@ -17,3 +17,13 @@ export const parseNumber = (value?: string | string[]) => {
     ? null
     : parsedNumber;
 };
+
+const stringIdRegex = /^[a-zA-Z0-9]+$/;
+// value - string, containing letters and numbers
+export const parseStringId = (text?: string | string[]) => {
+  if (!text) {
+    return null;
+  }
+  const id = typeof text === "string" ? text : text[0];
+  return stringIdRegex.test(id) ? id : null;
+};
