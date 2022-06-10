@@ -38,19 +38,22 @@ const CreditList = <T extends AnyCredit>({ credits, children }: CreditListProps<
         return (
           <Fragment key={`${item.mediaType}-${item.creditId}`}>
             {item.mediaType === MediaTypes.Movie && (
-              <MovieCreditCard movie={item}>{children(item)}</MovieCreditCard>
+              <MovieCreditCard movie={item}>
+                {group.map((credit) => (
+                  <div key={credit.creditId}>{children(credit)}</div>
+                ))}
+              </MovieCreditCard>
             )}
             {item.mediaType === MediaTypes.Show && (
               <ShowCreditCard show={item}>
-                {group.map(
-                  (credit) =>
-                    credit.mediaType === MediaTypes.Show && (
-                      <div key={credit.creditId} className="flex">
-                        {children(credit)}
-                        <span className="ml-auto shrink-0">{credit.episodeCount} ep.</span>
-                      </div>
-                    )
-                )}
+                {group.map((credit) => (
+                  <div key={credit.creditId} className="flex">
+                    {children(credit)}
+                    {credit.mediaType === MediaTypes.Show && (
+                      <span className="ml-auto shrink-0">{credit.episodeCount} ep.</span>
+                    )}
+                  </div>
+                ))}
               </ShowCreditCard>
             )}
           </Fragment>
