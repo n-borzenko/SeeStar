@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import type { ShowEpisode } from "types/show/episode";
 import { memo, useMemo } from "react";
-import BlockHeader from "components/common/BlockHeader";
 import Card from "components/common/Card";
 import PosterImage from "components/common/PosterImage";
 import Rating from "components/common/Rating";

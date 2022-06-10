@@ -3,14 +3,13 @@ import type { AnyCredit } from "types/credit";
 import type { PersonExtended } from "types/person";
 import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
+import { listLengthLimit } from "components/common/CardsList";
 import { MediaTypes } from "types/mediaTypes";
 import PersonCreditList from "./PersonCreditList";
 
 type PersonCreditsProps = {
   person: PersonExtended;
 };
-
-const listLengthLimit = 10;
 
 const sortCredits = (a: AnyCredit, b: AnyCredit) => {
   if (a.mediaType === MediaTypes.Show && b.mediaType === MediaTypes.Show) {

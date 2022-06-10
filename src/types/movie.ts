@@ -61,4 +61,8 @@ export type MovieExtended = MovieDetailed & {
   releaseDates: {
     results: CountryCertification[];
   };
+  similar: {
+    page: number;
+    results: Movie[];
+  };
 };

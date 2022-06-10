@@ -17,7 +17,7 @@ const Rating: FC<RatingProps> = ({ size = "medium", voteAverage = 0, voteCount }
           "ml-2 text-xl font-semibold": size === "extra-large",
         })}
       >
-        {voteAverage.toFixed(1)}
+        {voteAverage % 1 === 0 ? voteAverage : voteAverage.toFixed(1)}
       </div>
       {voteCount ? (
         <div

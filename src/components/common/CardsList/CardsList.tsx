@@ -11,9 +11,13 @@ const getKey = (item: CardsListItem) => {
   return item.id;
 };
 
-const CardsList = <T extends CardsListItem>({ items, children }: CardsListProps<T>) => {
+const CardsList = <T extends CardsListItem>({
+  items,
+  children,
+  limited = false,
+}: CardsListProps<T>) => {
   return (
-    <CustomCardsList items={items} getKey={getKey}>
+    <CustomCardsList items={items} getKey={getKey} limited={limited}>
       {children}
     </CustomCardsList>
   );
