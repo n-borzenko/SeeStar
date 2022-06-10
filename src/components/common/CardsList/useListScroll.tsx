@@ -1,4 +1,4 @@
-import { memo, useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 const containerPadding = 8;
 const visibilityOffset = 12;

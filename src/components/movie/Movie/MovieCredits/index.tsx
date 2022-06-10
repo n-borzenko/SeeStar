@@ -2,6 +2,7 @@ import type { FC } from "react";
 import type { CastMember, CrewMember } from "types/credit";
 import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
+import { listLengthLimit } from "components/common/CardsList";
 import MovieCreditList from "./MovieCreditList";
 
 type MovieCreditsProps = {
@@ -11,8 +12,6 @@ type MovieCreditsProps = {
   };
   href: string;
 };
-
-const listLengthLimit = 10;
 
 const sortCredits = <T extends CastMember | CrewMember>(a: T, b: T) => {
   const aOrder = "order" in a ? a.order : 0;

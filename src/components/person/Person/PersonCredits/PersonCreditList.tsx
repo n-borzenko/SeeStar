@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { AnyCredit } from "types/credit";
-import { memo, Fragment } from "react";
+import { memo } from "react";
 import { CustomCardsList } from "components/common/CardsList";
 import { MediaTypes } from "types/mediaTypes";
 import MovieCreditCard from "./MovieCreditCard";
@@ -19,14 +19,14 @@ const PersonCreditList = <T extends AnyCredit>({ items, children }: PersonCredit
   return (
     <CustomCardsList items={items} getKey={getKey}>
       {(item) => (
-        <Fragment key={`${item.mediaType}-${item.creditId}`}>
+        <>
           {item.mediaType === MediaTypes.Movie && (
             <MovieCreditCard movie={item}>{children(item)}</MovieCreditCard>
           )}
           {item.mediaType === MediaTypes.Show && (
             <ShowCreditCard show={item}>{children(item)}</ShowCreditCard>
           )}
-        </Fragment>
+        </>
       )}
     </CustomCardsList>
   );

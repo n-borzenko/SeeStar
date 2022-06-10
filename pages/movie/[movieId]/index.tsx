@@ -4,11 +4,11 @@ import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
 import Movie from "components/movie/Movie";
-import useMovieRequest from "hooks/movie/useMovieRequest";
+import { useExtendedMovieRequest } from "hooks/movie/useMovieRequest";
 
 const MoviePage: NextPage = () => {
   const router = useRouter();
-  const { movieRequestResult, retry } = useMovieRequest(router);
+  const { movieRequestResult, retry } = useExtendedMovieRequest(router);
 
   if (movieRequestResult.state === "loading") {
     return <Spinner size="large" />;

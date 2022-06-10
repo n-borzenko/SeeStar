@@ -1,9 +1,21 @@
 import type { CustomCardsListProps } from "./types";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import useListScroll from "./useListScroll";
 import CardsListButton from "./CardsListButton";
 
-const CustomCardsList = <T extends any>({ items, children, getKey }: CustomCardsListProps<T>) => {
+export const listLengthLimit = 10;
+
+const CustomCardsList = <T extends any>({
+  items,
+  children,
+  getKey,
+  limited = false,
+}: CustomCardsListProps<T>) => {
+  const limitedItems = useMemo(
+    () => (items.length > listLengthLimit && limited ? items.slice(0, listLengthLimit) : items),
+    [items, limited]
+  );
+
   const {
     scrollParameters: { scrollBarHeight, isStartPosition, isEndPosition },
     scrollableArea,
@@ -25,7 +37,7 @@ const CustomCardsList = <T extends any>({ items, children, getKey }: CustomCards
         ref={scrollableArea}
         onScroll={updateScrollParameters}
       >
-        {items.map((item, index) => (
+        {limitedItems.map((item, index) => (
           <div key={getKey(item)} className="px-2" ref={index === 0 ? firstItem : null}>
             {children(item)}
           </div>
