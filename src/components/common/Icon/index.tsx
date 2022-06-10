@@ -18,8 +18,10 @@ import TvIcon from "./items/tv.svg";
 import TwitterIcon from "./items/twitter.svg";
 
 export type IconTypes =
+  | "arrow-down"
   | "arrow-left"
   | "arrow-right"
+  | "arrow-up"
   | "burger"
   | "close"
   | "facebook"
@@ -63,15 +65,19 @@ const Icon: FC<IconProps> = ({
       "text-primary": color === "primary",
       "text-secondary": color === "secondary",
       "text-white": color === "white",
+      "-rotate-90": type === "arrow-down",
       "rotate-180": type === "arrow-right",
+      "rotate-90": type === "arrow-up",
     },
     className
   );
 
   return (
     <>
+      {type === "arrow-down" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
       {type === "arrow-left" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
       {type === "arrow-right" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
+      {type === "arrow-up" && <ArrowLeftIcon className={classes} aria-label={ariaLabel} />}
       {type === "burger" && <BurgerIcon className={classes} aria-label={ariaLabel} />}
       {type === "close" && <CloseIcon className={classes} aria-label={ariaLabel} />}
       {type === "facebook" && <FacebookIcon className={classes} aria-label={ariaLabel} />}
