@@ -14,7 +14,7 @@ type EpisodesListProps = {
   episodes: ShowEpisodeDetailed[];
 };
 
-const posterSizeName = "mediumLandscape";
+const posterSizeName = "smallLandscape";
 
 const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
   const seasonNumber = episodes[0]?.seasonNumber;

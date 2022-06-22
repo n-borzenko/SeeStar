@@ -62,7 +62,6 @@ export type MovieExtended = MovieDetailed & {
     results: CountryCertification[];
   };
   similar: {
-    page: number;
     results: Movie[];
   };
 };

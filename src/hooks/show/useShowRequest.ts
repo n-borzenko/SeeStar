@@ -16,7 +16,7 @@ const generateShowUrl = (id: number, isExtended: boolean) => {
     {
       api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
       append_to_response: isExtended
-        ? ["aggregate_credits", "external_ids", "keywords", "content_ratings"]
+        ? ["aggregate_credits", "external_ids", "keywords", "content_ratings", "similar"]
         : [],
     },
     { arrayFormat: "comma" }

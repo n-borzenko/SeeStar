@@ -67,11 +67,9 @@ export type CrewMember = Person & CrewCredit;
 
 // Part of Show and Show Season details
 export type AggregatedCastMember = Person & {
-  roles: [
-    CastCredit & {
-      episodeCount: number;
-    }
-  ];
+  roles: (CastCredit & {
+    episodeCount: number;
+  })[];
   totalEpisodeCount: number;
   order: number;
 };
@@ -79,11 +77,9 @@ export type AggregatedCastMember = Person & {
 // Part of Show and Show Season details
 export type AggregatedCrewMember = Person &
   Pick<CrewCredit, "department"> & {
-    jobs: [
-      Pick<CrewCredit, "creditId" | "job"> & {
-        episodeCount: number;
-      }
-    ];
+    jobs: (Pick<CrewCredit, "creditId" | "job"> & {
+      episodeCount: number;
+    })[];
     totalEpisodeCount: number;
   };
 

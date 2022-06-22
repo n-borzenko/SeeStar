@@ -1,18 +1,18 @@
 import type { FC } from "react";
-import type { ShowSeasonDetailed } from "types/show/season";
+import { ShowSeasonExtended } from "types/show/season";
 import { memo } from "react";
 import MediaDescription from "components/common/MediaDescription";
+import CreditMembersList from "components/lists/CreditMembersList";
 import { MediaTypes } from "types/mediaTypes";
-import EpisodesList from "./EpisodesList";
 
-type EpisodesProps = {
+type SeasonCreditsProps = {
+  season: ShowSeasonExtended;
   showId: number;
-  season: ShowSeasonDetailed;
 };
 
-const Episodes: FC<EpisodesProps> = ({ season, showId }) => {
+const SeasonCredits: FC<SeasonCreditsProps> = ({ season, showId }) => {
   return (
-    <div>
+    <div className="min-h-full flex flex-col">
       <MediaDescription
         mediaType={MediaTypes.Show}
         title={season.name ? season.name : `Season ${season.seasonNumber}`}
@@ -23,9 +23,12 @@ const Episodes: FC<EpisodesProps> = ({ season, showId }) => {
           {season.episodes.length} episode{season.episodes.length !== 1 && "s"}
         </span>
       </MediaDescription>
-      <EpisodesList showId={showId} episodes={season.episodes} />
+      <CreditMembersList
+        credits={season.aggregateCredits}
+        href={`/show/${showId}/season/${season.seasonNumber}/credits`}
+      />
     </div>
   );
 };
 
-export default memo(Episodes);
+export default memo(SeasonCredits);

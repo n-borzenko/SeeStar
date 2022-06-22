@@ -1,9 +1,8 @@
 import type { FC } from "react";
 import type { ShowExtended } from "types/show";
 import { memo } from "react";
-import Icon from "components/common/Icon";
+import MediaDescription from "components/common/MediaDescription";
 import PosterImage from "components/common/PosterImage";
-import Rating from "components/common/Rating";
 import getImageSize from "helpers/getImageSize";
 import { MediaTypes } from "types/mediaTypes";
 
@@ -22,28 +21,17 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
       className="md:grid md:grid-rows-[auto_auto] md:gap-4 lg:gap-8"
       style={{ gridTemplateColumns: `${posterSize.width}px 1fr` }}
     >
-      <div className="md:col-start-2 md:col-end-2 flex flex-col">
-        <div>
-          <div className="inline-block mr-2 md:mr-4">
-            <Icon size="extra-large" type={MediaTypes.Show} ariaLabel="Type: show" />
-          </div>
-          <h1 className="inline text-3xl md:text-4xl font-black">{show.name}</h1>
-        </div>
-
-        <div className="flex items-center mt-2 sm:mt-4">
-          {show.firstAirDate && (
-            <p className="text-xl font-normal text-neutral-500">
-              {new Date(show.firstAirDate).toLocaleDateString()}
-              {show.lastAirDate && ` - ${new Date(show.lastAirDate).toLocaleDateString()}`}
-            </p>
-          )}
-          <div className="ml-auto flex">
-            <Rating voteAverage={show.voteAverage} voteCount={show.voteCount} size="extra-large" />
-          </div>
-        </div>
-
+      <div className="md:col-start-2 md:col-end-2 grid gap-2 md:gap-4 content-start">
+        <MediaDescription
+          mediaType={MediaTypes.Show}
+          title={show.name}
+          startDate={show.firstAirDate}
+          endDate={show.lastAirDate}
+          voteAverage={show.voteAverage}
+          voteCount={show.voteCount}
+        />
         {show.tagline && show.tagline.length > 0 && (
-          <p className="text-lg font-normal italic mt-2 sm:mt-4">{show.tagline}</p>
+          <p className="text-lg font-normal italic">{show.tagline}</p>
         )}
       </div>
 

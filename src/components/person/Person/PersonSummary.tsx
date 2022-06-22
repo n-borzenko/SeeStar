@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import type { PersonExtended } from "types/person";
 import { memo, Fragment } from "react";
-import Icon from "components/common/Icon";
+import MediaDescription from "components/common/MediaDescription";
 import PosterImage from "components/common/PosterImage";
 import SocialLinks from "components/common/SocialLinks";
 import getGenderName from "helpers/getGenderName";
@@ -24,16 +24,17 @@ const PersonSummary: FC<PersonSummaryProps> = ({ person }) => {
       className="md:grid md:gap-4 lg:gap-8"
       style={{ gridTemplateColumns: `${posterSize.width}px 1fr` }}
     >
-      <div className="md:col-start-2 md:row-end-1 flex flex-col">
-        <div>
-          <div className="inline-block mr-2 md:mr-4">
-            <Icon size="extra-large" type={MediaTypes.Person} ariaLabel="Type: movie" />
-          </div>
-          <h1 className="inline text-3xl md:text-4xl font-black">{person.name}</h1>
-        </div>
+      <div className="md:col-start-2 md:row-end-1 grid gap-2 md:gap-4 content-start">
+        <MediaDescription
+          mediaType={MediaTypes.Person}
+          title={person.name}
+          startDate={person.birthday}
+          endDate={person.deathday}
+          isRatingHidden
+        />
 
         {(person.knownForDepartment || genderName) && (
-          <p className="mt-2 sm:mt-4">
+          <p>
             {genderName && (
               <>
                 <span className="text-xl font-normal text-neutral-700 capitalize">
@@ -50,29 +51,8 @@ const PersonSummary: FC<PersonSummaryProps> = ({ person }) => {
           </p>
         )}
 
-        {person.birthday && (
-          <p className="mt-2 sm:mt-4 text-xl font-normal text-neutral-500">
-            {new Date(person.birthday).toLocaleDateString()}
-            {person.deathday && ` - ${new Date(person.deathday).toLocaleDateString()}`}
-          </p>
-        )}
-
         {person.placeOfBirth && (
-          <p className="mt-2 sm:mt-4 text-lg font-normal text-neutral-700">
-            Born in {person.placeOfBirth}
-          </p>
-        )}
-
-        {person.alsoKnownAs && person.alsoKnownAs.length > 0 && (
-          <p className="text-lg font-normal italic mt-2 sm:mt-4 md:mt-auto">
-            Also known as:{" "}
-            {person.alsoKnownAs.map((name) => (
-              <Fragment key={name}>
-                <span>{name}</span>
-                <span className="last:hidden">, </span>
-              </Fragment>
-            ))}
-          </p>
+          <p className="text-lg font-normal text-neutral-700">Born in {person.placeOfBirth}</p>
         )}
       </div>
 

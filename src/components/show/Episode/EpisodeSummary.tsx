@@ -1,9 +1,8 @@
 import type { FC } from "react";
 import type { ShowEpisodeExtended } from "types/show/episode";
 import { memo } from "react";
-import Icon from "components/common/Icon";
+import MediaDescription from "components/common/MediaDescription";
 import PosterImage from "components/common/PosterImage";
-import Rating from "components/common/Rating";
 import getImageSize from "helpers/getImageSize";
 import { MediaTypes } from "types/mediaTypes";
 
@@ -22,31 +21,17 @@ const EpisodeSummary: FC<EpisodeSummaryProps> = ({ episode }) => {
       className="md:grid md:gap-4 lg:gap-8"
       style={{ gridTemplateColumns: `${posterSize.width}px 1fr` }}
     >
-      <div className="md:col-start-2 md:row-end-1 flex flex-col">
-        <div>
-          <div className="inline-block mr-2 md:mr-4">
-            <Icon size="extra-large" type={MediaTypes.Show} ariaLabel="Type: show" />
-          </div>
-          <h1 className="inline text-3xl md:text-4xl font-black">
-            {episode.seasonNumber ? `S${episode.seasonNumber}: ` : ""}
-            {episode.name ? episode.name : `Episode ${episode.episodeNumber}`}
-          </h1>
-        </div>
-
-        <div className="flex items-center mt-2 sm:mt-4">
-          {episode.airDate && (
-            <p className="text-xl font-normal text-neutral-500">
-              {new Date(episode.airDate).toLocaleDateString()}
-            </p>
-          )}
-          <div className="ml-auto flex">
-            <Rating
-              voteAverage={episode.voteAverage}
-              voteCount={episode.voteCount}
-              size="extra-large"
-            />
-          </div>
-        </div>
+      <div className="md:col-start-2 md:row-end-1">
+        <MediaDescription
+          mediaType={MediaTypes.Show}
+          title={
+            (episode.seasonNumber ? `S${episode.seasonNumber}: ` : "") +
+            (episode.name ? episode.name : `Episode ${episode.episodeNumber}`)
+          }
+          startDate={episode.airDate}
+          voteAverage={episode.voteAverage}
+          voteCount={episode.voteCount}
+        />
       </div>
 
       <div className="md:col-start-1 md:col-end-1 my-2 sm:my-4 md:my-0 flex justify-center">

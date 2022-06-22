@@ -10,7 +10,7 @@ import {
 import defaultFetcher from "helpers/fetching/defaultFetcher";
 import isDefined from "helpers/isDefined";
 
-const widthRegexp = /^w([1-9]+)$/;
+const widthRegexp = /^w([0-9]+)$/;
 
 type ConfigurationRawData = {
   images: {

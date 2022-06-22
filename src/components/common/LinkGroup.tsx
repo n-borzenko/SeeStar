@@ -41,7 +41,7 @@ const LinkGroup: FC<LinkGroupProps> = ({
       color === "primary",
     "text-secondary bg-secondary/0 focus:bg-secondary/10 hover:bg-secondary/10 active:bg-secondary/20":
       color === "secondary",
-    "text-white bg-white/0 border-white focus:bg-white/10 hover:bg-white/10 active:bg-white/20":
+    "text-white bg-white/0 focus:bg-white/10 hover:bg-white/10 active:bg-white/20":
       color === "white",
   });
   const selectedItemClasses = clsx(defaultItemClasses, {
