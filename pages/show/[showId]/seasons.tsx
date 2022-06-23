@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import Seasons from "components/show/Seasons";
+import ShowSeasons from "components/show/ShowSeasons";
 import { useDetailedShowRequest } from "hooks/show/useShowRequest";
 
 const SeasonsPage: NextPage = () => {
@@ -24,7 +24,7 @@ const SeasonsPage: NextPage = () => {
     );
   }
 
-  return <Seasons show={showRequestResult.data} />;
+  return <ShowSeasons show={showRequestResult.data} />;
 };
 
 export default memo(SeasonsPage);

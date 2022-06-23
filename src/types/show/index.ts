@@ -80,7 +80,7 @@ export type ShowExtended = ShowDetailed & {
     cast: AggregatedCastMember[];
     crew: AggregatedCrewMember[];
   };
-  similar: {
+  recommendations: {
     results: Show[];
   };
 };

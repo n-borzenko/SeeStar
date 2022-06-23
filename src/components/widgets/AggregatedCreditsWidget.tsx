@@ -3,7 +3,8 @@ import type { AggregatedCastMember, AggregatedCrewMember } from "types/credit";
 import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
 import CardsList, { listLengthLimit } from "components/common/CardsList";
-import MediumPortraitPersonCard from "components/cards/person/MediumPortraitPersonCard";
+import MediumPortraitCard from "components/cards/MediumPortraitCard";
+import { MediaTypes } from "types/mediaTypes";
 
 type AggregatedCreditsWidgetProps = {
   credits: {
@@ -76,9 +77,13 @@ const AggregatedCreditsWidget: FC<AggregatedCreditsWidgetProps> = ({ credits, hr
           <h6 className="lg:mb-4 text-primary">Cast</h6>
           <CardsList items={items.cast}>
             {(credit) => (
-              <MediumPortraitPersonCard person={credit}>
-                {(credit) => <span>{credit.roles[0].character || "Unknown character"}</span>}
-              </MediumPortraitPersonCard>
+              <MediumPortraitCard
+                href={`/person/${credit.id}`}
+                posterPath={credit.profilePath}
+                title={credit.name}
+                mediaType={MediaTypes.Person}
+                job={credit.roles[0].character || "Unknown character"}
+              />
             )}
           </CardsList>
         </>
@@ -88,13 +93,13 @@ const AggregatedCreditsWidget: FC<AggregatedCreditsWidgetProps> = ({ credits, hr
           <h6 className="mt-4 lg:mt-8 lg:mb-4 text-primary">Crew</h6>
           <CardsList items={items.crew}>
             {(credit) => (
-              <MediumPortraitPersonCard person={credit}>
-                {(credit) => (
-                  <span>
-                    {credit.department}, {credit.jobs[0].job}
-                  </span>
-                )}
-              </MediumPortraitPersonCard>
+              <MediumPortraitCard
+                href={`/person/${credit.id}`}
+                posterPath={credit.profilePath}
+                title={credit.name}
+                mediaType={MediaTypes.Person}
+                job={`${credit.department}, ${credit.jobs[0].job}`}
+              />
             )}
           </CardsList>
         </>

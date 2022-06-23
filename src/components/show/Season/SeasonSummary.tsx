@@ -26,12 +26,9 @@ const SeasonSummary: FC<SeasonSummaryProps> = ({ season }) => {
           mediaType={MediaTypes.Show}
           title={season.name ? season.name : `Season ${season.seasonNumber}`}
           startDate={season.airDate}
-          isRatingHidden
-        >
-          <span className="text-lg leading-6 md:text-xl font-normal text-neutral-700">
-            {season.episodes.length} episode{season.episodes.length !== 1 && "s"}
-          </span>
-        </MediaDescription>
+          infoType="text"
+          infoText={`${season.episodes.length} episode${season.episodes.length !== 1 && "s"}`}
+        />
       </div>
 
       <div className="md:col-start-1 md:col-end-1 md:row-span-full my-2 sm:my-4 md:my-0 flex justify-center">

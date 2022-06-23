@@ -30,7 +30,6 @@ const PersonSummary: FC<PersonSummaryProps> = ({ person }) => {
           title={person.name}
           startDate={person.birthday}
           endDate={person.deathday}
-          isRatingHidden
         />
 
         {(person.knownForDepartment || genderName) && (

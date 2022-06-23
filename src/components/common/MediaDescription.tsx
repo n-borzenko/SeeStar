@@ -1,4 +1,4 @@
-import type { FC, PropsWithChildren } from "react";
+import type { FC } from "react";
 import { memo } from "react";
 import Icon from "components/common/Icon";
 import Rating from "components/common/Rating";
@@ -13,20 +13,24 @@ type MediaDescriptionProps = {
   endDate?: string | null;
   voteAverage?: number;
   voteCount?: number;
-  isRatingHidden?: boolean;
+  infoType?: "rating" | "text" | "none";
+  infoText?: string;
 };
 
-const MediaDescription: FC<PropsWithChildren<MediaDescriptionProps>> = ({
+const MediaDescription: FC<MediaDescriptionProps> = ({
   mediaType,
   title,
   startDate,
   endDate,
   voteAverage,
   voteCount,
-  isRatingHidden = false,
-  children,
+  infoType = "none",
+  infoText,
 }) => {
   const screenSize = useScreenSize();
+  const hasInfoText = infoType === "text" && infoText && infoText.length > 0;
+  const hasRating = infoType === "rating" && screenSize;
+
   return (
     <div className="grid gap-2 md:gap-4">
       <div>
@@ -34,7 +38,7 @@ const MediaDescription: FC<PropsWithChildren<MediaDescriptionProps>> = ({
           <Icon
             size="extra-large"
             type={mediaType}
-            ariaLabel={`"Type: ${getMediaName(mediaType)}"`}
+            ariaLabel={`Type: ${getMediaName(mediaType)}`}
           />
         </div>
         <h2 className="inline text-3xl md:text-4xl font-black">{title}</h2>
@@ -47,14 +51,18 @@ const MediaDescription: FC<PropsWithChildren<MediaDescriptionProps>> = ({
           </span>
         )}
         <div className="ml-auto">
-          {isRatingHidden && children ? children : null}
-          {!isRatingHidden && screenSize ? (
+          {hasRating && (
             <Rating
               voteAverage={voteAverage}
               voteCount={voteCount}
               size={screenSize < ScreenSize.Md ? "large" : "extra-large"}
             />
-          ) : null}
+          )}
+          {hasInfoText && (
+            <span className="text-lg leading-6 md:text-xl font-normal text-neutral-700">
+              {infoText}
+            </span>
+          )}
         </div>
       </div>
     </div>

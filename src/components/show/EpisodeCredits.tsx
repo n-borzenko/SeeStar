@@ -22,6 +22,7 @@ const EpisodeCredits: FC<EpisodeCreditsProps> = ({ episode, showId }) => {
         startDate={episode.airDate}
         voteAverage={episode.voteAverage}
         voteCount={episode.voteCount}
+        infoType="rating"
       />
       <CreditMembersList
         credits={episode.credits}

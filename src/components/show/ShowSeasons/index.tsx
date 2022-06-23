@@ -5,11 +5,11 @@ import MediaDescription from "components/common/MediaDescription";
 import { MediaTypes } from "types/mediaTypes";
 import SeasonsList from "./SeasonsList";
 
-type SeasonsProps = {
+type ShowSeasonsProps = {
   show: ShowDetailed;
 };
 
-const Seasons: FC<SeasonsProps> = ({ show }) => {
+const ShowSeasons: FC<ShowSeasonsProps> = ({ show }) => {
   return (
     <div>
       <MediaDescription
@@ -19,10 +19,11 @@ const Seasons: FC<SeasonsProps> = ({ show }) => {
         endDate={show.lastAirDate}
         voteAverage={show.voteAverage}
         voteCount={show.voteCount}
+        infoType="rating"
       />
       <SeasonsList showId={show.id} seasons={show.seasons} />
     </div>
   );
 };
 
-export default memo(Seasons);
+export default memo(ShowSeasons);

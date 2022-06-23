@@ -29,6 +29,7 @@ const ShowSummary: FC<ShowSummaryProps> = ({ show }) => {
           endDate={show.lastAirDate}
           voteAverage={show.voteAverage}
           voteCount={show.voteCount}
+          infoType="rating"
         />
         {show.tagline && show.tagline.length > 0 && (
           <p className="text-lg font-normal italic">{show.tagline}</p>

@@ -19,6 +19,7 @@ const ShowCredits: FC<ShowCreditsProps> = ({ show }) => {
         endDate={show.lastAirDate}
         voteAverage={show.voteAverage}
         voteCount={show.voteCount}
+        infoType="rating"
       />
       <CreditMembersList credits={show.aggregateCredits} href={`/show/${show.id}/credits`} />
     </div>

@@ -17,7 +17,6 @@ const PersonCredits: FC<PersonCreditsProps> = ({ person }) => {
         title={person.name}
         startDate={person.birthday}
         endDate={person.deathday}
-        isRatingHidden
       />
       <FullCreditList credits={person.combinedCredits} personId={person.id} />
     </div>

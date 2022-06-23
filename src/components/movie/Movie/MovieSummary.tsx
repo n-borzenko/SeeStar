@@ -28,6 +28,7 @@ const MovieSummary: FC<MovieSummaryProps> = ({ movie }) => {
           startDate={movie.releaseDate}
           voteAverage={movie.voteAverage}
           voteCount={movie.voteCount}
+          infoType="rating"
         />
         {movie.tagline && movie.tagline.length > 0 && (
           <p className="text-lg font-normal italic">{movie.tagline}</p>

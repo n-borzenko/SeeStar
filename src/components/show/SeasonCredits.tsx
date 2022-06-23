@@ -17,12 +17,9 @@ const SeasonCredits: FC<SeasonCreditsProps> = ({ season, showId }) => {
         mediaType={MediaTypes.Show}
         title={season.name ? season.name : `Season ${season.seasonNumber}`}
         startDate={season.airDate}
-        isRatingHidden
-      >
-        <span className="text-lg leading-6 md:text-xl font-normal text-neutral-700">
-          {season.episodes.length} episode{season.episodes.length !== 1 && "s"}
-        </span>
-      </MediaDescription>
+        infoType="text"
+        infoText={`${season.episodes.length} episode${season.episodes.length !== 1 && "s"}`}
+      />
       <CreditMembersList
         credits={season.aggregateCredits}
         href={`/show/${showId}/season/${season.seasonNumber}/credits`}

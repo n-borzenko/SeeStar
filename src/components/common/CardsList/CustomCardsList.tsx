@@ -22,7 +22,7 @@ const CustomCardsList = <T extends any>({
     firstItem,
     updateScrollParameters,
     scrollByButton,
-  } = useListScroll();
+  } = useListScroll(limitedItems);
 
   return (
     <div className="-mx-4 relative">

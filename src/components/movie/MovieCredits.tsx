@@ -18,6 +18,7 @@ const MovieCredits: FC<MovieCreditsProps> = ({ movie }) => {
         startDate={movie.releaseDate}
         voteAverage={movie.voteAverage}
         voteCount={movie.voteCount}
+        infoType="rating"
       />
       <CreditMembersList credits={movie.credits} href={`/movie/${movie.id}/credits`} />
     </div>

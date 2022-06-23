@@ -31,6 +31,7 @@ const EpisodeSummary: FC<EpisodeSummaryProps> = ({ episode }) => {
           startDate={episode.airDate}
           voteAverage={episode.voteAverage}
           voteCount={episode.voteCount}
+          infoType="rating"
         />
       </div>
 
