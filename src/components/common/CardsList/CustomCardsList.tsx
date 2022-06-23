@@ -3,7 +3,7 @@ import { memo, useMemo } from "react";
 import useListScroll from "./useListScroll";
 import CardsListButton from "./CardsListButton";
 
-export const listLengthLimit = 10;
+export const listLengthLimit = 20;
 
 const CustomCardsList = <T extends any>({
   items,
@@ -22,7 +22,7 @@ const CustomCardsList = <T extends any>({
     firstItem,
     updateScrollParameters,
     scrollByButton,
-  } = useListScroll();
+  } = useListScroll(limitedItems);
 
   return (
     <div className="-mx-4 relative">

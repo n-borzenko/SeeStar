@@ -4,7 +4,6 @@ import { memo, useMemo } from "react";
 import Card from "components/common/Card";
 import PosterImage from "components/common/PosterImage";
 import Rating from "components/common/Rating";
-import useExtraSmallScreen from "hooks/common/useExtraSmallScreen";
 import { MediaTypes } from "types/mediaTypes";
 
 type EpisodeListProps = {
@@ -19,7 +18,6 @@ const sortEpisodes = (a: ShowEpisode, b: ShowEpisode) => {
 };
 
 const EpisodeList: FC<EpisodeListProps> = ({ episodes, showId }) => {
-  const isExtraSmallScreen = useExtraSmallScreen();
   const sortedEpisodes = useMemo(() => episodes.sort(sortEpisodes), [episodes]);
 
   return (
@@ -35,7 +33,7 @@ const EpisodeList: FC<EpisodeListProps> = ({ episodes, showId }) => {
               <PosterImage
                 src={episode.stillPath}
                 type={MediaTypes.Show}
-                size={isExtraSmallScreen ? "smallLandscape" : "mediumLandscape"}
+                size="smallLandscape"
                 rounded={hasOverview ? "top-left" : "left"}
               />
 

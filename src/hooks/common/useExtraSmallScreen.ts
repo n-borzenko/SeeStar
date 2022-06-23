@@ -1,4 +1,4 @@
-import { memo, useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const useExtraSmallScreen = () => {
   const [isExtraSmallScreen, setIsExtraSmallScreen] = useState<boolean>();

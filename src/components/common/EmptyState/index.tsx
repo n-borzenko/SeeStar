@@ -17,7 +17,9 @@ const EmptyState: FC<EmptyStateProps> = ({
       <div className="flex-basis-[24rem] p-4 flex flex-col justify-center items-center">
         <EmptyImage width={280} height={140} />
         {message && (
-          <p className="text-base font-normal text-center mt-4 whitespace-pre-line">{message}</p>
+          <p className="text-base font-normal leading-5 text-center mt-4 whitespace-pre-line">
+            {message}
+          </p>
         )}
         {isButtonVisible && (
           <Button type="button" onClick={onClick} className="mt-4">

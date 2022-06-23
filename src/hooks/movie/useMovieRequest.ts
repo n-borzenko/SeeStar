@@ -16,7 +16,7 @@ const generateMovieUrl = (id: number, isExtended: boolean) => {
     {
       api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
       append_to_response: isExtended
-        ? ["credits", "external_ids", "keywords", "release_dates", "similar"]
+        ? ["credits", "external_ids", "keywords", "release_dates", "recommendations"]
         : [],
     },
     { arrayFormat: "comma" }

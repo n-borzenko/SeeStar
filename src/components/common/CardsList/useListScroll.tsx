@@ -9,7 +9,7 @@ const defaultScrollParameters = {
   isEndPosition: true,
 };
 
-const useListScroll = () => {
+const useListScroll = <T extends any>(items: T[]) => {
   const scrollableArea = useRef<HTMLDivElement>(null);
   const firstItem = useRef<HTMLDivElement>(null);
   const [scrollParameters, setScrollParameters] = useState(defaultScrollParameters);
@@ -28,7 +28,7 @@ const useListScroll = () => {
 
   useEffect(() => {
     updateScrollParameters();
-  }, [updateScrollParameters]);
+  }, [updateScrollParameters, items]);
 
   const scrollByButton = useCallback((direction: "right" | "left") => {
     if (

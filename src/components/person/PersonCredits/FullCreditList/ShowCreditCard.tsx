@@ -46,7 +46,7 @@ const ShowCreditCard: FC<PropsWithChildren<ShowCreditCardProps>> = ({ show, chil
             </div>
           </div>
 
-          <div className="text-sm sm:text-base font-normal italic leading-[1.15rem] sm:leading-5 text-neutral-700 line-clamp-4">
+          <div className="text-sm sm:text-base font-normal italic leading-[1.15rem] sm:leading-5 text-neutral-700 line-clamp-3 sm:line-clamp-5">
             {children}
           </div>
         </div>

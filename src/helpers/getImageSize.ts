@@ -12,16 +12,16 @@ const imageSizesConfiguration = {
     height: 513,
   },
   smallLandscape: {
-    width: 92,
-    height: 52,
-  },
-  mediumLandscape: {
     width: 185,
     height: 104,
   },
-  largeLandscape: {
+  mediumLandscape: {
     width: 300,
-    height: 192,
+    height: 169,
+  },
+  largeLandscape: {
+    width: 500,
+    height: 281,
   },
 };
 

@@ -19,7 +19,7 @@ const CardsListButton: FC<CardsListButtonProps> = ({
   const onClick = useCallback(() => scrollByButton(direction), [scrollByButton, direction]);
 
   const wrapperClasses = clsx(
-    "w-8 absolute top-0 from-white via-white to-white/0 flex items-center",
+    "z-1 w-8 absolute top-0 from-white via-white to-white/0 flex items-center",
     {
       "left-0 bg-gradient-to-r": direction === "left",
       "right-0 bg-gradient-to-l": direction === "right",

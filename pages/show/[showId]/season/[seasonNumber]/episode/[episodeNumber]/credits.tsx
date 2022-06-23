@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import Episode from "components/show/Episode";
+import EpisodeCredits from "components/show/EpisodeCredits";
 import useEpisodeRequest from "hooks/show/useEpisodeRequest";
 
-const EpisodePage: NextPage = () => {
+const EpisodeCreditsPage: NextPage = () => {
   const router = useRouter();
   const { episodeRequestResult, retry } = useEpisodeRequest(router);
 
@@ -24,7 +24,12 @@ const EpisodePage: NextPage = () => {
     );
   }
 
-  return <Episode episode={episodeRequestResult.data.episode} />;
+  return (
+    <EpisodeCredits
+      episode={episodeRequestResult.data.episode}
+      showId={episodeRequestResult.data.showId}
+    />
+  );
 };
 
-export default memo(EpisodePage);
+export default memo(EpisodeCreditsPage);

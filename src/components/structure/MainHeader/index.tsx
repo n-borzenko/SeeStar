@@ -19,7 +19,7 @@ const MainHeader = () => {
   }, [router, clearMenuSelection]);
 
   return (
-    <header className="fixed w-full flex justify-center bg-primary shadow-bar z-1" role="banner">
+    <header className="fixed w-full flex justify-center bg-primary shadow-bar z-10" role="banner">
       <div style={{ width: 0, height: 0 }} tabIndex={-1} ref={resetSelectionElement} />
       <nav
         className="xl:max-w-screen-xl py-2 px-4 sm:px-8 grow flex justify-between items-center h-full"

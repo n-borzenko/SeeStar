@@ -10,7 +10,7 @@
 
   html,
   body {
-    @apply w-full h-full;
+    @apply w-full h-full text-neutral-900;
   }
   .body-locked {
     @apply overflow-hidden fixed;

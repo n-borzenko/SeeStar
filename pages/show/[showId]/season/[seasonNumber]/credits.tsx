@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import SeasonEpisodes from "components/show/SeasonEpisodes";
-import { useDetailedSeasonRequest } from "hooks/show/useSeasonRequest";
+import SeasonCredits from "components/show/SeasonCredits";
+import { useExtendedSeasonRequest } from "hooks/show/useSeasonRequest";
 
-const EpisodesPage: NextPage = () => {
+const SeasonCreditsPage: NextPage = () => {
   const router = useRouter();
-  const { seasonRequestResult, retry } = useDetailedSeasonRequest(router);
+  const { seasonRequestResult, retry } = useExtendedSeasonRequest(router);
 
   if (seasonRequestResult.state === "loading") {
     return <Spinner size="large" />;
@@ -25,11 +25,11 @@ const EpisodesPage: NextPage = () => {
   }
 
   return (
-    <SeasonEpisodes
+    <SeasonCredits
       season={seasonRequestResult.data.season}
       showId={seasonRequestResult.data.showId}
     />
   );
 };
 
-export default memo(EpisodesPage);
+export default memo(SeasonCreditsPage);

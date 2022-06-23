@@ -5,7 +5,6 @@ import BlockHeader from "components/common/BlockHeader";
 import Card from "components/common/Card";
 import PosterImage from "components/common/PosterImage";
 import Rating from "components/common/Rating";
-import useExtraSmallScreen from "hooks/common/useExtraSmallScreen";
 import { MediaTypes } from "types/mediaTypes";
 
 type EpisodesListProps = {
@@ -14,8 +13,6 @@ type EpisodesListProps = {
 };
 
 const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
-  const isExtraSmallScreen = useExtraSmallScreen();
-
   return (
     <div>
       <BlockHeader title="Episodes" />
@@ -31,7 +28,7 @@ const EpisodesList: FC<EpisodesListProps> = ({ episodes, showId }) => {
                 <PosterImage
                   src={episode.stillPath}
                   type={MediaTypes.Show}
-                  size={isExtraSmallScreen ? "smallLandscape" : "mediumLandscape"}
+                  size="smallLandscape"
                   rounded={hasOverview ? "top-left" : "left"}
                 />
 

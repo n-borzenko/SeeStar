@@ -27,8 +27,8 @@ const LabelsList: FC<LabelsListProps> = ({ labels, size = "medium", isMultilined
         <div
           key={id}
           className={clsx("bg-primary/10 text-primary rounded-full last:mr-0", {
-            "h-4 px-1 mr-1 mb-1 text-xs font-normal": size === "medium",
-            "h-6 px-2 mr-2 mb-2 text-lg font-normal leading-6": size === "large",
+            "h-4 px-1 mr-1 mb-1 text-xs": size === "medium",
+            "h-6 px-2 mr-2 mb-2 text-base leading-6": size === "large",
           })}
         >
           {name}

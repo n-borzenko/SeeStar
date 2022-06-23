@@ -42,7 +42,7 @@ const CompactHeaderMenu = () => {
       <div
         onAnimationEnd={updateStateAfterAnimation}
         className={clsx(
-          "bg-primary absolute will-change-transform overflow-x-hidden overflow-y-auto max-width-w-screen z-10",
+          "bg-primary absolute will-change-transform overflow-x-hidden overflow-y-auto max-width-w-screen z-20",
           menuState === "isSlidingIn" && "animate-slide-in-from-right",
           menuState === "isSlidingOut" && "animate-slide-out-to-right",
           menuState === "isInvisible" ? "w-0 left-full" : "w-screen left-0"
