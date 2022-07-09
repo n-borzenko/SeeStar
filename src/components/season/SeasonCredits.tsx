@@ -13,10 +13,10 @@ type SeasonCreditsProps = {
 
 const SeasonCredits: FC<SeasonCreditsProps> = ({ season, showId }) => {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full grid grid-rows-[auto_1fr]">
       <MediaDescription
         mediaType={MediaTypes.Show}
-        title={getSeasonName(season.name, season.seasonNumber, true)}
+        title={getSeasonName(season.name, season.seasonNumber)}
         startDate={season.airDate}
         infoType="text"
         infoText={getPluralizedName("episode", season.episodes.length)}

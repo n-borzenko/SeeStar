@@ -11,7 +11,7 @@ type PersonCreditsProps = {
 
 const PersonCredits: FC<PersonCreditsProps> = ({ person }) => {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full grid grid-rows-[auto_1fr]">
       <MediaDescription
         mediaType={MediaTypes.Person}
         title={person.name}

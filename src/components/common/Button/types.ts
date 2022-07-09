@@ -12,4 +12,5 @@ export type ButtonCommonProps = {
   hasWhiteBackground?: boolean;
   ariaLabel?: AriaAttributes["aria-label"];
   ariaHidden?: AriaAttributes["aria-hidden"];
+  disabled?: boolean;
 };

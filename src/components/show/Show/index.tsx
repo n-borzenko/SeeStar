@@ -25,12 +25,12 @@ const Show: FC<ShowProps> = ({ show }) => {
       <ShowDetails show={show} />
       <Block hidingCondition={!show.seasons || show.seasons.length === 0}>
         <BlockHeader title="Seasons" href={`/show/${show.id}/seasons`} />
-        <CardsList items={show.seasons}>
+        <CardsList items={show.seasons} limited>
           {(season) => (
             <MediumPortraitCard
               href={`/show/${show.id}/season/${season.seasonNumber}`}
               posterPath={season.posterPath}
-              title={getSeasonName(season.name, season.seasonNumber, true)}
+              title={getSeasonName(season.name, season.seasonNumber)}
               startDate={season.airDate}
               infoType="text"
               infoText={season.episodeCount ? `${season.episodeCount} ep.` : undefined}

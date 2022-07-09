@@ -13,7 +13,7 @@ type EpisodeCreditsProps = {
 
 const EpisodeCredits: FC<EpisodeCreditsProps> = ({ episode, showId }) => {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full grid grid-rows-[auto_1fr]">
       <MediaDescription
         mediaType={MediaTypes.Show}
         title={getEpisodeName(episode.name, episode.episodeNumber, episode.seasonNumber, true)}

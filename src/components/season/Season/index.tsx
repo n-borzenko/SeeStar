@@ -27,7 +27,7 @@ const Season: FC<SeasonProps> = ({ season, showId }) => {
           title="Episodes"
           href={`/show/${showId}/season/${season.seasonNumber}/episodes`}
         />
-        <CardsList items={season.episodes}>
+        <CardsList items={season.episodes} limited>
           {(episode) => (
             <MediumPortraitCard
               href={`/show/${showId}/season/${episode.seasonNumber}/episode/${episode.episodeNumber}`}

@@ -9,7 +9,9 @@ import MediaLandscapeCard from "components/cards/MediaLandscapeCard";
 import BlockHeader from "components/common/BlockHeader";
 import EmptyState from "components/common/EmptyState";
 import LinkGroup from "components/common/LinkGroup";
+import PaginationContainer from "components/common/PaginationContainer";
 import useShowListParameter, { showListTypes } from "hooks/credit/useShowListParameter";
+import usePageParameter from "hooks/common/usePageParameter";
 import { getEpisodeName, getPluralizedName, getSeasonName } from "helpers/textUtilities";
 
 type CreditShowDetailsProps = {
@@ -24,6 +26,8 @@ const sortItems = <T extends ShowSeason | ShowEpisode>(a: T, b: T) => {
 
 const CreditShowDetails: FC<CreditShowDetailsProps> = ({ credit }) => {
   const showList = useShowListParameter();
+  const page = usePageParameter();
+
   const links = useMemo(
     () =>
       showListTypes.map((type) => ({
@@ -51,41 +55,55 @@ const CreditShowDetails: FC<CreditShowDetailsProps> = ({ credit }) => {
       </BlockHeader>
 
       {sortedItems[showList].length > 0 ? (
-        <div className="w-full place-self-start grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-          {showList === "episodes" &&
-            sortedItems.episodes.map((episode) => (
-              <EpisodeLandscapeCard
-                key={episode.id}
-                cardSize="small"
-                href={`/show/${credit.media.id}/season/${episode.seasonNumber}/episode/${episode.episodeNumber}`}
-                posterPath={episode.stillPath}
-                title={getEpisodeName(
-                  episode.name,
-                  episode.episodeNumber,
-                  episode.seasonNumber,
-                  true
-                )}
-                startDate={episode.airDate}
-                voteAverage={episode.voteAverage}
-                overview={episode.overview}
-              />
-            ))}
-          {showList === "seasons" &&
-            sortedItems.seasons.map((season) => (
-              <MediaLandscapeCard
-                key={season.id}
-                cardSize="small"
-                href={`/show/${credit.media.id}/season/${season.seasonNumber}`}
-                posterPath={season.posterPath}
-                mediaType={credit.mediaType}
-                title={getSeasonName(season.name, season.seasonNumber, true)}
-                startDate={season.airDate}
-                infoType="text"
-                infoText={getPluralizedName("episode", season.episodeCount)}
-                overview={season.overview}
-              />
-            ))}
-        </div>
+        <>
+          {showList === "episodes" && (
+            <PaginationContainer items={sortedItems.episodes} page={page}>
+              {(episodes) => (
+                <div className="w-full place-self-start grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+                  {episodes.map((episode) => (
+                    <EpisodeLandscapeCard
+                      key={episode.id}
+                      cardSize="small"
+                      href={`/show/${credit.media.id}/season/${episode.seasonNumber}/episode/${episode.episodeNumber}`}
+                      posterPath={episode.stillPath}
+                      title={getEpisodeName(
+                        episode.name,
+                        episode.episodeNumber,
+                        episode.seasonNumber,
+                        true
+                      )}
+                      startDate={episode.airDate}
+                      voteAverage={episode.voteAverage}
+                      overview={episode.overview}
+                    />
+                  ))}
+                </div>
+              )}
+            </PaginationContainer>
+          )}
+          {showList === "seasons" && (
+            <PaginationContainer items={sortedItems.seasons} page={page}>
+              {(seasons) => (
+                <div className="w-full place-self-start grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+                  {seasons.map((season) => (
+                    <MediaLandscapeCard
+                      key={season.id}
+                      cardSize="small"
+                      href={`/show/${credit.media.id}/season/${season.seasonNumber}`}
+                      posterPath={season.posterPath}
+                      mediaType={credit.mediaType}
+                      title={getSeasonName(season.name, season.seasonNumber)}
+                      startDate={season.airDate}
+                      infoType="text"
+                      infoText={getPluralizedName("episode", season.episodeCount)}
+                      overview={season.overview}
+                    />
+                  ))}
+                </div>
+              )}
+            </PaginationContainer>
+          )}
+        </>
       ) : (
         <EmptyState message="No credits found" />
       )}

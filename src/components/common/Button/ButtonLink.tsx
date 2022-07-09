@@ -31,6 +31,7 @@ const ButtonLink: ForwardRefRenderFunction<
     hasWhiteBackground,
     className,
     tabIndex,
+    disabled,
   },
   ref
 ) => {
@@ -44,23 +45,30 @@ const ButtonLink: ForwardRefRenderFunction<
       iconSize={iconSize}
       hasWhiteBackground={hasWhiteBackground}
       className={className}
+      disabled={disabled}
     >
-      {({ classes, iconElement }) => (
-        <a
-          ref={ref}
-          href={href}
-          rel={rel}
-          referrerPolicy={referrerPolicy}
-          target={target}
-          className={classes}
-          aria-label={ariaLabel}
-          aria-hidden={ariaHidden}
-          tabIndex={tabIndex}
-          onClick={onClick}
-        >
-          {iconElement || children}
-        </a>
-      )}
+      {({ classes, iconElement }) =>
+        disabled ? (
+          <span className={classes} aria-hidden={ariaHidden}>
+            {iconElement || children}
+          </span>
+        ) : (
+          <a
+            ref={ref}
+            href={href}
+            rel={rel}
+            referrerPolicy={referrerPolicy}
+            target={target}
+            className={classes}
+            aria-label={ariaLabel}
+            aria-hidden={ariaHidden}
+            tabIndex={tabIndex}
+            onClick={onClick}
+          >
+            {iconElement || children}
+          </a>
+        )
+      }
     </ButtonWrapper>
   );
 };

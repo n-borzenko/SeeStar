@@ -5,7 +5,15 @@ import Icon from "components/common/Icon";
 
 type ButtonWrapperProps = Pick<
   ButtonCommonProps,
-  "color" | "variant" | "size" | "wide" | "icon" | "iconSize" | "hasWhiteBackground" | "className"
+  | "color"
+  | "variant"
+  | "size"
+  | "wide"
+  | "icon"
+  | "iconSize"
+  | "hasWhiteBackground"
+  | "className"
+  | "disabled"
 > & {
   children: (props: { classes: string; iconElement: ReactChild | null }) => ReactNode;
 };
@@ -19,6 +27,7 @@ const ButtonWrapper: VFC<ButtonWrapperProps> = ({
   iconSize,
   hasWhiteBackground = false,
   className,
+  disabled,
   children,
 }) => {
   const backgroundClasses = clsx("bg-white rounded-full", {
@@ -37,6 +46,7 @@ const ButtonWrapper: VFC<ButtonWrapperProps> = ({
       "w-8 h-8": size === "medium" && icon !== undefined,
       "w-10 h-10": size === "large" && icon !== undefined,
       "w-full": wide,
+      "opacity-30 pointer-events-none": disabled,
       "text-white bg-primary border-primary/0 focus:bg-primary/80 hover:bg-primary/80 active:bg-primary/60":
         variant === "filled" && color === "primary",
       "text-primary bg-primary/0 border-primary focus:bg-primary/10 hover:bg-primary/10 active:bg-primary/20":

@@ -25,7 +25,7 @@ const SeasonSummary: FC<SeasonSummaryProps> = ({ season }) => {
       <div className="md:col-start-2 md:col-end-2">
         <MediaDescription
           mediaType={MediaTypes.Show}
-          title={getSeasonName(season.name, season.seasonNumber, true)}
+          title={getSeasonName(season.name, season.seasonNumber)}
           startDate={season.airDate}
           infoType="text"
           infoText={getPluralizedName("episode", season.episodes.length)}

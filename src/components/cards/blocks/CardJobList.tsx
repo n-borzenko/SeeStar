@@ -26,7 +26,7 @@ const CardJobList: FC<CardJobListProps> = ({ cardSize, jobs }) => {
             <a className="link text-ellipsis overflow-hidden whitespace-nowrap pr-1">{job}</a>
           </Link>
           {episodes !== undefined && episodes > 0 && (
-            <span className="shrink-0">[{episodes} ep.]</span>
+            <span className="shrink-0 last:pr-1">[{episodes} ep.]</span>
           )}
           {index < jobs.length - 1 && <span className="mr-2">,</span>}
         </p>

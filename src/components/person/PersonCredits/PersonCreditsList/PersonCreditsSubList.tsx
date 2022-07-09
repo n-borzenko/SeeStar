@@ -1,6 +1,8 @@
 import type { AnyMediaCredit } from "types/credit";
 import { memo, useMemo } from "react";
 import CreditLandscapeCard from "components/cards/CreditLandscapeCard";
+import PaginationContainer from "components/common/PaginationContainer";
+import usePageParameter from "hooks/common/usePageParameter";
 import { MediaTypes } from "types/mediaTypes";
 
 type PersonCreditsSubListProps<T> = {
@@ -46,27 +48,32 @@ const PersonCreditsSubList = <T extends AnyMediaCredit>({
   credits,
   getJobName,
 }: PersonCreditsSubListProps<T>) => {
+  const page = usePageParameter();
   const groupedCredits = useMemo(
     () => getSortedCredits(credits, getJobName),
     [credits, getJobName]
   );
 
   return (
-    <div className="w-full place-self-start grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-      {groupedCredits.map((item) => (
-        <CreditLandscapeCard
-          key={`${item.mediaType}-${item.creditId}`}
-          href={`/${item.mediaType === MediaTypes.Movie ? "movie" : "show"}/${item.id}`}
-          posterPath={item.posterPath}
-          mediaType={item.mediaType}
-          title={item.title}
-          startDate={item.startDate}
-          voteAverage={item.voteAverage}
-          infoType="rating"
-          jobs={item.jobs}
-        />
-      ))}
-    </div>
+    <PaginationContainer items={groupedCredits} page={page}>
+      {(limitedCredits) => (
+        <div className="w-full place-self-start grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+          {limitedCredits.map((item) => (
+            <CreditLandscapeCard
+              key={`${item.mediaType}-${item.creditId}`}
+              href={`/${item.mediaType === MediaTypes.Movie ? "movie" : "show"}/${item.id}`}
+              posterPath={item.posterPath}
+              mediaType={item.mediaType}
+              title={item.title}
+              startDate={item.startDate}
+              voteAverage={item.voteAverage}
+              infoType="rating"
+              jobs={item.jobs}
+            />
+          ))}
+        </div>
+      )}
+    </PaginationContainer>
   );
 };
 

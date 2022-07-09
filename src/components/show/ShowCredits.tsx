@@ -11,7 +11,7 @@ type ShowCreditsProps = {
 
 const ShowCredits: FC<ShowCreditsProps> = ({ show }) => {
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full grid grid-rows-[auto_1fr]">
       <MediaDescription
         mediaType={MediaTypes.Show}
         title={show.name}
