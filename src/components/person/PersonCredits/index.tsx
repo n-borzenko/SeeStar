@@ -3,7 +3,7 @@ import type { PersonExtended } from "types/person";
 import { memo } from "react";
 import MediaDescription from "components/common/MediaDescription";
 import { MediaTypes } from "types/mediaTypes";
-import FullCreditList from "./FullCreditList";
+import PersonCreditsList from "./PersonCreditsList";
 
 type PersonCreditsProps = {
   person: PersonExtended;
@@ -18,7 +18,7 @@ const PersonCredits: FC<PersonCreditsProps> = ({ person }) => {
         startDate={person.birthday}
         endDate={person.deathday}
       />
-      <FullCreditList credits={person.combinedCredits} personId={person.id} />
+      <PersonCreditsList credits={person.combinedCredits} personId={person.id} />
     </div>
   );
 };

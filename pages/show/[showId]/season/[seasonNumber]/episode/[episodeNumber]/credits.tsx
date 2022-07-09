@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import EpisodeCredits from "components/show/EpisodeCredits";
+import EpisodeCredits from "components/episode/EpisodeCredits";
 import useEpisodeRequest from "hooks/show/useEpisodeRequest";
 
 const EpisodeCreditsPage: NextPage = () => {

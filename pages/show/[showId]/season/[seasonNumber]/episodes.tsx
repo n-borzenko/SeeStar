@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import SeasonEpisodes from "components/show/SeasonEpisodes";
+import SeasonEpisodes from "components/season/SeasonEpisodes";
 import { useDetailedSeasonRequest } from "hooks/show/useSeasonRequest";
 
 const EpisodesPage: NextPage = () => {

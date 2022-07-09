@@ -3,8 +3,8 @@ import type { ShowCreditDetailed, MovieCreditDetailed } from "types/credit";
 import { memo } from "react";
 import { MediaTypes } from "types/mediaTypes";
 import CreditDescription from "./CreditDescription";
+import CreditShowDetails from "./CreditShowDetails";
 import CreditSummary from "./CreditSummary";
-import ShowDetails from "./ShowDetails";
 
 type CreditProps = {
   credit: ShowCreditDetailed | MovieCreditDetailed;
@@ -12,10 +12,10 @@ type CreditProps = {
 
 const Credit: FC<CreditProps> = ({ credit }) => {
   return (
-    <div>
+    <div className="min-h-full flex flex-col">
       <CreditDescription credit={credit} />
       <CreditSummary credit={credit} />
-      {credit.mediaType === MediaTypes.Show && <ShowDetails credit={credit} />}
+      {credit.mediaType === MediaTypes.Show && <CreditShowDetails credit={credit} />}
     </div>
   );
 };

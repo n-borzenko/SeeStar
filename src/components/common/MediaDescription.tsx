@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { memo } from "react";
 import Icon from "components/common/Icon";
 import Rating from "components/common/Rating";
-import getMediaName from "helpers/getMediaName";
+import { getMediaName } from "helpers/textUtilities";
 import useScreenSize, { ScreenSize } from "hooks/common/useScreenSize";
 import { MediaTypes } from "types/mediaTypes";
 
@@ -34,7 +34,7 @@ const MediaDescription: FC<MediaDescriptionProps> = ({
   return (
     <div className="grid gap-2 md:gap-4">
       <div>
-        <div className="inline-block mr-2 md:mr-4">
+        <div className="inline-block mr-2 md:mr-4 align-top">
           <Icon
             size="extra-large"
             type={mediaType}

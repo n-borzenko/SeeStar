@@ -1,18 +1,25 @@
 import type { FC } from "react";
 import type { PersonExtended } from "types/person";
 import { memo } from "react";
+import UniversalCreditsWidget from "components/widgets/UniversalCreditsWidget";
+import usePersonCredits from "hooks/credits/usePersonCredits";
 import PersonSummary from "./PersonSummary";
-import PersonCredits from "./PersonCredits";
 
 type PersonProps = {
   person: PersonExtended;
 };
 
 const Person: FC<PersonProps> = ({ person }) => {
+  const credits = usePersonCredits(person.combinedCredits);
   return (
     <div>
       <PersonSummary person={person} />
-      <PersonCredits person={person} />
+      <UniversalCreditsWidget
+        credits={credits}
+        href={`/person/${person.id}/credits`}
+        castGroupTitle="As cast member"
+        crewGroupTitle="As crew member"
+      />
     </div>
   );
 };

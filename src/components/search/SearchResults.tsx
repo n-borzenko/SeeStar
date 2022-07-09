@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import type { SearchData } from "types/search";
 import { memo } from "react";
+import MediaLandscapeCard from "components/cards/MediaLandscapeCard";
+import PersonLandscapeCard from "components/cards/PersonLandscapeCard";
 import getImageSize from "helpers/getImageSize";
+import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
-import MovieItemContent from "./MovieItemContent";
-import PersonItemContent from "./PersonItemContent";
-import ShowItemContent from "./ShowItemContent";
 
 const posterSizeName = "smallPortrait";
 
@@ -17,21 +17,44 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
   const maxItemHeight = getImageSize(posterSizeName).height;
 
   return (
-    <div className="grid grid-cols-2 grid-rows-20-auto -mb-4 lg:-mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
       {data.results.map((item) => (
-        <div
-          key={item.id}
-          className="col-span-2 md:col-span-1 md:row-span-2 mb-4 lg:mb-8 md:odd:mr-2 md:even:ml-2 lg:odd:mr-4 lg:even:ml-4"
-          style={{ maxHeight: maxItemHeight }}
-        >
+        <div key={item.id} style={{ maxHeight: maxItemHeight }}>
           {item.mediaType === MediaTypes.Movie && (
-            <MovieItemContent item={item} posterSize={posterSizeName} />
+            <MediaLandscapeCard
+              href={`/movie/${item.id}`}
+              cardSize="small"
+              posterPath={item.posterPath}
+              mediaType={item.mediaType}
+              title={item.title}
+              startDate={item.releaseDate}
+              voteAverage={item.voteAverage}
+              genreIds={item.genreIds}
+              overview={item.overview}
+            />
           )}
           {item.mediaType === MediaTypes.Show && (
-            <ShowItemContent item={item} posterSize={posterSizeName} />
+            <MediaLandscapeCard
+              href={`/show/${item.id}`}
+              cardSize="small"
+              posterPath={item.posterPath}
+              mediaType={item.mediaType}
+              title={item.name}
+              startDate={item.firstAirDate}
+              voteAverage={item.voteAverage}
+              genreIds={item.genreIds}
+              overview={item.overview}
+            />
           )}
           {item.mediaType === MediaTypes.Person && (
-            <PersonItemContent item={item} posterSize={posterSizeName} />
+            <PersonLandscapeCard
+              href={`/person/${item.id}`}
+              cardSize="small"
+              posterPath={item.profilePath}
+              title={item.name}
+              infoText={getGenderAndDepartment(item.gender, item.knownForDepartment)}
+              knownFor={item.knownFor}
+            />
           )}
         </div>
       ))}

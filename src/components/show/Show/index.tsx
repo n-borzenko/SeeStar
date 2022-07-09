@@ -5,7 +5,9 @@ import MediumPortraitCard from "components/cards/MediumPortraitCard";
 import Block from "components/common/Block";
 import BlockHeader from "components/common/BlockHeader";
 import CardsList from "components/common/CardsList";
-import AggregatedCreditsWidget from "components/widgets/AggregatedCreditsWidget";
+import UniversalCreditsWidget from "components/widgets/UniversalCreditsWidget";
+import { getSeasonName } from "helpers/textUtilities";
+import useAggregatedMediaCredits from "hooks/credits/useAggregatedMediaCredits";
 import { MediaTypes } from "types/mediaTypes";
 import ShowDetails from "./ShowDetails";
 import ShowSummary from "./ShowSummary";
@@ -15,6 +17,8 @@ type ShowProps = {
 };
 
 const Show: FC<ShowProps> = ({ show }) => {
+  const credits = useAggregatedMediaCredits(show.aggregateCredits);
+
   return (
     <div>
       <ShowSummary show={show} />
@@ -26,16 +30,17 @@ const Show: FC<ShowProps> = ({ show }) => {
             <MediumPortraitCard
               href={`/show/${show.id}/season/${season.seasonNumber}`}
               posterPath={season.posterPath}
-              title={season.name ? season.name : `Season ${season.seasonNumber}`}
+              title={getSeasonName(season.name, season.seasonNumber, true)}
               startDate={season.airDate}
               infoType="text"
               infoText={season.episodeCount ? `${season.episodeCount} ep.` : undefined}
               mediaType={MediaTypes.Show}
+              hasInfoRowAlignedToEnd
             />
           )}
         </CardsList>
       </Block>
-      <AggregatedCreditsWidget credits={show.aggregateCredits} href={`/show/${show.id}/credits`} />
+      <UniversalCreditsWidget credits={credits} href={`/show/${show.id}/credits`} />
       <Block
         hidingCondition={!show.recommendations.results || show.recommendations.results.length === 0}
       >

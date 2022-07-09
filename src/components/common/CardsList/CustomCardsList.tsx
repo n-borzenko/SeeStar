@@ -33,7 +33,7 @@ const CustomCardsList = <T extends any>({
         scrollByButton={scrollByButton}
       />
       <div
-        className="flex px-2 py-2 overflow-x-auto"
+        className="flex p-2 overflow-x-auto"
         ref={scrollableArea}
         onScroll={updateScrollParameters}
       >

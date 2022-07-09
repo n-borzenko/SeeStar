@@ -1,11 +1,11 @@
 import type { FC } from "react";
 import type { PersonExtended } from "types/person";
-import { memo, Fragment } from "react";
+import { memo } from "react";
 import MediaDescription from "components/common/MediaDescription";
 import PosterImage from "components/common/PosterImage";
 import SocialLinks from "components/common/SocialLinks";
-import getGenderName from "helpers/getGenderName";
 import getImageSize from "helpers/getImageSize";
+import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
 
 type PersonSummaryProps = {
@@ -17,7 +17,7 @@ const posterSizeName = "largePortrait";
 const PersonSummary: FC<PersonSummaryProps> = ({ person }) => {
   const posterSize = getImageSize(posterSizeName);
   const posterRatio = (posterSize.height / posterSize.width) * 100;
-  const genderName = getGenderName(person.gender);
+  const genderAndDepartment = getGenderAndDepartment(person.gender, person.knownForDepartment);
 
   return (
     <div
@@ -32,21 +32,9 @@ const PersonSummary: FC<PersonSummaryProps> = ({ person }) => {
           endDate={person.deathday}
         />
 
-        {(person.knownForDepartment || genderName) && (
-          <p>
-            {genderName && (
-              <>
-                <span className="text-xl font-normal text-neutral-700 capitalize">
-                  {genderName}
-                </span>
-                <span className="last:hidden">, </span>
-              </>
-            )}
-            {person.knownForDepartment && (
-              <span className="text-xl font-normal text-neutral-700 first:capitalize">
-                known for {person.knownForDepartment}
-              </span>
-            )}
+        {genderAndDepartment && (
+          <p className="text-xl font-normal text-neutral-700 first-letter:uppercase">
+            {genderAndDepartment}
           </p>
         )}
 

@@ -1,18 +1,25 @@
 import type { FC } from "react";
 import type { CrewMember, AggregatedCrewMember } from "types/credit";
-import Link from "next/link";
 import { memo, useState, useCallback, useMemo } from "react";
 import Button from "components/common/Button";
-import SmallLandscapePersonCard from "components/cards/person/SmallLandscapePersonCard";
+import CreditLandscapeCard from "components/cards/CreditLandscapeCard";
+import { getGenderAndDepartment } from "helpers/textUtilities";
+import { MediaTypes } from "types/mediaTypes";
 
-type AnyCrewMember = CrewMember | AggregatedCrewMember;
+type UnifiedCrewMember = (CrewMember | AggregatedCrewMember) & {
+  allJobs: {
+    job: string;
+    creditId: string;
+    episodes?: number;
+  }[];
+};
 
 type CrewMembersGroupProps = {
   groupTitle: string;
-  credits: AnyCrewMember[];
+  credits: (CrewMember | AggregatedCrewMember)[];
 };
 
-const isCrewMember = (value: AnyCrewMember): value is CrewMember => {
+const isCrewMember = (value: CrewMember | AggregatedCrewMember): value is CrewMember => {
   return "creditId" in value;
 };
 
@@ -20,17 +27,8 @@ const getJobName = (job?: string) => {
   return job && job.length > 0 ? job : "Unknown job";
 };
 
-const sortJobs = (
-  a: AggregatedCrewMember["jobs"][number],
-  b: AggregatedCrewMember["jobs"][number]
-) => {
-  return getJobName(a.job).localeCompare(getJobName(b.job), "en");
-};
-
-const sortCredits = (a: AnyCrewMember, b: AnyCrewMember) => {
-  const aJob = getJobName(isCrewMember(a) ? a.job : a.jobs[0].job);
-  const bJob = getJobName(isCrewMember(b) ? b.job : b.jobs[0].job);
-  const jobComparison = aJob.localeCompare(bJob, "en");
+const sortCredits = (a: UnifiedCrewMember, b: UnifiedCrewMember) => {
+  const jobComparison = a.allJobs[0].job.localeCompare(b.allJobs[0].job, "en");
   return jobComparison !== 0 ? jobComparison : (a.name || "").localeCompare(b.name || "", "en");
 };
 
@@ -39,10 +37,19 @@ const CrewMembersGroup: FC<CrewMembersGroupProps> = ({ credits, groupTitle }) =>
   const toggleGroup = useCallback(() => setIsOpen((isCurrentlyOpen) => !isCurrentlyOpen), []);
 
   const sortedCredits = useMemo(() => {
-    const preSortedCredits = credits.map<AnyCrewMember>((credit) =>
-      isCrewMember(credit) ? credit : { ...credit, jobs: credit.jobs.sort(sortJobs) }
-    );
-    return preSortedCredits.sort(sortCredits);
+    const unifiedCredits = credits.map<UnifiedCrewMember>((credit) => {
+      const allJobs = isCrewMember(credit)
+        ? [{ job: getJobName(credit.job), creditId: credit.creditId }]
+        : credit.jobs
+            .map((item) => ({
+              job: getJobName(item.job),
+              creditId: item.creditId,
+              episodes: item.episodeCount,
+            }))
+            .sort((a, b) => a.job.localeCompare(b.job, "en"));
+      return { ...credit, allJobs };
+    });
+    return unifiedCredits.sort(sortCredits);
   }, [credits]);
 
   return (
@@ -53,31 +60,19 @@ const CrewMembersGroup: FC<CrewMembersGroupProps> = ({ credits, groupTitle }) =>
       </div>
       {isOpen && (
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-          {sortedCredits.map((credit) =>
-            isCrewMember(credit) ? (
-              <SmallLandscapePersonCard person={credit} key={credit.creditId}>
-                <Link href={`/credit/${credit.creditId}`}>
-                  <a className="link text-ellipsis overflow-hidden whitespace-nowrap">
-                    {getJobName(credit.job)}
-                  </a>
-                </Link>
-              </SmallLandscapePersonCard>
-            ) : (
-              <SmallLandscapePersonCard person={credit} key={credit.id}>
-                {credit.jobs.map((job, index) => (
-                  <div key={job.creditId} className="inline-flex items-baseline max-w-full">
-                    <Link href={`/credit/${job.creditId}`}>
-                      <a className="link text-ellipsis overflow-hidden whitespace-nowrap pr-1">
-                        {getJobName(job.job)}
-                      </a>
-                    </Link>
-                    <span className="shrink-0">[{job.episodeCount} ep.]</span>
-                    {index < credit.jobs.length - 1 && <span className="mr-2">,</span>}
-                  </div>
-                ))}
-              </SmallLandscapePersonCard>
-            )
-          )}
+          {sortedCredits.map((item) => (
+            <CreditLandscapeCard
+              key={isCrewMember(item) ? item.creditId : item.id}
+              href={`/person/${item.id}`}
+              cardSize="small"
+              posterPath={item.profilePath}
+              mediaType={MediaTypes.Person}
+              title={item.name}
+              infoType="text"
+              infoText={getGenderAndDepartment(item.gender, item.knownForDepartment)}
+              jobs={item.allJobs}
+            />
+          ))}
         </div>
       )}
     </div>
