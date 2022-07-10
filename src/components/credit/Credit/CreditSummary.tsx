@@ -7,12 +7,14 @@ import BlockHeader from "components/common/BlockHeader";
 import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
 
-type CreditSummaryProps = {
-  credit: MovieCreditDetailed | ShowCreditDetailed;
+type CreditSummaryProps<T extends MovieCreditDetailed | ShowCreditDetailed> = {
+  credit: T;
 };
 
-const CreditSummary: FC<CreditSummaryProps> = ({ credit }) => {
-  const { person, media, mediaType } = credit;
+const CreditSummary = <T extends MovieCreditDetailed | ShowCreditDetailed>({
+  credit,
+}: CreditSummaryProps<T>) => {
+  const { person, media } = credit;
   return (
     <div>
       <BlockHeader title="Find out more" />
@@ -25,11 +27,15 @@ const CreditSummary: FC<CreditSummaryProps> = ({ credit }) => {
           knownFor={person.knownFor}
         />
         <MediaLandscapeCard
-          href={`/${mediaType === MediaTypes.Movie ? "movie" : "show"}/${media.id}`}
+          href={`/${credit.mediaType === MediaTypes.Movie ? "movie" : "show"}/${media.id}`}
           posterPath={media.posterPath}
-          mediaType={mediaType}
-          title={mediaType === MediaTypes.Movie ? media.title : media.name}
-          startDate={mediaType === MediaTypes.Movie ? media.releaseDate : media.firstAirDate}
+          mediaType={credit.mediaType}
+          title={credit.mediaType === MediaTypes.Movie ? credit.media.title : credit.media.name}
+          startDate={
+            credit.mediaType === MediaTypes.Movie
+              ? credit.media.releaseDate
+              : credit.media.firstAirDate
+          }
           voteAverage={media.voteAverage}
           genreIds={media.genreIds}
           overview={media.overview}

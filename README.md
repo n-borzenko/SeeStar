@@ -1,1 +1,3 @@
-## See Star
+## SeeStar
+
+Description will be updated soon

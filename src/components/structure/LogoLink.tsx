@@ -30,7 +30,7 @@ const LogoLink: FC<LogoLinkProps> = ({ onClick, size }) => {
             size === "large" ? "text-3xl ml-4" : "text-xl ml-2"
           }`}
         >
-          See Star
+          SeeStar
         </span>
       </a>
     </Link>
