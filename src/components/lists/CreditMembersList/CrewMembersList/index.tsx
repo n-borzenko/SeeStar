@@ -3,6 +3,7 @@ import type { CrewMember, AggregatedCrewMember } from "types/credit";
 import { memo, useMemo } from "react";
 import EmptyState from "components/common/EmptyState";
 import CrewMembersGroup from "./CrewMembersGroup";
+import useCrewGroupParameter from "./useCrewGroupParameter";
 
 type CrewMembersListProps = {
   credits: (CrewMember | AggregatedCrewMember)[];
@@ -28,12 +29,18 @@ const groupCredits = (credits: (CrewMember | AggregatedCrewMember)[]) => {
 
 const CrewMembersList: FC<CrewMembersListProps> = ({ credits }) => {
   const { keys, groupedCredits } = useMemo(() => groupCredits(credits), [credits]);
+  const selectedCrewGroup = useCrewGroupParameter();
 
   return (
     <div>
       {keys.length > 0 ? (
         keys.map((key) => (
-          <CrewMembersGroup key={key} credits={groupedCredits[key]} groupTitle={key} />
+          <CrewMembersGroup
+            key={key}
+            credits={groupedCredits[key]}
+            groupTitle={key}
+            isSelected={selectedCrewGroup === key}
+          />
         ))
       ) : (
         <EmptyState message={`No credits found`} />

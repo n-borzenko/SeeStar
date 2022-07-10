@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import Spinner from "components/common/Spinner";
-import SeasonCredits from "components/show/SeasonCredits";
+import SeasonCredits from "components/season/SeasonCredits";
 import { useExtendedSeasonRequest } from "hooks/show/useSeasonRequest";
 
 const SeasonCreditsPage: NextPage = () => {

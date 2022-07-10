@@ -3,6 +3,7 @@ import type { ExternalIds } from "types/externalIds";
 import type { Language } from "types/language";
 import type { ProductionCompany, ProductionCountry } from "types/production";
 import type { CountryCertification } from "types/release";
+import { MediaTypes } from "types/mediaTypes";
 
 type MovieCollection = {
   id: number;
@@ -34,6 +35,10 @@ export type Movie = {
   video?: boolean;
   voteAverage?: number;
   voteCount?: number;
+};
+
+export type TypedMovie = Movie & {
+  mediaType: MediaTypes.Movie;
 };
 
 export type MovieDetailed = Omit<Movie, "genreIds"> & {

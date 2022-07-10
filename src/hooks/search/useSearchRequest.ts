@@ -11,7 +11,7 @@ import {
 import defaultFetcher from "helpers/fetching/defaultFetcher";
 import { MediaTypes } from "types/mediaTypes";
 
-const generateSearchUrl = ({ text, type, page }: SearchParameters) => {
+const generateSearchUrl = (text: string, type: MediaTypes, page: number) => {
   return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/search/${type}?${qs.stringify({
     api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
     query: text,
@@ -36,11 +36,9 @@ const searchFetcher = async (url: string, type: MediaTypes) => {
   } as SearchData;
 };
 
-const useSearchRequest = (isRouterReady: boolean, parameters: SearchParameters) => {
+const useSearchRequest = (isRouterReady: boolean, text: string, type: MediaTypes, page: number) => {
   const { data, error, mutate } = useSWRImmutable<SearchData, FetchingError>(
-    isRouterReady && parameters.text.length > 0
-      ? [generateSearchUrl(parameters), parameters.type]
-      : null,
+    isRouterReady && text.length > 0 ? [generateSearchUrl(text, type, page), type] : null,
     searchFetcher,
     {
       shouldRetryOnError: false,
@@ -61,7 +59,7 @@ const useSearchRequest = (isRouterReady: boolean, parameters: SearchParameters) 
         true
       );
     }
-    if (parameters.text.length === 0) {
+    if (text.length === 0) {
       return createFailedRequestResult(`Current query is empty,
         type your request and press search button`);
     }
@@ -73,7 +71,7 @@ const useSearchRequest = (isRouterReady: boolean, parameters: SearchParameters) 
         specify requested parameters`);
     }
     return createSuccessfulRequestResult(data);
-  }, [error, parameters.text, data]);
+  }, [error, text, data]);
 
   return {
     searchResults,

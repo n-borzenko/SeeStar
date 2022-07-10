@@ -1,13 +1,14 @@
 import type { FC } from "react";
 import { memo } from "react";
 import Card from "components/common/Card";
-import Icon from "components/common/Icon";
 import GenresList from "components/common/GenresList";
 import PosterImage from "components/common/PosterImage";
-import Rating from "components/common/Rating";
 import getImageSize from "helpers/getImageSize";
-import getMediaName from "helpers/getMediaName";
 import { MediaTypes } from "types/mediaTypes";
+import CardHeader from "./blocks/CardHeader";
+import CardInfoRow from "./blocks/CardInfoRow";
+import CardOverview from "./blocks/CardOverview";
+import getDataAvailability from "./helpers/getDataAvailability";
 
 type MediumPortraitCardProps = {
   href: string;
@@ -21,6 +22,7 @@ type MediumPortraitCardProps = {
   job?: string;
   infoType?: "rating" | "text" | "none";
   infoText?: string;
+  hasInfoRowAlignedToEnd?: boolean;
 };
 
 const MediumPortraitCard: FC<MediumPortraitCardProps> = ({
@@ -35,72 +37,50 @@ const MediumPortraitCard: FC<MediumPortraitCardProps> = ({
   job,
   infoType = "none",
   infoText,
+  hasInfoRowAlignedToEnd = false,
 }) => {
+  const { hasInfoRow, hasGenreIds, hasOverview } = getDataAvailability({
+    startDate,
+    infoText,
+    infoType,
+    genreIds,
+    overview: job,
+  });
   const posterSize = getImageSize(posterSizeName);
-  const hasInfoText = infoType === "text" && infoText && infoText.length > 0;
-  const hasInfoLine = startDate || infoType === "rating" || hasInfoText;
   const hasGenresList =
-    genreIds &&
-    genreIds.length > 0 &&
-    (mediaType === MediaTypes.Movie || mediaType === MediaTypes.Show);
-  const hasJob = job && job.length > 0;
+    hasGenreIds && (mediaType === MediaTypes.Movie || mediaType === MediaTypes.Show);
+  const gridTemplateRows =
+    (!hasGenresList && !hasOverview) || !hasInfoRow ? "auto 1fr" : "auto auto 1fr";
 
   return (
     <Card href={href} direction="vertical">
       <div className="flex-shrink-0">
-        <PosterImage
-          src={posterPath}
-          type={MediaTypes.Person}
-          size={posterSizeName}
-          rounded="top"
-        />
+        <PosterImage src={posterPath} type={mediaType} size={posterSizeName} rounded="top" />
       </div>
 
       <div
         className="w-full h-full grid gap-2 p-2"
         style={{
           maxWidth: `${posterSize.width}px`,
-          gridTemplateRows: `auto ${hasInfoLine ? "auto" : ""} ${
-            hasGenresList || hasJob ? "1fr" : ""
-          }`,
+          gridTemplateRows,
         }}
       >
-        <div className="line-clamp-2">
-          <div className="inline-block mr-1">
-            <Icon size="medium" type={mediaType} ariaLabel={`Type: ${getMediaName(mediaType)}`} />
-          </div>
-          <span className="text-base font-medium leading-5 break-words">{title}</span>
-        </div>
-
-        {hasInfoLine && (
-          <div className="flex items-center justify-between">
-            {startDate && (
-              <span className="text-sm font-normal leading-4 text-neutral-500 mr-2 last:mr-0">
-                {new Date(startDate).toLocaleDateString()}
-              </span>
-            )}
-            {infoType === "rating" && (
-              <div className="ml-auto">
-                <Rating voteAverage={voteAverage} />
-              </div>
-            )}
-            {hasInfoText && (
-              <span className="text-sm font-normal leading-4 text-neutral-700">{infoText}</span>
-            )}
-          </div>
-        )}
-
+        <CardHeader cardSize="small" mediaType={mediaType} title={title} isMultilined />
+        <CardInfoRow
+          cardSize="small"
+          startDate={startDate}
+          voteAverage={voteAverage}
+          infoType={infoType}
+          infoText={infoText}
+          isInfoTextAlignedRight
+          aligned={hasInfoRowAlignedToEnd ? "end" : "start"}
+        />
         {hasGenresList && (
           <div className="w-full self-end">
             <GenresList ids={genreIds} type={mediaType} />
           </div>
         )}
-
-        {hasJob && (
-          <p className="text-sm font-normal italic leading-4 line-clamp-2 text-neutral-700 self-end break-words">
-            {job}
-          </p>
-        )}
+        <CardOverview cardSize="small" overview={job} className="line-clamp-2 self-end" />
       </div>
     </Card>
   );

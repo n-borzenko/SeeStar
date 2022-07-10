@@ -37,11 +37,19 @@ export type IconTypes =
   | "twitter"
   | Exclude<MediaTypes, "any">;
 
-export type IconSize = "small" | "medium" | "large" | "extra-large" | "huge" | "giant";
+export type IconSize =
+  | "tiny"
+  | "small"
+  | "medium"
+  | "big"
+  | "large"
+  | "extra-large"
+  | "huge"
+  | "giant";
 
 type IconProps = {
   type: IconTypes;
-  color?: "primary" | "secondary" | "white";
+  color?: "primary" | "secondary" | "white" | "custom";
   size?: IconSize;
   className?: string;
   ariaLabel?: AriaAttributes["aria-label"];
@@ -56,9 +64,11 @@ const Icon: FC<IconProps> = ({
 }) => {
   const classes = clsx(
     {
-      "w-2 h-2": size === "small",
+      "w-2 h-2": size === "tiny",
+      "w-3 h-3": size === "small",
       "w-4 h-4": size === "medium",
-      "w-5 h-5": size === "large",
+      "w-5 h-5": size === "big",
+      "w-6 h-6": size === "large",
       "w-8 h-8": size === "extra-large",
       "w-10 h-10": size === "huge",
       "w-20 h-20": size === "giant",

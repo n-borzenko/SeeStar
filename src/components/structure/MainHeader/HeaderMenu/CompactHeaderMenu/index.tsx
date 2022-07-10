@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import { memo } from "react";
-import Button from "components/common/Button";
+import Button, { ButtonLink } from "components/common/Button";
 import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "components/structure/pagesData";
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 import useCompactMenuState from "./useCompactMenuState";
@@ -51,29 +51,34 @@ const CompactHeaderMenu = () => {
       >
         {menuState === "isVisible" && (
           <>
-            <ul className="flex flex-col mx-4 my-2" ref={itemsListContainer}>
+            <ul className="grid gap-4 m-4" ref={itemsListContainer}>
               {headerMenuStructure.map((item) => (
                 <li
-                  className={`flex my-2 ${generateVisibilityClassNames(item.supportedSizes)}`}
+                  className={`flex ${generateVisibilityClassNames(item.supportedSizes)}`}
                   key={item.id}
                 >
                   {isHeaderMenuGroup(item) && (
                     <>
-                      <p className="basis-5/12 variant-h6 text-white m-1.5 px-2 py-1 opacity-70">
+                      <p className="basis-5/12 flex items-center h-10 text-xl font-semibold text-white/70 px-4">
                         {item.title}:
                       </p>
-                      <ul className="flex flex-col">
+                      <ul className="grid gap-2">
                         {item.submenu.map((item) => (
                           <li
-                            className={`my-1.5 js-compact-menu-item ${generateVisibilityClassNames(
+                            className={`js-compact-menu-item ${generateVisibilityClassNames(
                               item.supportedSizes
                             )}`}
                             key={item.id}
                           >
-                            <Link href={pagesData[item.id].path}>
-                              <a className="variant-h6 inline-block text-white px-2 py-1 rounded-full focus:bg-white/20 hover:bg-white/20 active:bg-white/40 js-compact-menu-link">
+                            <Link href={pagesData[item.id].path} passHref>
+                              <ButtonLink
+                                className="font-semibold text-xl js-compact-menu-link"
+                                size="large"
+                                color="white"
+                                variant="transparent"
+                              >
                                 {pagesData[item.id].title}
-                              </a>
+                              </ButtonLink>
                             </Link>
                           </li>
                         ))}

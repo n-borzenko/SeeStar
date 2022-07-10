@@ -11,6 +11,10 @@ const imageSizesConfiguration = {
     width: 342,
     height: 513,
   },
+  tinyLandscape: {
+    width: 92,
+    height: 52,
+  },
   smallLandscape: {
     width: 185,
     height: 104,

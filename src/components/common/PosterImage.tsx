@@ -76,7 +76,9 @@ const PosterImage: FC<PosterImageProps> = ({ src, type, size, rounded = "none" }
       {!isAlternativeIconHidden && (
         <Icon
           type={type}
-          size={size === "largePortrait" ? "giant" : "huge"}
+          size={
+            size === "largePortrait" ? "giant" : size === "tinyLandscape" ? "extra-large" : "huge"
+          }
           className="opacity-30"
         />
       )}

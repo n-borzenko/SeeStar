@@ -11,7 +11,11 @@ type RatingProps = {
 
 const Rating: FC<RatingProps> = ({ size = "medium", voteAverage = 0, voteCount }) => {
   return (
-    <div className={clsx("flex items-center", { "opacity-50": !voteAverage })}>
+    <div
+      className={clsx("flex items-center not-italic text-neutral-900", {
+        "opacity-50": !voteAverage,
+      })}
+    >
       <div className="flex-shrink-0">
         <Icon size={size} type="star-filled" ariaLabel="Rating" />
       </div>

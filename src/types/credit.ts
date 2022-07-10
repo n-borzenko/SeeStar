@@ -48,7 +48,7 @@ export type ShowCrewCredit = CrewCredit &
     episodeCount?: number;
   };
 
-export type AnyCredit = MovieCastCredit | ShowCastCredit | MovieCrewCredit | ShowCrewCredit;
+export type AnyMediaCredit = MovieCastCredit | ShowCastCredit | MovieCrewCredit | ShowCrewCredit;
 
 // Part of Show details
 export type GuestStarMember = Person &
@@ -82,6 +82,25 @@ export type AggregatedCrewMember = Person &
     })[];
     totalEpisodeCount: number;
   };
+
+export type AnyCredit =
+  | AnyMediaCredit
+  | CastMember
+  | CrewMember
+  | AggregatedCastMember
+  | AggregatedCrewMember;
+
+export type UniversalCreditDescription = {
+  id: string;
+  href: string;
+  posterPath?: string | null;
+  mediaType: MediaTypes;
+  title?: string;
+  startDate?: string | null;
+  voteAverage?: number;
+  job?: string;
+  infoType?: "rating" | "none";
+};
 
 type CreditDetailed = {
   creditType: CreditTypes;

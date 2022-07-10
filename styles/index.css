@@ -54,6 +54,6 @@
 
 @layer components {
   .link {
-    @apply text-base text-primary underline hover:text-primary/80 active:text-primary/60 focus:rounded-sm;
+    @apply text-primary underline hover:text-primary/80 active:text-primary/60 focus:rounded-sm;
   }
 }

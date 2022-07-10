@@ -25,7 +25,12 @@ const Breadcrumbs: FC = () => {
                 {title}
               </a>
             </Link>
-            <Icon type="arrow-right" size="medium" className="text-neutral-300 mx-2" />
+            <Icon
+              type="arrow-right"
+              size="small"
+              color="custom"
+              className="text-neutral-300 mx-2"
+            />
           </Fragment>
         )
       )}

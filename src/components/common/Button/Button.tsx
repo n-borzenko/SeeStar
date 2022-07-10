@@ -20,6 +20,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
     variant,
     size,
     wide,
+    narrow,
     icon,
     iconSize,
     type,
@@ -32,6 +33,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
     hasWhiteBackground = false,
     className,
     tabIndex,
+    disabled,
   },
   ref
 ) => {
@@ -41,10 +43,12 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
       variant={variant}
       size={size}
       wide={wide}
+      narrow={narrow}
       icon={icon}
       iconSize={iconSize}
       hasWhiteBackground={hasWhiteBackground}
       className={className}
+      disabled={disabled}
     >
       {({ classes, iconElement }) => (
         <button
@@ -57,6 +61,7 @@ const Button: ForwardRefRenderFunction<HTMLButtonElement, PropsWithChildren<Butt
           aria-label={ariaLabel}
           aria-hidden={ariaHidden}
           tabIndex={tabIndex}
+          disabled={disabled}
         >
           {iconElement || children}
         </button>

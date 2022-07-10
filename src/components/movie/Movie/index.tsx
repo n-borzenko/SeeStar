@@ -5,7 +5,8 @@ import MediumPortraitCard from "components/cards/MediumPortraitCard";
 import Block from "components/common/Block";
 import BlockHeader from "components/common/BlockHeader";
 import CardsList from "components/common/CardsList";
-import CreditsWidget from "components/widgets/CreditsWidget";
+import UniversalCreditsWidget from "components/widgets/UniversalCreditsWidget";
+import useMediaCredits from "hooks/credits/useMediaCredits";
 import { MediaTypes } from "types/mediaTypes";
 import MovieDetails from "./MovieDetails";
 import MovieSummary from "./MovieSummary";
@@ -15,11 +16,13 @@ type MovieProps = {
 };
 
 const Movie: FC<MovieProps> = ({ movie }) => {
+  const credits = useMediaCredits(movie.credits);
+
   return (
     <div>
       <MovieSummary movie={movie} />
       <MovieDetails movie={movie} />
-      <CreditsWidget credits={movie.credits} href={`/movie/${movie.id}/credits`} />
+      <UniversalCreditsWidget credits={credits} href={`/movie/${movie.id}/credits`} />
       <Block
         hidingCondition={
           !movie.recommendations.results || movie.recommendations.results.length === 0

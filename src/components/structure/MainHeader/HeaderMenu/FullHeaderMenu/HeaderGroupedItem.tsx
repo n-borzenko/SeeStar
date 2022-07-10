@@ -1,7 +1,7 @@
 import type { FC, FocusEvent } from "react";
-import clsx from "clsx";
 import Link from "next/link";
 import { memo, useCallback, useRef } from "react";
+import Button, { ButtonLink } from "components/common/Button";
 import { HeaderMenuGroup, pagesData } from "components/structure/pagesData";
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 
@@ -43,30 +43,33 @@ const HeaderGroupedItem: FC<HeaderGroupedItemProps> = ({
       onBlur={closeSubmenu}
       ref={groupContainer}
     >
-      <button
+      <Button
         type="button"
         onClick={toggleSubmenu}
-        className={clsx(
-          "variant-h6 text-white mx-2 my-1.5 px-2 py-1 rounded-full hover:bg-white/20 focus:bg-white/20",
-          isSubmenuOpened && "bg-white/20"
-        )}
+        className={`font-semibold text-xl px-2 ${isSubmenuOpened && "bg-white/20"}`}
+        size="large"
+        color="white"
+        variant="transparent"
         ref={submenuToggler}
         aria-expanded={isExpanded}
         aria-haspopup="true"
+        narrow
       >
         {group.title}
-      </button>
+      </Button>
       {isExpanded && (
-        <ul className="p-2 flex flex-col items-center z-50 bg-white absolute top-full right-1/2 translate-x-1/2 group-last:right-0 group-last:-translate-x-0 max-w-5xl rounded-2xl shadow-popup">
+        <ul className="mt-2 p-4 grid gap-2 justify-items-center z-50 bg-white absolute top-full right-1/2 translate-x-1/2 group-last:right-0 group-last:-translate-x-0 max-w-5xl rounded-2xl shadow-popup">
           {group.submenu.map((item) => (
-            <li
-              className={`mx-2 my-1.5 ${generateVisibilityClassNames(item.supportedSizes)}`}
-              key={item.id}
-            >
-              <Link href={pagesData[item.id].path}>
-                <a className="variant-h6 inline-block text-primary rounded-full px-2 py-1 focus:bg-primary/10 hover:bg-primary/10 active:bg-primary/20">
+            <li className={generateVisibilityClassNames(item.supportedSizes)} key={item.id}>
+              <Link href={pagesData[item.id].path} passHref>
+                <ButtonLink
+                  className="font-semibold text-xl"
+                  size="large"
+                  color="primary"
+                  variant="transparent"
+                >
                   {pagesData[item.id].title}
-                </a>
+                </ButtonLink>
               </Link>
             </li>
           ))}

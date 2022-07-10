@@ -5,7 +5,16 @@ import Icon from "components/common/Icon";
 
 type ButtonWrapperProps = Pick<
   ButtonCommonProps,
-  "color" | "variant" | "size" | "wide" | "icon" | "iconSize" | "hasWhiteBackground" | "className"
+  | "color"
+  | "variant"
+  | "size"
+  | "wide"
+  | "narrow"
+  | "icon"
+  | "iconSize"
+  | "hasWhiteBackground"
+  | "className"
+  | "disabled"
 > & {
   children: (props: { classes: string; iconElement: ReactChild | null }) => ReactNode;
 };
@@ -15,10 +24,12 @@ const ButtonWrapper: VFC<ButtonWrapperProps> = ({
   variant = "filled",
   size = "medium",
   wide,
+  narrow,
   icon,
   iconSize,
   hasWhiteBackground = false,
   className,
+  disabled,
   children,
 }) => {
   const backgroundClasses = clsx("bg-white rounded-full", {
@@ -32,11 +43,14 @@ const ButtonWrapper: VFC<ButtonWrapperProps> = ({
   const buttonClasses = clsx(
     "font-normal rounded-full border inline-flex justify-center items-center",
     {
-      "h-8 px-3 text-sm": size === "medium" && icon === undefined,
-      "h-10 px-4 text-lg": size === "large" && icon === undefined,
+      "h-8 text-sm": size === "medium" && icon === undefined,
+      "h-10 text-lg": size === "large" && icon === undefined,
+      "px-3": size === "medium" && icon === undefined && !narrow,
+      "px-4": size === "large" && icon === undefined && !narrow,
       "w-8 h-8": size === "medium" && icon !== undefined,
       "w-10 h-10": size === "large" && icon !== undefined,
       "w-full": wide,
+      "opacity-30 pointer-events-none": disabled,
       "text-white bg-primary border-primary/0 focus:bg-primary/80 hover:bg-primary/80 active:bg-primary/60":
         variant === "filled" && color === "primary",
       "text-primary bg-primary/0 border-primary focus:bg-primary/10 hover:bg-primary/10 active:bg-primary/20":
@@ -51,16 +65,18 @@ const ButtonWrapper: VFC<ButtonWrapperProps> = ({
         variant === "transparent" && color === "secondary",
       "text-primary bg-white border-white/0 focus:bg-white/80 hover:bg-white/80 active:bg-white/60":
         variant === "filled" && color === "white",
-      "text-white bg-white/0 border-white focus:bg-white/10 hover:bg-white/10 active:bg-white/20":
+      "text-white bg-white/0 border-white focus:bg-white/20 hover:bg-white/20 active:bg-white/40":
         variant === "outlined" && color === "white",
-      "text-white bg-white/0 border-white/0 focus:bg-white/10 hover:bg-white/10 active:bg-white/20":
+      "text-white bg-white/0 border-white/0 focus:bg-white/20 hover:bg-white/20 active:bg-white/40":
         variant === "transparent" && color === "white",
     },
     className
   );
 
   const iconColor = variant === "filled" ? (color === "white" ? "primary" : "white") : color;
-  const iconElement = icon ? <Icon type={icon} color={iconColor} size={iconSize || size} /> : null;
+  const iconElement = icon ? (
+    <Icon type={icon} color={iconColor} size={iconSize || (size === "large" ? "big" : "medium")} />
+  ) : null;
   const props = { classes: buttonClasses, iconElement };
 
   return hasWhiteBackground ? (

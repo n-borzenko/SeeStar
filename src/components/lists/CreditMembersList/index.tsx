@@ -40,7 +40,7 @@ const CreditMembersList: FC<CreditMembersListProps> = ({ credits, href }) => {
   );
 
   return (
-    <div className="grow grid grid-rows-[auto_1fr]">
+    <div className="grid grid-rows-[auto_1fr]">
       <BlockHeader title="Credits">
         <div className="w-1/2 max-w-[18rem]">
           <LinkGroup links={links} selectedId={creditType} size="medium" wide />

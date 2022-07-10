@@ -6,10 +6,12 @@ export type ButtonCommonProps = {
   variant?: "outlined" | "filled" | "transparent";
   size?: "medium" | "large";
   wide?: boolean;
+  narrow?: boolean;
   icon?: IconTypes;
   iconSize?: IconSize;
   className?: string;
   hasWhiteBackground?: boolean;
   ariaLabel?: AriaAttributes["aria-label"];
   ariaHidden?: AriaAttributes["aria-hidden"];
+  disabled?: boolean;
 };

@@ -5,7 +5,7 @@ import InfoItem from "components/common/InfoItem";
 import LabelsList from "components/common/LabelsList";
 import SocialLinks from "components/common/SocialLinks";
 import { getCertificationRating } from "helpers/getCertification";
-import getFlagEmoji from "helpers/getFlagEmoji";
+import { getFlagEmoji } from "helpers/textUtilities";
 
 type ShowDetailsProps = {
   show: ShowExtended;

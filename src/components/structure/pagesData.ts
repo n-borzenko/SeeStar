@@ -55,27 +55,28 @@ export const headerMenuStructure: (HeaderMenuItem | HeaderMenuGroup)[] = [
   {
     id: "discover",
     title: "Discover",
+    supportedSizes: ["xs"],
     submenu: [
       { id: "search", supportedSizes: ["xs"] },
-      { id: "trending" },
-      { id: "upcoming" },
-      { id: "top-rated" },
+      // { id: "trending" },
+      // { id: "upcoming" },
+      // { id: "top-rated" },
     ],
   },
-  { id: "shows", supportedSizes: ["lg", "xl"] },
-  { id: "movies", supportedSizes: ["lg", "xl"] },
-  { id: "calendar", supportedSizes: ["lg", "xl"] },
-  {
-    id: "my-lists",
-    title: "My lists",
-    supportedSizes: ["xs", "sm", "md"],
-    submenu: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }],
-  },
-  {
-    id: "manage",
-    title: "Manage",
-    submenu: [{ id: "profile" }, { id: "settings" }],
-  },
+  // { id: "shows", supportedSizes: ["lg", "xl"] },
+  // { id: "movies", supportedSizes: ["lg", "xl"] },
+  // { id: "calendar", supportedSizes: ["lg", "xl"] },
+  // {
+  //   id: "my-lists",
+  //   title: "My lists",
+  //   supportedSizes: ["xs", "sm", "md"],
+  //   submenu: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }],
+  // },
+  // {
+  //   id: "manage",
+  //   title: "Manage",
+  //   submenu: [{ id: "profile" }, { id: "settings" }],
+  // },
 ];
 
 type FooterMenuItem = {
@@ -85,9 +86,20 @@ type FooterMenuItem = {
 
 export const footerMenuStructure: FooterMenuItem[] = [
   {
-    groupTitle: "Discover",
-    content: [{ id: "search" }, { id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
+    groupTitle: "Search",
+    content: [{ id: "search" }],
   },
-  { groupTitle: "Personalize", content: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }] },
-  { groupTitle: "Manage", content: [{ id: "profile" }, { id: "contacts" }, { id: "about" }] },
+  // {
+  //   groupTitle: "Discover",
+  //   content: [{ id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
+  // },
+  // { groupTitle: "Personalize", content: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }] },
+  {
+    groupTitle: "Manage",
+    content: [
+      // { id: "profile" },
+      // { id: "contacts" },
+      { id: "about" },
+    ],
+  },
 ];

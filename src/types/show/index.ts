@@ -5,6 +5,7 @@ import type { ProductionCompany, ProductionCountry } from "types/production";
 import type { CertificationRating } from "types/release";
 import type { ShowEpisode } from "types/show/episode";
 import type { ShowSeason } from "types/show/season";
+import { MediaTypes } from "types/mediaTypes";
 
 type ShowCreator = {
   id: number;
@@ -46,6 +47,10 @@ export type Show = {
   posterPath?: string | null;
   voteAverage?: number;
   voteCount?: number;
+};
+
+export type TypedShow = Show & {
+  mediaType: MediaTypes.Show;
 };
 
 export type ShowDetailed = Omit<Show, "genreIds"> & {
