@@ -6,6 +6,7 @@ export type ButtonCommonProps = {
   variant?: "outlined" | "filled" | "transparent";
   size?: "medium" | "large";
   wide?: boolean;
+  narrow?: boolean;
   icon?: IconTypes;
   iconSize?: IconSize;
   className?: string;

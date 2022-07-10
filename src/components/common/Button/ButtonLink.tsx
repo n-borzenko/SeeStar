@@ -22,6 +22,7 @@ const ButtonLink: ForwardRefRenderFunction<
     variant,
     size,
     wide,
+    narrow,
     icon,
     iconSize,
     onClick,
@@ -41,6 +42,7 @@ const ButtonLink: ForwardRefRenderFunction<
       variant={variant}
       size={size}
       wide={wide}
+      narrow={narrow}
       icon={icon}
       iconSize={iconSize}
       hasWhiteBackground={hasWhiteBackground}

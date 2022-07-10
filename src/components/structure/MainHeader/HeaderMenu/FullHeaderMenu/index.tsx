@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import Link from "next/link";
 import { memo } from "react";
+import { ButtonLink } from "components/common/Button";
 import { pagesData, headerMenuStructure, isHeaderMenuGroup } from "components/structure/pagesData";
 import generateVisibilityClassNames from "../generateVisibilityClassNames";
 import HeaderGroupedItem from "./HeaderGroupedItem";
@@ -17,7 +18,7 @@ const FullHeaderMenu: FC<FullHeaderMenuProps> = ({
   toggleSubmenuById,
 }) => {
   return (
-    <ul className="hidden sm:flex items-center h-full -mr-1.5">
+    <ul className="hidden sm:grid grid-flow-col gap-1 md:gap-4">
       {headerMenuStructure.map((item) =>
         isHeaderMenuGroup(item) ? (
           <HeaderGroupedItem
@@ -28,14 +29,17 @@ const FullHeaderMenu: FC<FullHeaderMenuProps> = ({
             toggleSubmenuById={toggleSubmenuById}
           />
         ) : (
-          <li
-            className={`mx-2 my-1.5 ${generateVisibilityClassNames(item.supportedSizes)}`}
-            key={item.id}
-          >
-            <Link href={pagesData[item.id].path}>
-              <a className="variant-h6 inline-block text-white px-2 py-1 rounded-full focus:bg-white/20 hover:bg-white/20 active:bg-white/40">
+          <li className={generateVisibilityClassNames(item.supportedSizes)} key={item.id}>
+            <Link href={pagesData[item.id].path} passHref>
+              <ButtonLink
+                className="font-semibold text-xl px-2"
+                size="large"
+                color="white"
+                variant="transparent"
+                narrow
+              >
                 {pagesData[item.id].title}
-              </a>
+              </ButtonLink>
             </Link>
           </li>
         )

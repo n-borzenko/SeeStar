@@ -85,8 +85,12 @@ type FooterMenuItem = {
 
 export const footerMenuStructure: FooterMenuItem[] = [
   {
+    groupTitle: "Search",
+    content: [{ id: "search" }],
+  },
+  {
     groupTitle: "Discover",
-    content: [{ id: "search" }, { id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
+    content: [{ id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
   },
   { groupTitle: "Personalize", content: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }] },
   { groupTitle: "Manage", content: [{ id: "profile" }, { id: "contacts" }, { id: "about" }] },
