@@ -28,6 +28,28 @@ const AboutPage: NextPage = () => {
           but is not endorsed or certified by TMDB.
         </p>
       </div>
+      <div className="mt-8">
+        <h4 className="mb-4">Author</h4>
+        <p className="text-base font-normal">Application is created by Natalia Borzenko.</p>
+        <p className="mt-2">
+          You can contact me by email:{" "}
+          <a className="link" href="mailto:n.borzenko93@gmail.com">
+            n.borzenko93@gmail.com
+          </a>
+        </p>
+        <p>
+          or check out my{" "}
+          <a
+            className="link"
+            href="https://github.com/n-borzenko"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Github profile
+          </a>
+          .
+        </p>
+      </div>
     </>
   );
 };

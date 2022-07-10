@@ -7,13 +7,11 @@ import BlockHeader from "components/common/BlockHeader";
 import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
 
-type CreditSummaryProps<T extends MovieCreditDetailed | ShowCreditDetailed> = {
-  credit: T;
+type CreditSummaryProps = {
+  credit: MovieCreditDetailed | ShowCreditDetailed;
 };
 
-const CreditSummary = <T extends MovieCreditDetailed | ShowCreditDetailed>({
-  credit,
-}: CreditSummaryProps<T>) => {
+const CreditSummary: FC<CreditSummaryProps> = ({ credit }) => {
   const { person, media } = credit;
   return (
     <div>
