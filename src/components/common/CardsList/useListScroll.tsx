@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 
 const containerPadding = 8;
+const firstItemExtraPadding = 8;
 const visibilityOffset = 12;
 
 const defaultScrollParameters = {
@@ -36,7 +37,9 @@ const useListScroll = <T extends any>(items: T[]) => {
       scrollableArea.current.scrollWidth > scrollableArea.current.clientWidth
     ) {
       const { clientWidth, scrollLeft, scrollWidth } = scrollableArea.current;
-      const itemSize = firstItem.current?.offsetWidth || 0;
+      const itemSize = firstItem.current
+        ? firstItem.current.offsetWidth - firstItemExtraPadding
+        : 0;
       const maxScrollLeft = scrollWidth - clientWidth;
       const shiftWidth = clientWidth - 2 * containerPadding;
 

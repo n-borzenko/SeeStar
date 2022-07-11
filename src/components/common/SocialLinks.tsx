@@ -21,7 +21,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
           target="_blank"
           rel="noopener noreferrer"
           icon="home"
-          iconSize="large"
+          iconSize="big"
           className={className}
         />
       )}
@@ -32,7 +32,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
           target="_blank"
           rel="noopener noreferrer"
           icon="imdb"
-          iconSize="large"
+          iconSize="big"
           className={className}
         />
       )}
@@ -43,7 +43,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
           target="_blank"
           rel="noopener noreferrer"
           icon="facebook"
-          iconSize="large"
+          iconSize="big"
           className={className}
         />
       )}
@@ -54,7 +54,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
           target="_blank"
           rel="noopener noreferrer"
           icon="instagram"
-          iconSize="large"
+          iconSize="big"
           className={className}
         />
       )}
@@ -65,7 +65,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ externalIds, homepage, label }) => 
           target="_blank"
           rel="noopener noreferrer"
           icon="twitter"
-          iconSize="large"
+          iconSize="big"
           className={className}
         />
       )}

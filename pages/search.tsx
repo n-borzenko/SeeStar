@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
@@ -29,29 +30,34 @@ const SearchPage: NextPage = () => {
   }
 
   return (
-    <div className="w-full h-full grid grid-rows-[auto_auto_auto_1fr] grid-cols-2 gap-2 sm:gap-y-6 lg:gap-8">
-      <h1 className="col-span-full sm:row-span-2 variant-h3 md:variant-h2">
-        Search for movies, shows, people
-      </h1>
-      <div className="col-span-full sm:col-span-1">
-        <SearchForm value={searchText} onValueChanged={setSearchText} onSubmit={submitForm} />
-      </div>
-      <div className="col-span-full sm:col-span-1">
-        <LinkGroup links={typeLinks} selectedId={mediaType} size="large" wide />
-      </div>
+    <>
+      <Head>
+        <title>SeeStar • Search {text.length > 0 ? `• ${text}` : ""}</title>
+      </Head>
+      <div className="w-full h-full grid grid-rows-[auto_auto_auto_1fr] grid-cols-2 gap-2 sm:gap-y-6 lg:gap-8">
+        <h1 className="col-span-full sm:row-span-2 variant-h3 md:variant-h2">
+          Search for movies, shows, people
+        </h1>
+        <div className="col-span-full sm:col-span-1">
+          <SearchForm value={searchText} onValueChanged={setSearchText} onSubmit={submitForm} />
+        </div>
+        <div className="col-span-full sm:col-span-1">
+          <LinkGroup links={typeLinks} selectedId={mediaType} size="large" wide />
+        </div>
 
-      <div className="col-span-full grid grid-rows-1">
-        {searchResults.state === "loading" && <Spinner size="large" />}
-        {searchResults.state === "failed" && (
-          <EmptyState
-            message={searchResults.errorMessage}
-            buttonTitle={searchResults.isRetryAvailable ? "Try again" : undefined}
-            onClick={searchResults.isRetryAvailable ? retry : undefined}
-          />
-        )}
-        {searchResults.state === "succeeded" && <SearchResults data={searchResults.data} />}
+        <div className="col-span-full grid grid-rows-1">
+          {searchResults.state === "loading" && <Spinner size="large" />}
+          {searchResults.state === "failed" && (
+            <EmptyState
+              message={searchResults.errorMessage}
+              buttonTitle={searchResults.isRetryAvailable ? "Try again" : undefined}
+              onClick={searchResults.isRetryAvailable ? retry : undefined}
+            />
+          )}
+          {searchResults.state === "succeeded" && <SearchResults data={searchResults.data} />}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

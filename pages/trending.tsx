@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
@@ -36,27 +37,32 @@ const TrendingPage: NextPage = () => {
   }
 
   return (
-    <div className="w-full h-full grid grid-rows-[auto_auto_1fr]">
-      <h2 className="text-3xl md:text-4xl font-black">Trending media</h2>
-      <BlockHeader title="Trending now">
-        <div className="w-1/2 max-w-[18rem]">
-          <LinkGroup links={typeLinks} selectedId={mediaType} size="medium" wide />
+    <>
+      <Head>
+        <title>SeeStar • Trending • {getMediaName(mediaType)}</title>
+      </Head>
+      <div className="w-full h-full grid grid-rows-[auto_auto_1fr]">
+        <h2 className="text-3xl md:text-4xl font-black">Trending media</h2>
+        <BlockHeader title="Trending now">
+          <div className="w-1/2 max-w-[18rem]">
+            <LinkGroup links={typeLinks} selectedId={mediaType} size="medium" wide />
+          </div>
+        </BlockHeader>
+        <div>
+          {trendingRequestResult.state === "loading" && <Spinner size="large" />}
+          {trendingRequestResult.state === "failed" && (
+            <EmptyState
+              message={trendingRequestResult.errorMessage}
+              buttonTitle={trendingRequestResult.isRetryAvailable ? "Try again" : undefined}
+              onClick={trendingRequestResult.isRetryAvailable ? retry : undefined}
+            />
+          )}
+          {trendingRequestResult.state === "succeeded" && (
+            <TrendingResults data={trendingRequestResult.data} />
+          )}
         </div>
-      </BlockHeader>
-      <div>
-        {trendingRequestResult.state === "loading" && <Spinner size="large" />}
-        {trendingRequestResult.state === "failed" && (
-          <EmptyState
-            message={trendingRequestResult.errorMessage}
-            buttonTitle={trendingRequestResult.isRetryAvailable ? "Try again" : undefined}
-            onClick={trendingRequestResult.isRetryAvailable ? retry : undefined}
-          />
-        )}
-        {trendingRequestResult.state === "succeeded" && (
-          <TrendingResults data={trendingRequestResult.data} />
-        )}
       </div>
-    </div>
+    </>
   );
 };
 

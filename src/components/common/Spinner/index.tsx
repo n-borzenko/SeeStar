@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import clsx from "clsx";
-import Image from "next/image";
 import { memo } from "react";
+import LoadingImage from "./loading.svg";
 
 type SpinnerProps = { size?: "medium" | "large" };
 
@@ -13,16 +13,9 @@ const Spinner: FC<SpinnerProps> = ({ size = "medium" }) => {
 
   return (
     <div className={classes}>
-      <Image
-        src="/assets/loading.svg"
-        alt="Loading"
-        quality="100"
-        width={dimension}
-        height={dimension}
-        objectPosition="center"
-        className="leading-0 animate-spin-slow"
-        priority
-      />
+      <div className="animate-spin-slow">
+        <LoadingImage width={dimension} height={dimension} />
+      </div>
     </div>
   );
 };
