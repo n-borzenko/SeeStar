@@ -55,10 +55,9 @@ export const headerMenuStructure: (HeaderMenuItem | HeaderMenuGroup)[] = [
   {
     id: "discover",
     title: "Discover",
-    supportedSizes: ["xs"],
     submenu: [
       { id: "search", supportedSizes: ["xs"] },
-      // { id: "trending" },
+      { id: "trending" },
       // { id: "upcoming" },
       // { id: "top-rated" },
     ],
@@ -89,10 +88,14 @@ export const footerMenuStructure: FooterMenuItem[] = [
     groupTitle: "Search",
     content: [{ id: "search" }],
   },
-  // {
-  //   groupTitle: "Discover",
-  //   content: [{ id: "trending" }, { id: "upcoming" }, { id: "top-rated" }],
-  // },
+  {
+    groupTitle: "Discover",
+    content: [
+      { id: "trending" },
+      // { id: "upcoming" },
+      // { id: "top-rated" }
+    ],
+  },
   // { groupTitle: "Personalize", content: [{ id: "shows" }, { id: "movies" }, { id: "calendar" }] },
   {
     groupTitle: "Manage",

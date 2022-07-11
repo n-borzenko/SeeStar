@@ -33,12 +33,16 @@ const CustomCardsList = <T extends any>({
         scrollByButton={scrollByButton}
       />
       <div
-        className="flex p-2 overflow-x-auto"
+        className="grid grid-flow-col overflow-x-auto"
         ref={scrollableArea}
         onScroll={updateScrollParameters}
       >
         {limitedItems.map((item, index) => (
-          <div key={getKey(item)} className="px-2" ref={index === 0 ? firstItem : null}>
+          <div
+            key={getKey(item)}
+            className="p-2 first:pl-4 last:pr-4"
+            ref={index === 0 ? firstItem : null}
+          >
             {children(item)}
           </div>
         ))}

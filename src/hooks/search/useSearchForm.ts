@@ -1,22 +1,22 @@
 import type { NextRouter } from "next/router";
-import qs from "qs";
 import { useState, useCallback, useEffect } from "react";
 import { MediaTypes } from "types/mediaTypes";
 
 // text is part of parameters, parsed from current path
 // searchText is mutable value, used for controlled input inside search form
-const useSearchForm = (router: NextRouter, text: string, type: MediaTypes) => {
+const useSearchForm = (router: NextRouter, text: string, mediaType: MediaTypes) => {
   const [searchText, setSearchText] = useState(text);
 
   const submitForm = useCallback(
     () =>
-      router.push(
-        `${router.pathname}?${qs.stringify({
+      router.push({
+        pathname: router.pathname,
+        query: {
           text: searchText,
-          type,
-        })}`
-      ),
-    [router, searchText, type]
+          ["media_type"]: mediaType,
+        },
+      }),
+    [router, searchText, mediaType]
   );
 
   useEffect(() => setSearchText(text), [text]);

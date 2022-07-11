@@ -1,11 +1,12 @@
 import type { FC } from "react";
+import type { LinkProps } from "next/link";
 import clsx from "clsx";
 import Link from "next/link";
 import { memo } from "react";
 
 type LinkData = {
   title: string;
-  href: string;
+  href: LinkProps["href"];
   id: string;
 };
 

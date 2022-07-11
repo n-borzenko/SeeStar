@@ -45,7 +45,7 @@ export const getMediaName = (mediaType: MediaTypes) => {
     case MediaTypes.Person:
       return "Person";
     default:
-      return "Any media type";
+      return "All";
   }
 };
 

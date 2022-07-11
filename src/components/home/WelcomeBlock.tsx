@@ -13,7 +13,7 @@ const WelcomeBlock = () => {
   );
 
   return (
-    <div className="-m-4 sm:-m-8">
+    <div className="-m-4 sm:-m-8 mb-0 sm:mb-0">
       <div
         className="flex relative h-[20rem] overflow-hidden p-4 sm:p-8"
         style={{
