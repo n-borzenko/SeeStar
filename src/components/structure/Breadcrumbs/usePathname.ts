@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useMemo } from "react";
+import useRouterIsReady from "hooks/common/useRouterIsReady";
 
 const mainPage = {
   href: "/",
@@ -8,9 +9,10 @@ const mainPage = {
 
 const usePathname = () => {
   const router = useRouter();
+  const isReady = useRouterIsReady();
 
   const pathElements = useMemo(() => {
-    if (!router.isReady) {
+    if (!isReady) {
       return [];
     }
 
@@ -45,7 +47,7 @@ const usePathname = () => {
       },
       [mainPage]
     );
-  }, [router.pathname, router.query, router.isReady]);
+  }, [router.pathname, router.query, isReady]);
 
   return pathElements;
 };

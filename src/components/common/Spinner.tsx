@@ -1,13 +1,18 @@
 import type { FC } from "react";
+import clsx from "clsx";
 import Image from "next/image";
 import { memo } from "react";
 
 type SpinnerProps = { size?: "medium" | "large" };
 
 const Spinner: FC<SpinnerProps> = ({ size = "medium" }) => {
-  const dimension = size === "medium" ? "32" : "64";
+  const dimension = size === "medium" ? "48" : "64";
+  const classes = clsx("flex justify-center items-center py-16", {
+    "min-h-full": size === "large",
+  });
+
   return (
-    <div className="min-h-full flex justify-center items-center">
+    <div className={classes}>
       <Image
         src="/assets/loading.svg"
         alt="Loading"
