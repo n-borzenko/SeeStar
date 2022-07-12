@@ -33,7 +33,7 @@ const CustomCardsList = <T extends any>({
         scrollByButton={scrollByButton}
       />
       <div
-        className="grid grid-flow-col overflow-x-auto"
+        className="grid grid-flow-col justify-start overflow-x-auto"
         ref={scrollableArea}
         onScroll={updateScrollParameters}
       >

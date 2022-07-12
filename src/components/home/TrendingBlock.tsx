@@ -37,26 +37,30 @@ const TrendingBlock = () => {
           <LinkGroup links={links} selectedId={mediaType} size="medium" wide />
         </div>
       </BlockHeader>
-      {trendingRequestResult.state === "loading" && <Spinner size="medium" />}
-      {trendingRequestResult.state === "failed" && (
-        <EmptyState message={trendingRequestResult.errorMessage} />
-      )}
-      {trendingRequestResult.state === "succeeded" && (
-        <CardsList items={trendingRequestResult.data.results}>
-          {(item) => (
-            <MediumPortraitCard
-              href={`/${item.mediaType === MediaTypes.Movie ? "movie" : "show"}/${item.id}`}
-              posterPath={item.posterPath}
-              mediaType={item.mediaType}
-              title={item.mediaType === MediaTypes.Movie ? item.title : item.name}
-              startDate={item.mediaType === MediaTypes.Movie ? item.releaseDate : item.firstAirDate}
-              voteAverage={item.voteAverage}
-              genreIds={item.genreIds}
-              infoType="rating"
-            />
-          )}
-        </CardsList>
-      )}
+      <div>
+        {trendingRequestResult.state === "loading" && <Spinner size="medium" />}
+        {trendingRequestResult.state === "failed" && (
+          <EmptyState message={trendingRequestResult.errorMessage} />
+        )}
+        {trendingRequestResult.state === "succeeded" && (
+          <CardsList items={trendingRequestResult.data.results}>
+            {(item) => (
+              <MediumPortraitCard
+                href={`/${item.mediaType === MediaTypes.Movie ? "movie" : "show"}/${item.id}`}
+                posterPath={item.posterPath}
+                mediaType={item.mediaType}
+                title={item.mediaType === MediaTypes.Movie ? item.title : item.name}
+                startDate={
+                  item.mediaType === MediaTypes.Movie ? item.releaseDate : item.firstAirDate
+                }
+                voteAverage={item.voteAverage}
+                genreIds={item.genreIds}
+                infoType="rating"
+              />
+            )}
+          </CardsList>
+        )}
+      </div>
     </>
   );
 };

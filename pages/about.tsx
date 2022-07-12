@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { memo } from "react";
+import TitledPageContainer from "components/common/TitledPageContainer";
 
 const AboutPage: NextPage = () => {
   return (
-    <>
+    <TitledPageContainer title="SeeStar • About">
       <div>
         <h4 className="mb-4">Data and images provider</h4>
         <Image
@@ -50,7 +51,7 @@ const AboutPage: NextPage = () => {
           .
         </p>
       </div>
-    </>
+    </TitledPageContainer>
   );
 };
 

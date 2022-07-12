@@ -4,19 +4,14 @@ import { memo } from "react";
 import MediaLandscapeCard from "components/cards/MediaLandscapeCard";
 import PersonLandscapeCard from "components/cards/PersonLandscapeCard";
 import PaginationContainer from "components/common/PaginationContainer";
-import getImageSize from "helpers/getImageSize";
 import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
-
-const posterSizeName = "smallPortrait";
 
 type SearchResultsProps = {
   data: SearchData;
 };
 
 const SearchResults: FC<SearchResultsProps> = ({ data }) => {
-  const maxItemHeight = getImageSize(posterSizeName).height;
-
   return (
     <PaginationContainer
       items={data.results}
@@ -28,7 +23,7 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
       {(results) => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
           {results.map((item) => (
-            <div key={item.id} style={{ maxHeight: maxItemHeight }}>
+            <div key={item.id}>
               {item.mediaType === MediaTypes.Movie && (
                 <MediaLandscapeCard
                   href={`/movie/${item.id}`}

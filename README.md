@@ -15,7 +15,7 @@ Information is provided by [The Movie Database API](https://www.themoviedb.org/)
 3. UI is based on [Tailwind CSS](https://tailwindcss.com/)
 4. Data fetching is implemented using [SWR React Hooks](https://swr.vercel.app/)
 
-## Installation and local launch
+## Installation
 
 Clone the project
 
@@ -30,6 +30,18 @@ yarn install
 # or
 npm install
 ```
+
+### API key
+
+Fetching data requires an API key and it's not secure to store such information in a public repository. You can either explore the production version accessible at <https://see-star.nborzenko.me/> or retrieve your own API key. You need to have an account on [The Movie Database](https://www.themoviedb.org/) and make a request to get API key.
+
+If you have one, you should:
+
+1. Copy `.env.local.example` file to project root directory
+2. Rename it to `.env.local`
+3. Fill with your personal API Key (v3 auth) retrieved from [api settings](https://www.themoviedb.org/settings/api)
+
+## Local launch
 
 Run project locally
 
