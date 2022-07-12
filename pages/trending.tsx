@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { memo, useMemo } from "react";
 import BlockHeader from "components/common/BlockHeader";
 import EmptyState from "components/common/EmptyState";
 import LinkGroup from "components/common/LinkGroup";
 import Spinner from "components/common/Spinner";
+import TitledPageContainer from "components/common/TitledPageContainer";
 import TrendingResults from "components/trending/TrendingResults";
 import useMediaTypeParameter from "hooks/common/useMediaTypeParameter";
 import usePageParameter from "hooks/common/usePageParameter";
@@ -37,10 +37,7 @@ const TrendingPage: NextPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>SeeStar • Trending • {getMediaName(mediaType)}</title>
-      </Head>
+    <TitledPageContainer title={`SeeStar • Trending • ${getMediaName(mediaType)}`}>
       <div className="w-full h-full grid grid-rows-[auto_auto_1fr]">
         <h2 className="text-3xl md:text-4xl font-black">Trending media</h2>
         <BlockHeader title="Trending now">
@@ -62,7 +59,7 @@ const TrendingPage: NextPage = () => {
           )}
         </div>
       </div>
-    </>
+    </TitledPageContainer>
   );
 };
 

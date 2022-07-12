@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { memo } from "react";
 import EmptyState from "components/common/EmptyState";
 import LinkGroup from "components/common/LinkGroup";
 import SearchForm from "components/common/SearchForm";
 import Spinner from "components/common/Spinner";
+import TitledPageContainer from "components/common/TitledPageContainer";
 import SearchResults from "components/search/SearchResults";
 import useMediaTypeParameter from "hooks/common/useMediaTypeParameter";
 import usePageParameter from "hooks/common/usePageParameter";
@@ -30,10 +30,7 @@ const SearchPage: NextPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>SeeStar • Search {text.length > 0 ? `• ${text}` : ""}</title>
-      </Head>
+    <TitledPageContainer title={`SeeStar • Search ${text.length > 0 ? `• ${text}` : ""}`}>
       <div className="w-full h-full grid grid-rows-[auto_auto_auto_1fr] grid-cols-2 gap-2 sm:gap-y-6 lg:gap-8">
         <h1 className="col-span-full sm:row-span-2 variant-h3 md:variant-h2">
           Search for movies, shows, people
@@ -57,7 +54,7 @@ const SearchPage: NextPage = () => {
           {searchResults.state === "succeeded" && <SearchResults data={searchResults.data} />}
         </div>
       </div>
-    </>
+    </TitledPageContainer>
   );
 };
 

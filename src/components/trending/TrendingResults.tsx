@@ -3,18 +3,13 @@ import type { TrendingData } from "types/trending";
 import { memo } from "react";
 import MediaLandscapeCard from "components/cards/MediaLandscapeCard";
 import PaginationContainer from "components/common/PaginationContainer";
-import getImageSize from "helpers/getImageSize";
 import { MediaTypes } from "types/mediaTypes";
-
-const posterSizeName = "smallPortrait";
 
 type TrendingResultsProps = {
   data: TrendingData;
 };
 
 const TrendingResults: FC<TrendingResultsProps> = ({ data }) => {
-  const maxItemHeight = getImageSize(posterSizeName).height;
-
   return (
     <PaginationContainer
       items={data.results}
