@@ -1,5 +1,5 @@
 import type FetchingError from "helpers/fetching/fetchingError";
-import type { SearchItem, SearchParameters, SearchData } from "types/search";
+import type { SearchItem, SearchData } from "types/search";
 import qs from "qs";
 import { useMemo, useCallback } from "react";
 import useSWRImmutable from "swr/immutable";
@@ -11,17 +11,17 @@ import {
 import defaultFetcher from "helpers/fetching/defaultFetcher";
 import { MediaTypes } from "types/mediaTypes";
 
-const generateSearchUrl = (text: string, type: MediaTypes, page: number) => {
-  return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/search/${type}?${qs.stringify({
+const generateSearchUrl = (text: string, mediaType: MediaTypes, page: number) => {
+  return `${process.env.NEXT_PUBLIC_TMBD_API_V3_URL}/search/${mediaType}?${qs.stringify({
     api_key: process.env.NEXT_PUBLIC_TMDB_V3_APIKEY,
     query: text,
     page,
   })}`;
 };
 
-const searchFetcher = async (url: string, type: MediaTypes) => {
+const searchFetcher = async (url: string, mediaType: MediaTypes) => {
   const data = await defaultFetcher<SearchData>(url);
-  if (type === MediaTypes.Any) {
+  if (mediaType === MediaTypes.Any) {
     return data;
   }
 
@@ -31,14 +31,19 @@ const searchFetcher = async (url: string, type: MediaTypes) => {
     ...data,
     results: data.results.map((item: SearchItem) => ({
       ...item,
-      mediaType: type,
+      mediaType,
     })),
   } as SearchData;
 };
 
-const useSearchRequest = (isRouterReady: boolean, text: string, type: MediaTypes, page: number) => {
+const useSearchRequest = (
+  isRouterReady: boolean,
+  text: string,
+  mediaType: MediaTypes,
+  page: number
+) => {
   const { data, error, mutate } = useSWRImmutable<SearchData, FetchingError>(
-    isRouterReady && text.length > 0 ? [generateSearchUrl(text, type, page), type] : null,
+    isRouterReady && text.length > 0 ? [generateSearchUrl(text, mediaType, page), mediaType] : null,
     searchFetcher,
     {
       shouldRetryOnError: false,

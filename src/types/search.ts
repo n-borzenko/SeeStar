@@ -1,24 +1,8 @@
-import type { Movie } from "types/movie";
-import type { Person } from "types/person";
-import type { Show } from "types/show";
-import { MediaTypes } from "types/mediaTypes";
+import type { TypedMovie } from "types/movie";
+import type { TypedPerson } from "types/person";
+import type { TypedShow } from "types/show";
 
-export type SearchItemMovie = Movie & {
-  mediaType: MediaTypes.Movie;
-};
-
-export type SearchItemShow = Show & {
-  mediaType: MediaTypes.Show;
-};
-
-export type SearchItemPerson = Person & {
-  mediaType: MediaTypes.Person;
-  knownFor?: (SearchItemMovie | SearchItemShow)[];
-};
-
-export type SearchItem = SearchItemMovie | SearchItemShow | SearchItemPerson;
-
-export type SearchParameters = { text: string; type: MediaTypes; page: number };
+export type SearchItem = TypedMovie | TypedShow | TypedPerson;
 
 export type SearchData = {
   page: number;

@@ -1,17 +1,15 @@
 import type { FC } from "react";
-import type { SearchData } from "types/search";
+import type { TrendingData } from "types/trending";
 import { memo } from "react";
 import MediaLandscapeCard from "components/cards/MediaLandscapeCard";
-import PersonLandscapeCard from "components/cards/PersonLandscapeCard";
 import PaginationContainer from "components/common/PaginationContainer";
-import { getGenderAndDepartment } from "helpers/textUtilities";
 import { MediaTypes } from "types/mediaTypes";
 
-type SearchResultsProps = {
-  data: SearchData;
+type TrendingResultsProps = {
+  data: TrendingData;
 };
 
-const SearchResults: FC<SearchResultsProps> = ({ data }) => {
+const TrendingResults: FC<TrendingResultsProps> = ({ data }) => {
   return (
     <PaginationContainer
       items={data.results}
@@ -27,7 +25,6 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
               {item.mediaType === MediaTypes.Movie && (
                 <MediaLandscapeCard
                   href={`/movie/${item.id}`}
-                  cardSize="small"
                   posterPath={item.posterPath}
                   mediaType={item.mediaType}
                   title={item.title}
@@ -40,7 +37,6 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
               {item.mediaType === MediaTypes.Show && (
                 <MediaLandscapeCard
                   href={`/show/${item.id}`}
-                  cardSize="small"
                   posterPath={item.posterPath}
                   mediaType={item.mediaType}
                   title={item.name}
@@ -48,16 +44,6 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
                   voteAverage={item.voteAverage}
                   genreIds={item.genreIds}
                   overview={item.overview}
-                />
-              )}
-              {item.mediaType === MediaTypes.Person && (
-                <PersonLandscapeCard
-                  href={`/person/${item.id}`}
-                  cardSize="small"
-                  posterPath={item.profilePath}
-                  title={item.name}
-                  infoText={getGenderAndDepartment(item.gender, item.knownForDepartment)}
-                  knownFor={item.knownFor}
                 />
               )}
             </div>
@@ -68,4 +54,4 @@ const SearchResults: FC<SearchResultsProps> = ({ data }) => {
   );
 };
 
-export default memo(SearchResults);
+export default memo(TrendingResults);
